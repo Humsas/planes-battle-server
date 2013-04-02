@@ -113,8 +113,7 @@ void SceneManager::Render()
 	CM->Render();
 	sceneObjects->Render();
 
-
-	if(renderConsole) cons.render(d3);
+	cons.render(d3);
 
 	// render hud
 	hud->Render();
