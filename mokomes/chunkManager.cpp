@@ -1,7 +1,7 @@
 #include "chunkManager.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 ChunkManager::ChunkManager(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* kamera)
 {

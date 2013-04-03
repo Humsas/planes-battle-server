@@ -4,8 +4,9 @@ using namespace std;
 
 enum GAME_CONSOLE_ERROR_NUM{
 						GAME_CONSOLE_OK = 1,
-						GAME_CONSOLE_ERROR = 2,
-						GAME_CONSOLE_WARNING = 3
+						GAME_CONSOLE_ERROR,
+						GAME_CONSOLE_WARNING,
+						GAME_CONSOLE_USER_INPUT
 						} ;
 
 struct console_content {

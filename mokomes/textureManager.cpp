@@ -1,7 +1,7 @@
 #include "textureManager.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 TextureManager::TextureManager(LPDIRECT3DDEVICE9 &d3)
 {
@@ -52,7 +52,7 @@ IDirect3DTexture9* TextureManager::loadTexture(std::wstring textureName)
 		string str(textureName.begin(), textureName.end());
 		stringstream ss;
 		ss << "Tekstura nerasta: " << str;
-		cons.add(ss.str(), GAME_CONSOLE_WARNING);
+		gServerConsole.add(ss.str(), GAME_CONSOLE_WARNING);
 
 		delete li;
 		return textureList->get(0)->texture;
@@ -63,7 +63,7 @@ IDirect3DTexture9* TextureManager::loadTexture(std::wstring textureName)
 		string str(textureName.begin(), textureName.end());
 		stringstream ss;
 		ss << "Tekstura uzkrauta: " << str;
-		cons.add(ss.str(), GAME_CONSOLE_OK);
+		gServerConsole.add(ss.str(), GAME_CONSOLE_OK);
 
 		textureList->add(li);
 		return li->texture;

@@ -1,7 +1,7 @@
 #include "sceneManager.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 //konstruktorius
 SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
@@ -113,12 +113,10 @@ void SceneManager::Render()
 	CM->Render();
 	sceneObjects->Render();
 
-	cons.render(d3);
-
 	// render hud
 	hud->Render();
-
 	debesis->Render();
+	gServerConsole.render(d3);
 
 	d3->EndScene();
 	d3->Present(NULL, NULL, NULL, NULL);

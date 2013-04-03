@@ -1,7 +1,7 @@
 #include "game.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 Game::Game(LPDIRECT3DDEVICE9 &d3)
 {

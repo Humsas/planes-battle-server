@@ -23,12 +23,9 @@ void Masyvas::add(string value)
 		MASYVAS = cell;
 		END = MASYVAS;
 		skaitiklis++;
-
 	}
 	else
 	{
-	
-
 		elementas *cell = new elementas;
 		
 		cell->cont.value = value;

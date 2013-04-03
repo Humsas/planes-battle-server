@@ -1,6 +1,6 @@
 #include "mesh.h"
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 Mesh::~Mesh()
 {
@@ -45,7 +45,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
 
 	if(FAILED(hr))
 	{
-		cons.add("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
+		gServerConsole.add("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
 		delete M;
 	}
 	else
@@ -195,7 +195,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
  
 		this->MESH = M;
 
-		cons.add("Modelis id: \""+id+"\" uzkrautas");
+		gServerConsole.add("Modelis id: \""+id+"\" uzkrautas");
 	}
 
 }

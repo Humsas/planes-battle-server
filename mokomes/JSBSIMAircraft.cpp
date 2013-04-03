@@ -1,7 +1,7 @@
 #include "JSBSIMAircraft.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 TestCraft::TestCraft(ColisionManager *colisionManager, Vector initPos)
 {

@@ -1,7 +1,7 @@
 #include"sceneObjects.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 SceneObjects::SceneObjects(LPDIRECT3DDEVICE9 &d3, Mesh *meshManager)
 {

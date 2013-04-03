@@ -1,6 +1,6 @@
 #include "splittedTerrain.h"
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 void splittedTerrain::makeChunk(LPDIRECT3DDEVICE9 &d3, terVert* vert, DWORD* drawMap, int terWidth, int terHeight, int splitWidth, int splitHeight, int chunkId)
 {
