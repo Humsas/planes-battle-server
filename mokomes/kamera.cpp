@@ -1,7 +1,7 @@
 #include "kamera.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 void Kamera::normalizeAngle()
 {

@@ -1,6 +1,6 @@
 #include "colisionManager.h"
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 ColisionManager::ColisionManager(terrain *ter)
 {
@@ -40,7 +40,7 @@ void ColisionManager::findColisions(Entity *op)
 		ss1 << "Colision sphere: Ground";
 			
 
-		cons.add(ss1.str(), GAME_CONSOLE_ERROR);
+		gServerConsole.add(ss1.str(), GAME_CONSOLE_ERROR);
 
 		///////////////////////
 		//op->colision = true;

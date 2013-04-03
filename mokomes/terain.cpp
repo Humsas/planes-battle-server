@@ -1,7 +1,7 @@
 #include "terrain.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 
 void terrain::setVal()
@@ -1454,7 +1454,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
   LPDIRECT3DTEXTURE9 terrain::trace2(LPDIRECT3DDEVICE9 &d3, int width, int height, float saule[3], int textMultiply)
  {
-	 cons.add("Generuojamas seseliu zemelapis", GAME_CONSOLE_WARNING);
+	 gServerConsole.add("Generuojamas seseliu zemelapis", GAME_CONSOLE_WARNING);
 	 unsigned char *lightmap = new unsigned char[width*height];
 	 
 	 for(int a = 0; a < width*height; a++)
@@ -1722,7 +1722,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 	 ss1 << width;
 	 ss2 << height;
 
-	 cons.add("Sugeneruotas seseliu zemelapis: "+ss1.str()+"x"+ss2.str());
+	 gServerConsole.add("Sugeneruotas seseliu zemelapis: "+ss1.str()+"x"+ss2.str());
 
 	 return lMapTexture;
  }
@@ -1823,7 +1823,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 	 ss2 << height;
 	 ss3 << blur;
 
-	 cons.add("Sugeneruotas teksturu zemelapis: "+ss1.str()+"x"+ss2.str()+" Blur level: "+ss3.str());
+	 gServerConsole.add("Sugeneruotas teksturu zemelapis: "+ss1.str()+"x"+ss2.str()+" Blur level: "+ss3.str());
 
 
 	 return textureMap;

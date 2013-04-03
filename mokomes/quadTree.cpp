@@ -1,6 +1,6 @@
 #include "quadTree.h"
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 QuadTree::QuadTree(int level, int cellID, float startX, float startY, float endX, float endY, QuadTree *motherBranch)
 {

@@ -1,7 +1,7 @@
 #include "aircraft.h"
 
 #include "console.h"
-extern Console cons;
+extern Console gServerConsole;
 
 //------------------------------------------------------------------------//
 // This function sets the initial state of the plane, i.e., its initial
