@@ -9,6 +9,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	this->d3 = d3;
 
 	sound		= new Sound();
+	mNetwork    = new Networking(&gServerConsole);
 
 	loadSounds();
 
@@ -47,6 +48,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 Game::~Game()
 {
 	if(sound != NULL)		delete sound;
+	if(mNetwork != NULL)	delete mNetwork;
 	if(scena != NULL)		delete scena;
 	if(kolizijos != NULL)	delete kolizijos;
 	//if(lektuvas != NULL)	delete lektuvas;

@@ -1,5 +1,6 @@
 #ifndef _TESTCRAFT
 #define _TESTCRAFT
+
 #include "colisionManager.h"
 
 #include "FGFDMExec.h"

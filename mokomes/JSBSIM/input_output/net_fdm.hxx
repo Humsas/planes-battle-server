@@ -15,9 +15,15 @@
 
 #include <time.h> // time_t
 
+/*
 #ifdef _MSC_VER
 typedef unsigned long uint32_t;
 typedef long int32_t;
+#endif*/
+#if defined( _MSC_VER ) && ( _MSC_VER < 1600 ) 
+#include "pstdint.h" 
+#else 
+#include <stdint.h> 
 #endif
 
 //--->>>#include <simgear/misc/stdint.hxx> //not required for JSBSim
