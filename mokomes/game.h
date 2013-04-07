@@ -1,6 +1,8 @@
 #ifndef _GAME
 #define _GAME
 
+#include "WinsockWrapper.h"
+#include <Mmsystem.h>
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -8,6 +10,7 @@
 #include "sceneManager.h"
 #include "colisionManager.h"
 #include "aircraft.h"
+#include "Networking.h"
 
 #include "JSBSIMAircraft.h"
 
@@ -83,6 +86,7 @@ private:
 	Sound			*sound;
 	SceneManager	*scena;
 	ColisionManager *kolizijos;
+	Networking		*mNetwork;
 
 
 

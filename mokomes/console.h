@@ -1,3 +1,6 @@
+#ifndef PLANES_BATTLE_SERVER_CONSOLE
+#define PLANES_BATTLE_SERVER_CONSOLE
+
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <string>
@@ -126,8 +129,8 @@ public:
 	}
 
 	void inputMessageAppend(char c);
-	void add(string cont);
-	void add(string cont, GAME_CONSOLE_ERROR_NUM num);
+	void addLine(string cont);
+	void addLine(string cont, GAME_CONSOLE_ERROR_NUM num);
 	void render(LPDIRECT3DDEVICE9 &d3);
 
 	void enableConsole(HWND mainWindow = NULL);
@@ -136,3 +139,6 @@ public:
 	void decreaseInputCursorPos();
 	void changeInputCursorPos(int newPos);
 };
+
+
+#endif

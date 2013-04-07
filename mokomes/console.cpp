@@ -12,7 +12,7 @@ void Console::inputMessageAppend(char c)
 	case '\r':
 		if(mInputMessage.size() > 0)
 		{
-			add(mInputMessage, GAME_CONSOLE_USER_INPUT);
+			addLine(mInputMessage, GAME_CONSOLE_USER_INPUT);
 
 			// If item is selected from old commands, delete old and insert it at the beginning
 			if(mInputMessagesListCursorIndex > -1)
@@ -69,7 +69,7 @@ void Console::inputMessageAppend(char c)
 	}
 }
 
-void Console::add(string cont)
+void Console::addLine(string cont)
 {
 #pragma omp critical(konsole)
 	{
@@ -77,7 +77,7 @@ void Console::add(string cont)
 	}
 }
 
-void Console::add(string cont, GAME_CONSOLE_ERROR_NUM num)
+void Console::addLine(string cont, GAME_CONSOLE_ERROR_NUM num)
 {
 #pragma omp critical(konsole)
 	{

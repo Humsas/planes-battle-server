@@ -904,7 +904,7 @@ void	AircraftPhysics::Stabilizacija(float speed)
 void	AircraftPhysics::Autopilot(void)
 {
 	float targetAlt = 3000;
-    float diff = 20;
+	float diff = 20;
 
 	if(Airplane.vPosition.z*0.3048 < targetAlt)
 	   {
