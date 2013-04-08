@@ -54,6 +54,7 @@ private:
 public:
 	Networking(Console* console);
 
+	void Update();
 };
 
 

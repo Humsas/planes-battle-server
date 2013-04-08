@@ -512,6 +512,10 @@ ColisionManager *Game::getColisionManager()
 	return kolizijos;
 }
 
+Networking* Game::getNetwork()
+{
+	return mNetwork;
+}
 
 void Game::TestGameInit()
 {
