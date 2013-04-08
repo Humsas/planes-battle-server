@@ -125,6 +125,7 @@ public:
 
 	SceneManager	*getScene();
 	ColisionManager	*getColisionManager();
+	Networking		*getNetwork();
 
 	void loadSounds();
 
