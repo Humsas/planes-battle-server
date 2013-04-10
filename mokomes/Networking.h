@@ -19,6 +19,7 @@
 //#include "Strsafe.h"		// StringCbPrintf funkcijai
 
 #include "console.h"
+#include "game.h"
 
 using namespace std;
 using namespace RakNet;
@@ -28,7 +29,7 @@ using namespace RakNet;
 
 enum GameMessages
 {
-	ID_GAME_MESSAGE_1=ID_USER_PACKET_ENUM+1,
+	ID_GAME_MESSAGE_CONNECTION_UPDATE=ID_USER_PACKET_ENUM+1,
 	ID_GAME_MESSAGE_PLAYER_ACTION,
 	ID_GAME_MESSAGE_PLAYER_CREATED_FOR_CLIENT,
 	ID_GAME_MESSAGE_PLAYER_CREATED,
@@ -38,23 +39,32 @@ enum GameMessages
 	ID_GAME_MESSAGE_PLAYER_DISCONNECTED
 };
 
+struct ConnectionData 
+{
+	BitStream	data;
+	RakNetGUID	playerId;
+};
+
+class Game;
 
 class Networking
 {
 private:
 
-	RakPeerInterface*	mServer;
-	Console*			mConsole;
-	Packet*				mPacket;
-
-
+	RakPeerInterface*		mServer;
+	Console*				mConsole;
+	Packet*					mPacketForMessages;
+	vector<ConnectionData>	mConnectionData;
+	Game*					mGame;
 
 	bool OpenUPNP();
 
 public:
-	Networking(Console* console);
+	Networking(Console* console, Game* game);
 
 	void Update();
+	void SendConnectionDataToPlayer(RakNetGUID id);
+	BitStream* GetPlayerConnectionPacket(RakNetGUID id);
 };
 
 

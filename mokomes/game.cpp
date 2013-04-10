@@ -5,11 +5,10 @@ extern Console gServerConsole;
 
 Game::Game(LPDIRECT3DDEVICE9 &d3)
 {
-	
 	this->d3 = d3;
 
 	sound		= new Sound();
-	mNetwork    = new Networking(&gServerConsole);
+	mNetwork    = new Networking(&gServerConsole, this);
 
 	loadSounds();
 
@@ -21,11 +20,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	
 	testCraft	= new TestCraft(kolizijos, Vector(7500, 20000, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))));
 
-	//lektuvas	= new AircraftPhysics(kolizijos);
-	
-	//oo = scena->addObject("B17");
 	ooo = scena->addObject("B17");
-	//oo->scale(20, 20, 20);
 	ooo->scale(20, 20, 20);
 
 
@@ -515,6 +510,11 @@ ColisionManager *Game::getColisionManager()
 Networking* Game::getNetwork()
 {
 	return mNetwork;
+}
+
+vector<RakNet::RakNetGUID>* Game::getPlayersId()
+{
+	return &mPlayersList;
 }
 
 void Game::TestGameInit()

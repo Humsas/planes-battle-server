@@ -1,9 +1,14 @@
 #include "Networking.h"
 
-Networking::Networking(Console* console)
+Networking::Networking(Console* console, Game* game)
 {
 	mConsole = console;
 	mServer = RakPeerInterface::GetInstance();
+
+	ConnectionData tmp;
+	ConnectionData tmp1;
+	mConnectionData.push_back(tmp);
+	mConnectionData.push_back(tmp1);
 
 	SocketDescriptor sd(SERVER_PORT, 0);
 	mServer->Startup(MAX_CLIENTS, &sd, 1);
@@ -16,9 +21,9 @@ Networking::Networking(Console* console)
 
 void Networking::Update()
 {
-	for (mPacket = mServer->Receive(); mPacket; mServer->DeallocatePacket(mPacket), mPacket = mServer->Receive())
+	for (mPacketForMessages = mServer->Receive(); mPacketForMessages; mServer->DeallocatePacket(mPacketForMessages), mPacketForMessages = mServer->Receive())
 	{
-		switch (mPacket->data[0])
+		switch (mPacketForMessages->data[0])
 		{
 			//ID_CONNECTION_ATTEMPT_FAILED - kai klientui nepavyksta prisijungt
 			//Remote siun2ia kitiem klientam =inute kad prisijunge kitas clientas(Man neveikë)
@@ -34,6 +39,14 @@ void Networking::Update()
 		case ID_NEW_INCOMING_CONNECTION:
 			{
 				mConsole->addLine("A connection is incoming.");
+				mGame->getPlayersId()->push_back(mPacketForMessages->guid);
+				for(int i = 0; i < 0; i++)
+					if(mPacketForMessages->guid == (*mGame->getPlayersId())[i])
+					{
+						mConnectionData[i].playerId = mPacketForMessages->guid;
+						mConnectionData[i].data.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_UPDATE);
+						break;
+					}
 			}
 			break;
 		case ID_DISCONNECTION_NOTIFICATION:
@@ -53,7 +66,7 @@ void Networking::Update()
 		default:
 			{
 				CHAR temp[MAX_PATH];
-				sprintf_s(temp, "Message with identifier %i has arrived.", mPacket->data[0]);
+				sprintf_s(temp, "Message with identifier %i has arrived.", mPacketForMessages->data[0]);
 				mConsole->addLine(temp);
 				break;
 			}
@@ -138,4 +151,31 @@ bool Networking::OpenUPNP()
 		return false;
 
 	return true;
+}
+
+
+
+void Networking::SendConnectionDataToPlayer(RakNetGUID id)
+{
+	for (int i = 0; i < 0; i++)
+		if(mConnectionData[i].playerId == id)
+		{
+			mServer->Send(&mConnectionData[i].data, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
+			mConnectionData[i].data.Reset();
+			break;
+		}
+}
+
+
+BitStream* Networking::GetPlayerConnectionPacket(RakNetGUID id)
+{
+	for (int i = 0; i < 0; i++)
+	{
+		if(mConnectionData[i].playerId == id)
+		{
+			return &mConnectionData[i].data;
+			break;
+		}
+	}
+	return NULL;
 }
