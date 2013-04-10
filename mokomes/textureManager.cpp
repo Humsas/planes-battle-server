@@ -49,10 +49,10 @@ IDirect3DTexture9* TextureManager::loadTexture(std::wstring textureName)
 		// ir returnint "no texture" tekstura
 
 		
-		string str(textureName.begin(), textureName.end());
-		stringstream ss;
-		ss << "Tekstura nerasta: " << str;
-		gServerConsole.addLine(ss.str(), GAME_CONSOLE_WARNING);
+		//string str(textureName.begin(), textureName.end());
+		//stringstream ss;
+		//ss << "Tekstura nerasta: " << str;
+		//gServerConsole.addLine(ss.str(), GAME_CONSOLE_WARNING);
 
 		delete li;
 		return textureList->get(0)->texture;
@@ -60,10 +60,10 @@ IDirect3DTexture9* TextureManager::loadTexture(std::wstring textureName)
 	else
 	{
 		//OK
-		string str(textureName.begin(), textureName.end());
+		/*string str(textureName.begin(), textureName.end());
 		stringstream ss;
 		ss << "Tekstura uzkrauta: " << str;
-		gServerConsole.addLine(ss.str(), GAME_CONSOLE_OK);
+		gServerConsole.addLine(ss.str(), GAME_CONSOLE_OK);*/
 
 		textureList->add(li);
 		return li->texture;

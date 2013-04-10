@@ -64,6 +64,9 @@ void Console::inputMessageAppend(char c)
 		if(mInputMessage.size() >= INPUT_MESSAGE_SIZE)
 			return;
 
+		if(!isalnum(c) && !(c==' '))
+			return;
+
 		mInputMessage += c;
 		break;
 	}

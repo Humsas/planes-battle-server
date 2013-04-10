@@ -40,12 +40,19 @@ void Networking::Update()
 			{
 				mConsole->addLine("A connection is incoming.");
 				mGame->getPlayersId()->push_back(mPacketForMessages->guid);
-				for(int i = 0; i < 0; i++)
+				for(int i = 0; i < (*mGame->getPlayersId()).size(); i++)
 					if(mPacketForMessages->guid == (*mGame->getPlayersId())[i])
 					{
+						mConnectionData[i].ready = false;
 						mConnectionData[i].playerId = mPacketForMessages->guid;
-						mConnectionData[i].data.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_UPDATE);
+						if(i == 0)
+							mShit1.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+						else if(i == 1)
+							mShit2.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+						//mConnectionData[i].data.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+						mGame->playerConnected(mConnectionData[i].playerId);
 						break;
+						//Send message, to begin data sending, Nusiusti, kitam klientui apie kita zaideja
 					}
 			}
 			break;
@@ -61,6 +68,16 @@ void Networking::Update()
 			break;
 		case ID_GAME_MESSAGE_PLAYER_DISCONNECTED:
 			{
+			}
+			break;
+
+		case ID_GAME_MESSAGE_LOADING_COMPLETED:
+			{
+				for(int i = 0; i < mConnectionData.size(); i++)
+					if(mConnectionData[i].playerId == mPacketForMessages->guid)
+					{
+						mConnectionData[i].ready = true;
+					}
 			}
 			break;
 		default:
@@ -157,11 +174,19 @@ bool Networking::OpenUPNP()
 
 void Networking::SendConnectionDataToPlayer(RakNetGUID id)
 {
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < mConnectionData.size(); i++)
 		if(mConnectionData[i].playerId == id)
 		{
-			mServer->Send(&mConnectionData[i].data, HIGH_PRIORITY, RELIABLE_ORDERED, 0, UNASSIGNED_SYSTEM_ADDRESS, true);
-			mConnectionData[i].data.Reset();
+			if(i == 0)
+			{
+				mServer->Send(&mShit1, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
+				mShit1.Reset();
+			}
+			else if(i == 1)
+			{
+				mServer->Send(&mShit2, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
+				mShit2.Reset();
+			}
 			break;
 		}
 }
@@ -169,13 +194,26 @@ void Networking::SendConnectionDataToPlayer(RakNetGUID id)
 
 BitStream* Networking::GetPlayerConnectionPacket(RakNetGUID id)
 {
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < mConnectionData.size(); i++)
 	{
 		if(mConnectionData[i].playerId == id)
 		{
-			return &mConnectionData[i].data;
+			if(i == 0)
+				return &mShit1;
+			else if(i == 1)
+				return &mShit2;
 			break;
 		}
 	}
 	return NULL;
+}
+
+
+bool Networking::ArePlayersReady()
+{
+	for (int i = 0; i < mConnectionData.size(); i++)
+		if(mConnectionData[i].ready == false)
+			return false;
+
+	return true;
 }
