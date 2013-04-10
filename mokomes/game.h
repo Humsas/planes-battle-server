@@ -11,6 +11,7 @@
 #include "colisionManager.h"
 #include "aircraft.h"
 #include "Networking.h"
+#include "RakPeerInterface.h"
 
 #include "JSBSIMAircraft.h"
 
@@ -18,6 +19,8 @@
 
 
 #include "timer.h"
+
+class Networking;
 
 struct enemyBaseStruct
 {
@@ -87,8 +90,7 @@ private:
 	SceneManager	*scena;
 	ColisionManager *kolizijos;
 	Networking		*mNetwork;
-
-
+	vector<RakNet::RakNetGUID>		mPlayersList;
 
 	Timer			*timer;
 
@@ -126,6 +128,7 @@ public:
 	SceneManager	*getScene();
 	ColisionManager	*getColisionManager();
 	Networking		*getNetwork();
+	vector<RakNet::RakNetGUID>* getPlayersId();
 
 	void loadSounds();
 
