@@ -132,6 +132,9 @@ public:
 
 	void loadSounds();
 
+	// Receives message about connected player
+	void playerConnected(RakNet::RakNetGUID playerID);
+
 	//void dropBomb();
 	//void shotBomb();
 	//void cannonShot(enemyCannonStruct *op);

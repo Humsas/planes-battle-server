@@ -517,6 +517,13 @@ vector<RakNet::RakNetGUID>* Game::getPlayersId()
 	return &mPlayersList;
 }
 
+
+void Game::playerConnected(RakNet::RakNetGUID playerID)
+{
+	//Start data sending here
+}
+
+
 void Game::TestGameInit()
 {
 	// add some tree
