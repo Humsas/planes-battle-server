@@ -512,10 +512,10 @@ Networking* Game::getNetwork()
 	return mNetwork;
 }
 
-vector<RakNet::RakNetGUID>* Game::getPlayersId()
-{
-	return &mPlayersList;
-}
+//vector<RakNet::RakNetGUID> Game::getPlayersId()
+//{
+//	return mPlayersList;
+//}
 
 
 void Game::playerConnected(RakNet::RakNetGUID playerID)

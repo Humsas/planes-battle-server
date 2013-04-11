@@ -90,7 +90,6 @@ private:
 	SceneManager	*scena;
 	ColisionManager *kolizijos;
 	Networking		*mNetwork;
-	vector<RakNet::RakNetGUID>		mPlayersList;
 
 	Timer			*timer;
 
@@ -120,6 +119,7 @@ public:
 	//AircraftPhysics* lektuvas;
 
 	TestCraft* testCraft;
+	//vector<RakNet::RakNetGUID>		mPlayersList;
 
 public:
 	Game(LPDIRECT3DDEVICE9 &d3);
@@ -128,7 +128,6 @@ public:
 	SceneManager	*getScene();
 	ColisionManager	*getColisionManager();
 	Networking		*getNetwork();
-	vector<RakNet::RakNetGUID>* getPlayersId();
 
 	void loadSounds();
 

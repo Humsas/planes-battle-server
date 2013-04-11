@@ -11,7 +11,6 @@
 
 #include "masyvas.h"
 #include "globalSetings.h"
-
 using namespace std;
 
 #define INPUT_MESSAGE_LIST_SIZE 100
@@ -42,6 +41,7 @@ private:
 	int				mInputMessagesListCursorIndex;
 
 	void sendCopyDataMessage();
+	void checkForCommand();
 
 	TLVERTEX		mBodyColor[4];
 	TLVERTEX		mBorderColor[4];
