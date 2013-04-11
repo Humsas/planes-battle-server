@@ -21,9 +21,10 @@ Networking::Networking(Console* console, Game* game)
 
 void Networking::Update()
 {
-	for (mPacketForMessages = mServer->Receive(); mPacketForMessages; mServer->DeallocatePacket(mPacketForMessages), mPacketForMessages = mServer->Receive())
+	Packet*	packet;
+	for (packet = mServer->Receive(); packet; mServer->DeallocatePacket(packet), packet = mServer->Receive())
 	{
-		switch (mPacketForMessages->data[0])
+		switch (packet->data[0])
 		{
 			//ID_CONNECTION_ATTEMPT_FAILED - kai klientui nepavyksta prisijungt
 			//Remote siun2ia kitiem klientam =inute kad prisijunge kitas clientas(Man neveikë)
@@ -39,21 +40,18 @@ void Networking::Update()
 		case ID_NEW_INCOMING_CONNECTION:
 			{
 				mConsole->addLine("A connection is incoming.");
-				mGame->getPlayersId()->push_back(mPacketForMessages->guid);
-				for(int i = 0; i < (*mGame->getPlayersId()).size(); i++)
-					if(mPacketForMessages->guid == (*mGame->getPlayersId())[i])
-					{
-						mConnectionData[i].ready = false;
-						mConnectionData[i].playerId = mPacketForMessages->guid;
-						if(i == 0)
-							mShit1.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
-						else if(i == 1)
-							mShit2.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
-						//mConnectionData[i].data.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
-						mGame->playerConnected(mConnectionData[i].playerId);
-						break;
-						//Send message, to begin data sending, Nusiusti, kitam klientui apie kita zaideja
-					}
+				ConnectionData tmp;
+				tmp.ready = false;
+				tmp.playerId = packet->guid;
+				mConnectionData.push_back(tmp);
+
+				int i = mConnectionData.size();
+				if(i == 1)
+					mShit1.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+				else if(i == 2)
+					mShit2.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+
+				mGame->playerConnected(tmp.playerId);
 			}
 			break;
 		case ID_DISCONNECTION_NOTIFICATION:
@@ -74,7 +72,7 @@ void Networking::Update()
 		case ID_GAME_MESSAGE_LOADING_COMPLETED:
 			{
 				for(int i = 0; i < mConnectionData.size(); i++)
-					if(mConnectionData[i].playerId == mPacketForMessages->guid)
+					if(mConnectionData[i].playerId == packet->guid)
 					{
 						mConnectionData[i].ready = true;
 					}
@@ -83,7 +81,7 @@ void Networking::Update()
 		default:
 			{
 				CHAR temp[MAX_PATH];
-				sprintf_s(temp, "Message with identifier %i has arrived.", mPacketForMessages->data[0]);
+				sprintf_s(temp, "Message with identifier %i has arrived.", packet->data[0]);
 				mConsole->addLine(temp);
 				break;
 			}
@@ -104,8 +102,8 @@ bool Networking::OpenUPNP()
 		for(device = devlist; device; device = device->pNext)
 		{
 			RakString str;
-			str = "desc: "+*(device->descURL);
-			str = str + "\n st: " + (device->st) + "/n";
+			str = "      desc: "+*(device->descURL);
+			str = str + " st: " + (device->st);
 			mConsole->addLine(str.C_String());
 		}
 
