@@ -63,7 +63,6 @@ private:
 
 	RakPeerInterface*		mServer;
 	Console*				mConsole;
-	Packet*					mPacketForMessages;
 	vector<ConnectionData>	mConnectionData;
 	BitStream				mShit1;
 	BitStream				mShit2;

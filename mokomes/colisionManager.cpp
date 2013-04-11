@@ -40,7 +40,7 @@ void ColisionManager::findColisions(Entity *op)
 		ss1 << "Colision sphere: Ground";
 			
 
-		gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
+		//gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
 
 		///////////////////////
 		//op->colision = true;

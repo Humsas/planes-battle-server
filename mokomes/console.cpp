@@ -31,6 +31,9 @@ void Console::inputMessageAppend(char c)
 			// Destroying last list messages
 			if(mInputMessagesList.size() > INPUT_MESSAGE_LIST_SIZE)
 				mInputMessagesList.pop_back();
+
+			checkForCommand();
+
 			sendCopyDataMessage();
 			mInputMessage = "";
 		}
@@ -76,7 +79,13 @@ void Console::addLine(string cont)
 {
 #pragma omp critical(konsole)
 	{
-		mMessagesList->add(cont);
+		//mMessagesList->add(cont);
+		stringstream ss(cont);
+		string line;
+		while( getline(ss, line) )
+		{
+			mMessagesList->add(line);
+		}
 	}
 }
 
@@ -84,7 +93,14 @@ void Console::addLine(string cont, GAME_CONSOLE_ERROR_NUM num)
 {
 #pragma omp critical(konsole)
 	{
-		mMessagesList->add(cont, num);
+		//mMessagesList->add(cont, num);
+
+		stringstream ss(cont);
+		string line;
+		while( getline(ss, line) )
+		{
+			mMessagesList->add(line, num);
+		}
 	}
 }
 
@@ -283,4 +299,37 @@ void Console::changeInputCursorPos(int newPos)
 		else
 			mInputMessage = "";
 	}
+}
+
+void Console::checkForCommand()
+{
+	int spacePos = mInputMessage.find_first_of(' ');
+	string command = "";
+	
+	if(spacePos != -1)
+		command = mInputMessage.substr(0, spacePos);
+	else
+		command = mInputMessage;
+	
+
+	if(command == "trol")
+	{
+		addLine("Yap troliu geimas!");
+		return;
+	}
+	else if(command == "help")
+	{
+		addLine("No help for you \\O/");
+		return;
+	}
+	else if(command == "quit")
+	{
+		addLine("Quiting...");
+		PostQuitMessage(1);
+		return;
+	}
+	
+
+	// Command not recognized
+	addLine("There is no such command. Type 'Help' for command list.");
 }
