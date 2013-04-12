@@ -4,7 +4,7 @@
 extern Console gServerConsole;
 
 
-void terrain::setVal()
+void Terrain::setVal()
 	{  
 		///////////////// NENAUDOTI ///////////////////
 		///////////////// mem leak  ///////////////////
@@ -33,7 +33,7 @@ void terrain::setVal()
 	//	
 	}
 
-void terrain::loadShader(LPDIRECT3DDEVICE9 &d3)
+void Terrain::loadShader(LPDIRECT3DDEVICE9 &d3)
 	{
 		
 
@@ -46,7 +46,7 @@ void terrain::loadShader(LPDIRECT3DDEVICE9 &d3)
 	}
 
 
-void terrain::generateTerain()
+void Terrain::generateTerain()
 {
 
 
@@ -466,7 +466,7 @@ void terrain::generateTerain()
 
 
 
-void terrain::Render()
+void Terrain::Render()
 
 {
 	/*while(writelock) {  }*/
@@ -670,7 +670,7 @@ void terrain::Render()
 
 
 
-D3DXVECTOR3 terrain::getNormal(D3DXVECTOR3 vect)
+D3DXVECTOR3 Terrain::getNormal(D3DXVECTOR3 vect)
 {
 
 
@@ -758,7 +758,7 @@ D3DXVECTOR3 terrain::getNormal(D3DXVECTOR3 vect)
 	return D3DXVECTOR3(0,0,0);
 }
 
-double terrain::getTmpH(D3DXVECTOR3 vect)
+double Terrain::getTmpH(D3DXVECTOR3 vect)
 {
 
 
@@ -812,7 +812,7 @@ double terrain::getTmpH(D3DXVECTOR3 vect)
 	return 0.0;
 }
 
-double terrain::getH(D3DXVECTOR3 vect)
+double Terrain::getH(D3DXVECTOR3 vect)
 {
 	D3DXVECTOR3 N = getNormal(vect);
 	double tmpY = getTmpH(vect);
@@ -862,7 +862,7 @@ double terrain::getH(D3DXVECTOR3 vect)
 
 
 
-void terrain::calculateTerrainNormals()
+void Terrain::calculateTerrainNormals()
 {
 
 	D3DXVECTOR3 v1;
@@ -993,7 +993,7 @@ start = i*3;
 
 
 
-void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
+void Terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
                                 D3DXVECTOR3 *v2,
                                 D3DXVECTOR3 *v3,
                                 float v1u, float v1v,
@@ -1173,7 +1173,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
- LPDIRECT3DTEXTURE9 terrain::trace(LPDIRECT3DDEVICE9 &d3, float *heightmap, int width, int height, float saule[3], int textMultiply)
+ LPDIRECT3DTEXTURE9 Terrain::trace(LPDIRECT3DDEVICE9 &d3, float *heightmap, int width, int height, float saule[3], int textMultiply)
  {
 	 unsigned char *lightmap = new unsigned char[width*height];
 	 
@@ -1432,7 +1432,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
- void terrain::setSunDirection(LPDIRECT3DDEVICE9 &d3, float saule[3])
+ void Terrain::setSunDirection(LPDIRECT3DDEVICE9 &d3, float saule[3])
  {
 	 if(saule[0] != lightDir[0] || saule[1] != lightDir[1] || saule[2] != lightDir[2])
 	 {
@@ -1452,7 +1452,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
-  LPDIRECT3DTEXTURE9 terrain::trace2(LPDIRECT3DDEVICE9 &d3, int width, int height, float saule[3], int textMultiply)
+  LPDIRECT3DTEXTURE9 Terrain::trace2(LPDIRECT3DDEVICE9 &d3, int width, int height, float saule[3], int textMultiply)
  {
 	 //gServerConsole.addLine("Generuojamas seseliu zemelapis", GAME_CONSOLE_WARNING);
 	 unsigned char *lightmap = new unsigned char[width*height];
@@ -1743,7 +1743,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
- unsigned char *terrain::textureGenerator(float minHeight, float maxHeight, float minAngle, float maxAngle, int width, int height, int density, int blur)
+ unsigned char *Terrain::textureGenerator(float minHeight, float maxHeight, float minAngle, float maxAngle, int width, int height, int density, int blur)
  {
 	 //cons.add("Generuojamas teksturu zemelapis...");
 	 unsigned char *textureMap = new unsigned char[width*height];
@@ -1832,7 +1832,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
- LPDIRECT3DTEXTURE9 terrain::textureRGBA(LPDIRECT3DDEVICE9 &d3, int width, int height, unsigned char *tex1, unsigned char *tex2, unsigned char *tex3, unsigned char *tex4)
+ LPDIRECT3DTEXTURE9 Terrain::textureRGBA(LPDIRECT3DDEVICE9 &d3, int width, int height, unsigned char *tex1, unsigned char *tex2, unsigned char *tex3, unsigned char *tex4)
  {
 	 DWORD *atvaizdas; 
 	 DWORD *paveikslas = new DWORD[width * height];
@@ -1901,7 +1901,7 @@ void terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 
 
 
-void terrain::Update()
+void Terrain::Update()
 {
 
 	double x = kamera->getCamP().x - startX; 
@@ -1971,7 +1971,7 @@ void terrain::Update()
 }
 
 
-void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, double atstumas)
+void Terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, double atstumas)
 {
 	double dist = 0;
 	bool c = colision(x, y, w, h, tx, ty, level, dist);
@@ -2125,7 +2125,7 @@ void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
 	}
 }
 
- bool terrain::colision(int x, int y, int w, int h, double tx, double ty, int level, double &dist)
+ bool Terrain::colision(int x, int y, int w, int h, double tx, double ty, int level, double &dist)
  {
 	 if(
              ((dist = distance(x,y, w, h, tx, ty)) <= radius[level]) 
@@ -2143,7 +2143,7 @@ void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
  }
 
 
- bool terrain::fullColision(int x, int y, int w, int h, double tx, double ty, int level)
+ bool Terrain::fullColision(int x, int y, int w, int h, double tx, double ty, int level)
     {
         if(
                 distance2(x,y, tx, ty) <= radius[level] &&
@@ -2159,7 +2159,7 @@ void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
     }
 
 
- double terrain::distance(int x, int y, int w, int h, double tx, double ty)
+ double Terrain::distance(int x, int y, int w, int h, double tx, double ty)
     {
         double distanceToCenter = sqrt(
                 ((x+(w/2.0)-tx)*(x+(w/2.0)-tx))+((y+(h/2.0)-ty)*(y+(h/2.0)-ty)));
@@ -2170,13 +2170,13 @@ void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
         return distanceToCenter-colisionRadius;
     } 
 
- double terrain::distance2(int x, int y, double tx, double ty)
+ double Terrain::distance2(int x, int y, double tx, double ty)
     {
         return sqrt(((x-tx)*(x-tx))+((y-ty)*(y-ty)));
     }
 
 
- double terrain::angle(double px, double py, double x, double y)
+ double Terrain::angle(double px, double py, double x, double y)
     {
         x = x - px;
         y = y - py;
@@ -2208,17 +2208,17 @@ void terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
         return angle;
     }
 
- int terrain::xyToint(int x, int y)
+ int Terrain::xyToint(int x, int y)
  {
 	 return vertX * y + x;
  }
 
- float terrain::getWidth()
+ float Terrain::getWidth()
  {
 	 return (float)cellsX * stepX;
  }
 
- float terrain::getHeight()
+ float Terrain::getHeight()
  {
 	 return (float)cellsZ * stepZ;
  }

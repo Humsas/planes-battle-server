@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include"matematika.h"
+#include "mymath.h"
 #include "textureManager.h"
 using namespace std;
 
@@ -85,6 +86,8 @@ public:
 
 	// uzloadina mesha i directx pagal mesho pointeri
 	void drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija, D3DXMATRIX &transformMatrix);
+
+	void drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix);
 
 
 
