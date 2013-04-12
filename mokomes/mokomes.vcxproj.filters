@@ -1,0 +1,810 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM">
+      <UniqueIdentifier>{5a1e1ee1-9e3f-46b5-848d-62b6950e02c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM">
+      <UniqueIdentifier>{bc9ecc2b-f243-4fb3-8057-2400691a6e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\models">
+      <UniqueIdentifier>{a1ce708b-23ab-4651-beb1-55c947f7a206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\models">
+      <UniqueIdentifier>{02b8814d-9a80-4c15-a956-f87392f0817d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\initialization">
+      <UniqueIdentifier>{c82ee4ef-61d4-4afa-a3da-f83f8f019cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\input_output">
+      <UniqueIdentifier>{5ee788ce-d245-461b-ba14-2e41ce20d7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\math">
+      <UniqueIdentifier>{4a0a42cc-8208-48ba-a076-50922701b67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\simgear">
+      <UniqueIdentifier>{d0b06d32-e4c3-4d6b-be74-d8468e6d4755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\utilities">
+      <UniqueIdentifier>{4897352b-4f57-4544-ab9d-f5db8f643aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\initialization">
+      <UniqueIdentifier>{cc4c3cca-0506-4202-9496-6f536510eb44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\input_output">
+      <UniqueIdentifier>{74101c1f-de3c-424e-98dc-44023520ca84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\math">
+      <UniqueIdentifier>{b27d13bc-a726-4a35-b5aa-ee483c1a71ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\simgear">
+      <UniqueIdentifier>{cae122cd-4b2e-451e-b8d4-433c3886d726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\utilities">
+      <UniqueIdentifier>{3a128117-4001-43ba-bf13-5f37020e16b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\models\atmosphere">
+      <UniqueIdentifier>{d83eccc3-21ed-4918-84ef-a23e433741dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\models\flight_control">
+      <UniqueIdentifier>{69d3c242-289c-477b-953f-79fa52735ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\models\propulsion">
+      <UniqueIdentifier>{6d10a65e-8d99-4f52-90ee-60a4c14abd8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\models\atmosphere">
+      <UniqueIdentifier>{40213317-aaf4-41e1-a9ee-f15b78c8f6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\models\flight_control">
+      <UniqueIdentifier>{43cb6b06-0ce6-4272-97fb-e2473c0e9e93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\models\propulsion">
+      <UniqueIdentifier>{6bbf7dcb-f751-4a4b-8ac8-51f60255c407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\simgear\props">
+      <UniqueIdentifier>{472885be-5d0f-44c4-8198-0261681b3f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JSBSIM\simgear\xml">
+      <UniqueIdentifier>{d1624008-7d1e-4e94-a8df-14669e29b07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\simgear\props">
+      <UniqueIdentifier>{8bcbdfa5-6069-4670-98cb-fabc6fd9cbaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JSBSIM\simgear\xml">
+      <UniqueIdentifier>{c4d4c09f-a1a9-460b-840e-e308ac2ecc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEntities">
+      <UniqueIdentifier>{1504491e-a740-4080-a96c-db9b5f68cf4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{17eff6df-4c03-45c7-a067-e2beaa80dbf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking">
+      <UniqueIdentifier>{253ea8cf-a643-4b8d-a78d-eca5d0b1d461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking">
+      <UniqueIdentifier>{31c575b6-e668-4ea2-ab28-956cfd728967}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="index.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="valdymas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="masyvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="splittedTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clouds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aircraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\FGFDMExec.cpp">
+      <Filter>Source Files\JSBSIM</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGAerodynamics.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGAircraft.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGAtmosphere.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGAuxiliary.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGBuoyantForces.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGExternalForce.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGExternalReactions.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGFCS.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGGasCell.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGGroundReactions.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGInertial.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGInput.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGLGear.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGMassBalance.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGModel.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGOutput.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGPropagate.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\FGPropulsion.cpp">
+      <Filter>Source Files\JSBSIM\models</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\initialization\FGInitialCondition.cpp">
+      <Filter>Source Files\JSBSIM\initialization</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\initialization\FGTrim.cpp">
+      <Filter>Source Files\JSBSIM\initialization</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\initialization\FGTrimAxis.cpp">
+      <Filter>Source Files\JSBSIM\initialization</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGfdmSocket.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGGroundCallback.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGPropertyManager.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGScript.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGXMLElement.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\input_output\FGXMLParse.cpp">
+      <Filter>Source Files\JSBSIM\input_output</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGColumnVector3.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGCondition.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGFunction.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGLocation.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGMatrix33.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGPropertyValue.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGQuaternion.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGRealValue.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\math\FGTable.cpp">
+      <Filter>Source Files\JSBSIM\math</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\atmosphere\FGMars.cpp">
+      <Filter>Source Files\JSBSIM\models\atmosphere</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\atmosphere\FGMSIS.cpp">
+      <Filter>Source Files\JSBSIM\models\atmosphere</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\atmosphere\FGMSISData.cpp">
+      <Filter>Source Files\JSBSIM\models\atmosphere</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGAccelerometer.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGActuator.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGDeadBand.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGFCSComponent.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGFCSFunction.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGFilter.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGGain.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGKinemat.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGPID.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGSensor.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGSummer.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\flight_control\FGSwitch.cpp">
+      <Filter>Source Files\JSBSIM\models\flight_control</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGElectric.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGEngine.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGForce.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGNozzle.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGPiston.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGPropeller.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGRocket.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGTank.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGThruster.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGTurbine.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\models\propulsion\FGTurboProp.cpp">
+      <Filter>Source Files\JSBSIM\models\propulsion</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\simgear\props\props.cxx">
+      <Filter>Source Files\JSBSIM\simgear\props</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\utilities\datafile.cpp">
+      <Filter>Source Files\JSBSIM\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\utilities\plotXMLVisitor.cpp">
+      <Filter>Source Files\JSBSIM\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\utilities\prep_plot.cpp">
+      <Filter>Source Files\JSBSIM\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\FGJSBBase.cpp">
+      <Filter>Source Files\JSBSIM</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\FGState.cpp">
+      <Filter>Source Files\JSBSIM</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\simgear\xml\easyxml.cxx">
+      <Filter>Source Files\JSBSIM\simgear\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\simgear\xml\xmltok.c">
+      <Filter>Source Files\JSBSIM\simgear\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\simgear\xml\xmlrole.c">
+      <Filter>Source Files\JSBSIM\simgear\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIM\simgear\xml\xmlparse.c">
+      <Filter>Source Files\JSBSIM\simgear\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="altimeter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="speedometer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bomb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneObjects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="quadTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="colisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="anglemeter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JSBSIMAircraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chunkManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking.cpp">
+      <Filter>Source Files\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mainClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="valdymas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="masyvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="declarations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="splittedTerrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clouds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globalSetings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aircraft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mymath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matematika.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\FGFDMExec.h">
+      <Filter>Header Files\JSBSIM</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGAerodynamics.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGAircraft.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGAtmosphere.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGAuxiliary.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGBuoyantForces.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGExternalForce.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGExternalReactions.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGFCS.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGGasCell.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGGroundReactions.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGInertial.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGInput.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGLGear.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGMassBalance.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGModel.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGOutput.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGPropagate.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\FGPropulsion.h">
+      <Filter>Header Files\JSBSIM\models</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\initialization\FGInitialCondition.h">
+      <Filter>Header Files\JSBSIM\initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\initialization\FGTrim.h">
+      <Filter>Header Files\JSBSIM\initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\initialization\FGTrimAxis.h">
+      <Filter>Header Files\JSBSIM\initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGfdmSocket.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGGroundCallback.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGPropertyManager.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGScript.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGXMLElement.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGXMLFileRead.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\FGXMLParse.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\net_fdm.hxx">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\input_output\string_utilities.h">
+      <Filter>Header Files\JSBSIM\input_output</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGColumnVector3.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGCondition.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGFunction.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGLocation.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGMatrix33.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGParameter.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGPropertyValue.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGQuaternion.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGRealValue.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\math\FGTable.h">
+      <Filter>Header Files\JSBSIM\math</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\atmosphere\FGMars.h">
+      <Filter>Header Files\JSBSIM\models\atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\atmosphere\FGMSIS.h">
+      <Filter>Header Files\JSBSIM\models\atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGAccelerometer.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGActuator.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGDeadBand.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGFCSComponent.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGFCSFunction.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGFilter.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGGain.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGKinemat.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGPID.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGSensor.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGSummer.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\flight_control\FGSwitch.h">
+      <Filter>Header Files\JSBSIM\models\flight_control</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGElectric.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGEngine.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGForce.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGNozzle.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGPiston.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGPropeller.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGRocket.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGTank.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGThruster.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGTurbine.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\models\propulsion\FGTurboProp.h">
+      <Filter>Header Files\JSBSIM\models\propulsion</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\compiler.h">
+      <Filter>Header Files\JSBSIM\simgear</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\ascii.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\asciitab.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\easyxml.hxx">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\expat.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\expat_config.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\expat_external.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\iasciitab.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\internal.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\latin1tab.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\macconfig.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\nametab.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\utf8tab.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\winconfig.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\xmlrole.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\xmltok.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\xml\xmltok_impl.h">
+      <Filter>Header Files\JSBSIM\simgear\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\props\props.hxx">
+      <Filter>Header Files\JSBSIM\simgear\props</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\props\SGReferenced.hxx">
+      <Filter>Header Files\JSBSIM\simgear\props</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\simgear\props\SGSharedPtr.hxx">
+      <Filter>Header Files\JSBSIM\simgear\props</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\utilities\datafile.h">
+      <Filter>Header Files\JSBSIM\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\utilities\plotXMLVisitor.h">
+      <Filter>Header Files\JSBSIM\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\FGJSBBase.h">
+      <Filter>Header Files\JSBSIM</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIM\FGState.h">
+      <Filter>Header Files\JSBSIM</Filter>
+    </ClInclude>
+    <ClInclude Include="altimeter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="speedometer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bomb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneObjects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hud.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quadTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="colisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anglemeter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JSBSIMAircraft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="forestRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chunkManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking.h">
+      <Filter>Header Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="WinsockWrapper.h">
+      <Filter>Header Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConsole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractEntity.h">
+      <Filter>Header Files\GameEntities</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
