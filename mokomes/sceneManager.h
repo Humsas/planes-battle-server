@@ -18,7 +18,6 @@ using namespace std;
 #include "kamera.h"
 #include "hud.h"
 #include "mymath.h"
-
 #include "chunkManager.h"
 
 
@@ -32,14 +31,14 @@ private:
 	TextureManager	*textureManager;
 	ChunkManager	*CM;
 
-	terrain			*ter;
+	Terrain			*ter;
 	Kamera			*kamera;
 	Mesh			*meshManager;
 	SceneObjects	*sceneObjects;
 	Hud				*hud;
 
 	bool			wireframe;
-	bool			renderConsole;
+	//bool			renderConsole;
 	
 	
 	Clouds *debesis;
@@ -54,12 +53,12 @@ public:
 	~SceneManager();
 
 	void Render();
-	void Update();
+	void Update(float dt);
 
 	void LoadObjects();
 
 	Kamera		*getCamera();
-	terrain		*getTerrain();
+	Terrain		*getTerrain();
 	Mesh		*getMeshManager();
 	Hud			*getHud();
 	ChunkManager *getChunkManager();
@@ -73,7 +72,7 @@ public:
 
 
 	void changeRenderMode();
-	void onOffConsolerender();
+	//void onOffConsolerender();
 
 	void slope(float delta);
 	void bias(float delta);

@@ -15,7 +15,7 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 	kamera			= new Kamera();
 	CM				= new ChunkManager(d3, textureManager, kamera);
 
-	ter				= new terrain(d3, textureManager, kamera, "Maps/Map0/map.BMP");
+	ter				= new Terrain(d3, textureManager, kamera, "Maps/Map0/map.BMP");
 	
 	
 	sceneObjects	= new SceneObjects(d3, meshManager);
@@ -25,7 +25,7 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 	depthBias = 0.0;
 
 	wireframe = false;
-	renderConsole = false;
+	//renderConsole = false;
 
 	LoadObjects();
 
@@ -55,38 +55,38 @@ void SceneManager::Render()
 
 	d3->BeginScene();
 
-	//D3DXMATRIX matView;    // the view transform matrix
+	D3DXMATRIX matView;    // the view transform matrix
 
-	//D3DXMatrixLookAtLH(&matView,
-	//	&D3DXVECTOR3 (kamera->getCamP().x, kamera->getCamP().y, kamera->getCamP().z),    // the camera position
-	//	&D3DXVECTOR3 (kamera->getCamW().x, kamera->getCamW().y, kamera->getCamW().z),	// the look-at position
-	//	&D3DXVECTOR3 (0.0f, 1.0f, 0.0f));    // the up direction
+	D3DXMatrixLookAtLH(&matView,
+		&D3DXVECTOR3 (kamera->getCamP().x, kamera->getCamP().y, kamera->getCamP().z),    // the camera position
+		&D3DXVECTOR3 (kamera->getCamW().x, kamera->getCamW().y, kamera->getCamW().z),	// the look-at position
+		&D3DXVECTOR3 (0.0f, 1.0f, 0.0f));    // the up direction
 
-	//d3->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
+	d3->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 
-	//D3DXMATRIX matProjection;     // the projection transform matrix
+	D3DXMATRIX matProjection;     // the projection transform matrix
 
-	//D3DXMatrixPerspectiveFovLH(&matProjection,
-	//						   D3DXToRadian(45),    // the horizontal field of view
-	//						   (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-	//						   0.1f,    // the near view-plane
-	//						   1000000.0f);    // the far view-plane
+	D3DXMatrixPerspectiveFovLH(&matProjection,
+							   D3DXToRadian(45),    // the horizontal field of view
+							   (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
+							   1.0f,    // the near view-plane
+							   50000.0f);    // the far view-plane
 
-	//d3->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
-	//d3->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	//d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	d3->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
+	d3->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
-	//// renderinti scenos objektus
-	//d3->SetRenderState( D3DRS_LIGHTING, FALSE );
-	//d3->SetRenderState(D3DRS_FOGENABLE, FALSE);
-	//meshManager->drawMesh(d3, "skybox", kamera->getCamP().x, kamera->getCamP().y, kamera->getCamP().z, 100000, 0, 0, 0 );
-	//d3->SetRenderState(D3DRS_FOGENABLE, TRUE);
-	//d3->SetRenderState( D3DRS_LIGHTING, TRUE );
-	//
-	//if(wireframe)
-	//	d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	//else
-	//	d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	// renderinti scenos objektus
+	d3->SetRenderState( D3DRS_LIGHTING, FALSE );
+	d3->SetRenderState(D3DRS_FOGENABLE, FALSE);
+	meshManager->drawMesh(d3, "skybox", kamera->getCamP().x, kamera->getCamP().y, kamera->getCamP().z, 50000, 0, 0, 0 );
+	d3->SetRenderState(D3DRS_FOGENABLE, TRUE);
+	d3->SetRenderState( D3DRS_LIGHTING, TRUE );
+	
+	if(wireframe)
+		d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	else
+		d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 	
 	
@@ -99,32 +99,37 @@ void SceneManager::Render()
 	//ss1 << "Slope: " << slopeScale << " Biass " << depthBias;
 	//
 
-	//cons.add(ss1.str(),GAME_CONSOLE_WARNING);
+	//gServerConsole.addLine(ss1.str(),GAME_CONSOLE_WARNING);
 	
-	//Vector camSpin;
-	//camSpin = kamera->getCamSpin();
-	////ter->Render(camSpin.x, camSpin.y, camSpin.z);
+	Vector camSpin;
+	camSpin = kamera->getCamSpin();
+	//ter->Render(camSpin.x, camSpin.y, camSpin.z);
 
-	////d3->SetRenderState(D3DRS_SLOPESCALEDEPTHBIAS, (DWORD)slopeScale);
-	////d3->SetRenderState(D3DRS_DEPTHBIAS, (DWORD)depthBias);
+	//d3->SetRenderState(D3DRS_SLOPESCALEDEPTHBIAS, (DWORD)slopeScale);
+	//d3->SetRenderState(D3DRS_DEPTHBIAS, (DWORD)depthBias);
 
-	//
+	
 
-	//CM->Render();
-	//sceneObjects->Render();
+	CM->Render();
+	sceneObjects->Render();
 
-	//// render hud
-	//hud->Render();
-	//debesis->Render();
+
+	//if(renderConsole) 
+	
+
+	// render hud
+	hud->Render();
 	gServerConsole.render(d3);
+
+	debesis->Render();
 
 	d3->EndScene();
 	d3->Present(NULL, NULL, NULL, NULL);
 }
 
-void SceneManager::Update()
+void SceneManager::Update(float dt)
 {
-	CM->Update();
+	CM->Update(dt);
 	kamera->Update();
 
 	ter->Update();
@@ -193,7 +198,7 @@ Kamera *SceneManager::getCamera()
 	return kamera;
 }
 
-terrain *SceneManager::getTerrain()
+Terrain *SceneManager::getTerrain()
 {
 	return ter;
 }
@@ -217,14 +222,14 @@ void SceneManager::changeRenderMode()
 }
 
 
-
+/*
 void SceneManager::onOffConsolerender()
 {
 	if(renderConsole)
 		renderConsole = false;
 	else
 		renderConsole = true;
-}
+}*/
 
 void SceneManager::slope(float delta)
 {
