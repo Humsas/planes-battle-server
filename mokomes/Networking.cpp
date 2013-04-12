@@ -87,6 +87,8 @@ void Networking::Update()
 			}
 		}
 	}
+
+	RakSleep(0);
 }
 
 

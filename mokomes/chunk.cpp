@@ -8,13 +8,13 @@ Chunk::Chunk(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* kame
 	this->kamera = kamera;
 	this->x = x;
 	this->y = y;
-	ter = new terrain(d3, textureManager, kamera, mapname, x, y);
+	ter = new Terrain(d3, textureManager, kamera, mapname, x, y);
 	ter->generateTerain();
 
 	this->w = ter->getWidth();
 	this->h = ter->getHeight();
 
-	this->QT = new QuadTree(6, 0, x, y, x+ter->getWidth(), y+ter->getHeight());
+	this->QT = new QuadTree(QUADTREE_DEPTH, 0, x, y, x+ter->getWidth(), y+ter->getHeight());
 
 	ter->Update();
 }
@@ -26,9 +26,14 @@ Chunk::~Chunk()
 	delete QT;
 }
 
-terrain *Chunk::getTerrain()
+Terrain *Chunk::getTerrain()
 {
 	return ter;
+}
+
+QuadTree *Chunk::getQuadTree()
+{
+	return QT;
 }
 
 bool Chunk::isPointInChunk(Vector *v)
@@ -42,14 +47,17 @@ double Chunk::getTerrainHeight()
 }
 
 
-void Chunk::Update()
+void Chunk::Update(float dt)
 {
 	// TODO
 	ter->Update();
+	QT->Update(dt);
 }
 
-void Chunk::Render()
+void Chunk::Render(InvisibleObjectsChecker *visibilityChecker)
 {
 	// TODO
 	ter->Render();
+	QT->Render(visibilityChecker);
+
 }

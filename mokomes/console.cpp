@@ -32,8 +32,6 @@ void Console::inputMessageAppend(char c)
 			if(mInputMessagesList.size() > INPUT_MESSAGE_LIST_SIZE)
 				mInputMessagesList.pop_back();
 
-			checkForCommand();
-
 			sendCopyDataMessage();
 			mInputMessage = "";
 		}
@@ -299,37 +297,4 @@ void Console::changeInputCursorPos(int newPos)
 		else
 			mInputMessage = "";
 	}
-}
-
-void Console::checkForCommand()
-{
-	int spacePos = mInputMessage.find_first_of(' ');
-	string command = "";
-	
-	if(spacePos != -1)
-		command = mInputMessage.substr(0, spacePos);
-	else
-		command = mInputMessage;
-	
-
-	if(command == "trol")
-	{
-		addLine("Yap troliu geimas!");
-		return;
-	}
-	else if(command == "help")
-	{
-		addLine("No help for you \\O/");
-		return;
-	}
-	else if(command == "quit")
-	{
-		addLine("Quiting...");
-		PostQuitMessage(1);
-		return;
-	}
-	
-
-	// Command not recognized
-	addLine("There is no such command. Type 'Help' for command list.");
 }

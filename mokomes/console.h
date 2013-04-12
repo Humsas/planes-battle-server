@@ -41,7 +41,6 @@ private:
 	int				mInputMessagesListCursorIndex;
 
 	void sendCopyDataMessage();
-	void checkForCommand();
 
 	TLVERTEX		mBodyColor[4];
 	TLVERTEX		mBorderColor[4];

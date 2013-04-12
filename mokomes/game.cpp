@@ -252,7 +252,7 @@ void Game::Update()
 
 
 
-	scena->Update();
+	scena->Update(timer->getDeltaT());
 	sound->update();
 
 	

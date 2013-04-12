@@ -17,6 +17,7 @@
 #include "upnperrors.h"
 #include "RakNetSmartPtr.h"
 #include "RakNetSocket2.h"
+#include "RakSleep.h"
 #include "Itoa.h"
 //#include "Strsafe.h"		// StringCbPrintf funkcijai
 

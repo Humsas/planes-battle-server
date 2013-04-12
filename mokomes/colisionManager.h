@@ -10,24 +10,24 @@ class ColisionManager
 {
 private:
 	QuadTree	*QT;
-	terrain		*ter;
+	Terrain		*ter;
 
 public:
-	ColisionManager(terrain *ter);
+	ColisionManager(Terrain *ter);
 	~ColisionManager();
 
 	QuadTree *getQuadTree();
 
-	void findColisions(Entity *op);
+	void findColisions(AbstractEntity *op);
 
-	float groundLevel(Entity *op);
+	float groundLevel(AbstractEntity *op);
 
 	/*void addElement()
 	{
 
 	}*/
 
-	void update(Entity *op);
+	void update(AbstractEntity *op);
 
 };
 
