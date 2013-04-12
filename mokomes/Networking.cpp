@@ -5,10 +5,10 @@ Networking::Networking(Console* console, Game* game)
 	mConsole = console;
 	mServer = RakPeerInterface::GetInstance();
 
-	ConnectionData tmp;
-	ConnectionData tmp1;
-	mConnectionData.push_back(tmp);
-	mConnectionData.push_back(tmp1);
+	//ConnectionData tmp;
+	//ConnectionData tmp1;
+	//mConnectionData.push_back(tmp);
+	//mConnectionData.push_back(tmp1);
 
 	SocketDescriptor sd(SERVER_PORT, 0);
 	mServer->Startup(MAX_CLIENTS, &sd, 1);

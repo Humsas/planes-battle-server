@@ -45,7 +45,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
 
 	if(FAILED(hr))
 	{
-		gServerConsole.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
+		//gServerConsole.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
 		delete M;
 	}
 	else
@@ -195,7 +195,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
  
 		this->MESH = M;
 
-		gServerConsole.addLine("Modelis id: \""+id+"\" uzkrautas");
+		//gServerConsole.addLine("Modelis id: \""+id+"\" uzkrautas");
 	}
 
 }
