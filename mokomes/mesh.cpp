@@ -45,7 +45,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
 
 	if(FAILED(hr))
 	{
-		//gServerConsole.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
+		gServerConsole.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
 		delete M;
 	}
 	else
@@ -195,7 +195,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
  
 		this->MESH = M;
 
-		//gServerConsole.addLine("Modelis id: \""+id+"\" uzkrautas");
+		gServerConsole.addLine("Modelis id: \""+id+"\" uzkrautas");
 	}
 
 }
@@ -551,12 +551,46 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija
 		d3->SetTransform( D3DTS_WORLD, &worldsave);
 			  
 	}
-
-
-
-
 }
 
+void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix)
+{
+	D3DXMATRIX worldsave, meshworld, combo;
+
+	if(mesh != NULL)
+	{
+		d3->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);
+
+		d3->GetTransform( D3DTS_WORLD, &worldsave );
+		meshworld = worldsave;
+		meshworld._41 = pozicija->x; 
+		meshworld._42 = pozicija->z; 
+		meshworld._43 = pozicija->y;
+
+
+ 
+		combo = transformMatrix * meshworld;
+
+
+		d3->SetTransform( D3DTS_WORLD, &combo );
+
+
+		for (DWORD i=0; i<mesh->numMaterials; i++)
+		{
+			// Set the material and texture for this subset
+			d3->SetMaterial(&mesh->meshMaterials[i]);
+			d3->SetTexture(0,mesh->meshTextures[i]);
+        
+			// Draw the mesh subset
+			mesh->mesh->DrawSubset(i);
+		}
+
+		d3->SetRenderState(D3DRS_NORMALIZENORMALS, false);
+			  
+		d3->SetTransform( D3DTS_WORLD, &worldsave);
+			  
+	}
+}
 
 
 

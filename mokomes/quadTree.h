@@ -3,7 +3,8 @@
 
 #include "linkedList.h"
 #include "mymath.h"
-#include "Entity.h"
+#include "AbstractEntity.h"
+#include "InvisibleObjectsChecker.h"
 
 struct objectPosition
 {
@@ -36,17 +37,16 @@ private:
 	float startX, startY, endX, endY;
 	float width, height;
 	int level;
-
 	int cellID; // 0, 1, 2, 3
 
-	MyLinkedList<Entity> *list;
-
+	MyLinkedList<AbstractEntity> *list;
 	QuadTree *QT[4];
 	QuadTree *motherBranch;
+	Vector *centerPos;
+	float radius;
 
-	//funkcijos
-	bool canItFit(Entity *op);
-	bool isColidingWithQuadBoundaries(Entity *op);
+	//funkcijos	
+	bool isColidingWithQuadBoundaries(AbstractEntity *op);
 
 	//void cutAndPaste(objectPosition *op);
 
@@ -55,22 +55,28 @@ public:
 	QuadTree(int level, int cellID, float startX, float startY, float endX, float endY, QuadTree *motherBranch = NULL);
 	~QuadTree();
 
-	
-	void findColisions(Entity *op);
-	void addElement(Entity *op, bool deleteOnDestruction);
-	bool removeElement(Entity *op);
+
+	bool wouldItFitInQuad(AbstractEntity *e, float startX, float startY, float endX, float endY);
+	bool canItFit(AbstractEntity *op);
+	//void findColisions(AbstractEntity *op);
+	//void addElement(AbstractEntity *op, bool deleteOnDestruction);
+
+	//bool removeElement(AbstractEntity *op);
 
 
-	void updateElement(Entity *op);
+	//void paste(AbstractEntity *op);
 
-	void paste(Entity *op);
+	MyLinkedList<AbstractEntity> *getList();
 
-	MyLinkedList<Entity> *getList();
-	
 
 	//void addElement(objectPosition *op);
 
-};
+	//Vector *getCenterPosition();
 
+	bool add(AbstractEntity *e, bool deleteOnDestruction = false);
+
+	void Update(float dt);
+	void Render(InvisibleObjectsChecker *visibilityChecker); 
+};
 
 #endif

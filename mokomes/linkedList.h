@@ -8,45 +8,46 @@ template <class T>
 class MyLinkedList
 {
 private: 
-	struct List
+	struct Node
 	{
 		T		*t;
-		List	*next;
-		List	*prev;
-
+		Node	*next;
+		Node	*prev;
 		bool	deleteOnDestruction;
-		List()
+
+		Node()
 		{
 			t		= NULL;
 			next	= NULL;
 			prev	= NULL;
 			deleteOnDestruction = false;
-			//std::cout << "CREATEstruct\n"; 
 		}
 
-		~List()
+		~Node()
 		{
 			if(t != NULL && deleteOnDestruction)
 			{
 				delete t;
-				//std::cout << "DELETEonDestruction\n";
 			}
 		}
 	};
 
 
-	List *LIST;	
+	Node *LIST;	
 	int counter;
 
-	List *it; // iterator
+	Node *it; // iterator
 
-	//T *test;
 
-	List *getElementPosition(T *t)
+	Node *renderPointer;
+	Node *updatePointer;
+
+
+	Node *getElementPosition(T *t)
 	{
-		List *ll = NULL;
+		Node *ll = NULL;
 
-		for(List *l = LIST; l != NULL; l = l->next)
+		for(Node *l = LIST; l != NULL; l = l->next)
 		{
 
 			if(l->t == t)
@@ -57,24 +58,38 @@ private:
 		return ll;
 	}
 
+	T *getNextOf(Node **l)
+	{
+		T *r = NULL;
+
+		if(*l != NULL)
+		{
+			r = (*l)->t;
+			*l = (*l)->next;
+		}
+		else
+		{
+			r = NULL;
+		}
+
+		return r;
+	}
+
 
 public:
-	// Konstruktorius
 	MyLinkedList()
 	{ 
-		//std::cout << "CREATE\n";  
 		LIST	= NULL;
 		it		= NULL;
+		updatePointer = NULL;
+		renderPointer = NULL;
 		counter = 0;
 	}
 
-	// Destruktorius
 	~MyLinkedList()
 	{ 
-		//std::cout << "DELETE\n"; 
-		//delete LIST;
-		List *ll;
-		for(List *l = LIST; l != NULL; )
+		Node *ll;
+		for(Node *l = LIST; l != NULL; )
 		{
 			ll = l;
 			l = l->next;
@@ -89,7 +104,7 @@ public:
 
 	void add(T *t, bool deleteOnDestruction = false)
 	{
-		List *L = new List;
+		Node *L = new Node;
 		L->t	= t;
 		L->next = NULL;
 		L->deleteOnDestruction = deleteOnDestruction;
@@ -98,14 +113,12 @@ public:
 		{ // pirmas elementas
 			L->prev = NULL;
 			LIST = L;
-			it	 = L;
-			
+			it	 = L;		
 		}
 		else
-		{ // jungiam prie pabaigos
-			
+		{ // jungiam prie pabaigos		
 			//ieskom galinio elemento
-			for(List *l = LIST; l != NULL; l = l->next)
+			for(Node *l = LIST; l != NULL; l = l->next)
 			{
 
 				if(l->next == NULL)
@@ -122,7 +135,7 @@ public:
 	T *get(int index)
 	{
 		int i = 0;
-		for(List *l = LIST; l != NULL; l = l->next)
+		for(Node *l = LIST; l != NULL; l = l->next)
 		{
 			if(i == index)
 			{
@@ -136,7 +149,7 @@ public:
 	void printR()
 	{
 		//std::cout << LIST << endl;
-		for(List *l = LIST; l != NULL; l = l->next)
+		for(Node *l = LIST; l != NULL; l = l->next)
 		{
 			std::cout << l << " " << l->prev << " " << l->next << endl;
 			
@@ -147,7 +160,7 @@ public:
 	bool remove(T *t)
 	{
 		bool r = false;
-		List *l = getElementPosition(t);
+		Node *l = getElementPosition(t);
 		if(l != NULL)
 		{
 			// vidurinis elementas
@@ -189,30 +202,38 @@ public:
 		it = LIST;
 	}
 
-	T *getNext()
+	void renderIteratorReset()
 	{
-		T *r = NULL;
-			
-		if(it != NULL)
-		{
-			r = it->t;
-			it = it->next;
-		}
-		else
-		{
-			r = NULL;
-		}
-
-		return r;
+		renderPointer = LIST;
 	}
 
-	List *cut(T *t)
+	void updateIteratorReset()
 	{
-		List *r = NULL;
+		updatePointer = LIST;
+	}
+
+	T *getNextUpdate()
+	{
+		return getNextOf(&updatePointer);
+	}
+
+	T *getNextRender()
+	{
+		return getNextOf(&renderPointer);
+	}
+
+	T *getNext()
+	{
+		return getNextOf(&it);
+	}
+
+	Node *cut(T *t)
+	{
+		Node *r = NULL;
 
 		if(t != NULL)
 		{
-			List *l = getElementPosition(t);
+			Node *l = getElementPosition(t);
 			if(l != NULL)
 			{
 				// vidurinis elementas
@@ -243,14 +264,11 @@ public:
 				counter--;
 				r = l;
 			}
-
-
 		}
-
 		return r;
 	}
 
-	void paste(List *listElement)
+	void paste(Node *listElement)
 	{
 		if(listElement != NULL)
 		{
@@ -261,13 +279,12 @@ public:
 				listElement->prev = NULL;
 				LIST = listElement;
 				it	 = listElement;
-			
 			}
 			else
 			{ // jungiam prie pabaigos
 			
 				//ieskom galinio elemento
-				for(List *l = LIST; l != NULL; l = l->next)
+				for(Node *l = LIST; l != NULL; l = l->next)
 				{
 
 					if(l->next == NULL)
@@ -281,28 +298,6 @@ public:
 			counter++;
 		}
 	}
-
-	void iteratorNext()
-	{
-	}
-
-
-
 };
-
-//template <class T>
-//OneWayLinkedList::OneWayLinkedList()
-//{
-//	std::cout << "CREATE\n";
-//}
-//
-//template <class T>
-//OneWayLinkedList::~OneWayLinkedList()
-//{
-//	std::cout << "DELETE\n";
-//}
-//#include "oneWayLinkedList.cpp"
-
-
 
 #endif

@@ -6,6 +6,8 @@
 #include "mymath.h"
 #include "linkedList.h"
 #include "textureManager.h"
+#include "declarations.h"
+#include "InvisibleObjectsChecker.h"
 
 
 class ChunkManager
@@ -14,36 +16,40 @@ private:
 	LPDIRECT3DDEVICE9 d3;
 	TextureManager* textureManager;
 	Kamera* kamera;
+	InvisibleObjectsChecker* visibilityChecker;
+	
 	MyLinkedList<Chunk> *chunksList;
+	MyLinkedList<AbstractEntity> *stacicEntityLeftovers;
+
+	MyLinkedList<AbstractEntity> *dynamicEntities;
+	
+	
+	//QuadTree *QTLeftovers;
 
 	void init();
 
 	Chunk *getChunkByPoint(Vector *v);
+
+
+	//////////////////////////
+	// SHIT FOR THE WIN :D
+	//MyLinkedList<AbstractEntity> *entityList;
+	//////////////////////////
+
+
 
 public:
 	ChunkManager(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* kamera);
 	~ChunkManager();
 
 
-	double getMapHeightAtPoint(D3DXVECTOR3 pos)
-	{
-		Vector *v = new Vector(pos.x, pos.z, pos.y);
-		Chunk *c = getChunkByPoint(v);
+	double getMapHeightAtPoint(D3DXVECTOR3 pos);
+	double getMapHeightAtPoint(Vector &pos);
 
-		double result = 0;
-
-		if(c != NULL)
-		{
-			result = c->getTerrain()->getH(pos);
-		}
-
-		return result;
-
-
-	}
+	void addEntity(AbstractEntity *e);
 	
 
-	void Update();
+	void Update(float dt);
 	void Render();
 
 };
