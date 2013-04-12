@@ -91,6 +91,11 @@ private:
 	ColisionManager *kolizijos;
 	Networking		*mNetwork;
 
+	// ReplicaManager3 requires NetworkIDManager to lookup pointers from numbers.
+	NetworkIDManager mNetworkIdManager;
+	// The system that performs most of our functionality for this demo
+	ReplicaManager3Sample mReplicaManager;
+
 	Timer			*timer;
 
 
