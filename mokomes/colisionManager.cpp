@@ -36,11 +36,11 @@ void ColisionManager::findColisions(AbstractEntity *op)
 	{
 
 		// DO SOMETHING
-		stringstream ss1;//create a stringstream
-		ss1 << "Colision sphere: Ground";
-			
+		//stringstream ss1;//create a stringstream
+		//ss1 << "Colision sphere: Ground";
+		//	
 
-		gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
+		//gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
 
 		///////////////////////
 		//op->colision = true;
