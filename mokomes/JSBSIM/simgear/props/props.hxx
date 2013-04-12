@@ -459,7 +459,7 @@ private:
  */
 class SGPropertyNode;
 typedef SGSharedPtr<SGPropertyNode> SGPropertyNode_ptr;
-typedef SGSharedPtr<const SGPropertyNode> SGConstPropertyNode_ptr;
+typedef SGSharedPtr<const SGPropertyNode> SgServerConsoletPropertyNode_ptr;
 
 
 /**

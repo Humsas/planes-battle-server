@@ -46,7 +46,7 @@ const D3DVERTEXELEMENT9 customVertexFormat[] =
 
 
 
-class terrain: public Bitmap
+class Terrain: public Bitmap
 {
 private:
 	int startX; // koordinate nuo kurios pradedamas mapo piesimas ( 0 )
@@ -109,7 +109,7 @@ private:
 	LPDIRECT3DINDEXBUFFER9 m_ibQuad[2];	/////////////
 	DWORD* drawMapQuad[2];					/////////////
 	double leftAngle, rightAngle, wAngle;
-    bool angleReverse;
+	bool angleReverse;
 	int pX, pY, *radius, levelCount;
 	double lastX, lastY;
 	int triCount[2];
@@ -129,21 +129,21 @@ private:
 
 	double getTmpH(D3DXVECTOR3 vect);
 	void createTangentSpaceVectors( D3DXVECTOR3 *v1,
-                                D3DXVECTOR3 *v2,
-                                D3DXVECTOR3 *v3,
-                                float v1u, float v1v,
-                                float v2u, float v2v,
-                                float v3u, float v3v,
-                                D3DXVECTOR3 *vTangent,
-                                D3DXVECTOR3 *vBiNormal,
-                                D3DXVECTOR3 *vNormal );
+								D3DXVECTOR3 *v2,
+								D3DXVECTOR3 *v3,
+								float v1u, float v1v,
+								float v2u, float v2v,
+								float v3u, float v3v,
+								D3DXVECTOR3 *vTangent,
+								D3DXVECTOR3 *vBiNormal,
+								D3DXVECTOR3 *vNormal );
 
 
 
 
 public:
 	
-	terrain(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* c, string mapname, int x = 0, int y = 0) 
+	Terrain(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* c, string mapname, int x = 0, int y = 0) 
 	{  
 
 		this->d3 = d3;
@@ -203,14 +203,14 @@ public:
 		wAngle = -1;
 		leftAngle = wAngle + 23;
 		rightAngle = wAngle - 23;
-        
+		
 		if(leftAngle > 360)
 		{
 			leftAngle -= 360;
 			rightAngle -= 360;
 		}
-        
-        
+		
+		
 		if(rightAngle < 0) { rightAngle +=360; angleReverse = true; }
 
 		pX = pY = 100;
@@ -236,7 +236,7 @@ public:
 		
 	}
 
-	~terrain() { 
+	~Terrain() { 
 	
 		delete[] vert; 
 

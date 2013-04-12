@@ -2,7 +2,7 @@
 #include "console.h"
 extern Console gServerConsole;
 
-ColisionManager::ColisionManager(terrain *ter)
+ColisionManager::ColisionManager(Terrain *ter)
 {
 	QT = new QuadTree(8, 0, 0, 0, ter->getWidth(), ter->getHeight());
 	this->ter = ter;
@@ -18,9 +18,9 @@ QuadTree *ColisionManager::getQuadTree()
 	return QT;
 }
 
-void ColisionManager::findColisions(Entity *op)
+void ColisionManager::findColisions(AbstractEntity *op)
 {
-	QT->findColisions(op);
+	//QT->findColisions(op);
 
 	stringstream sso1,sso2,sso3;//create a stringstream
 		sso1 << "X: " << op->getPosition()->x;
@@ -28,9 +28,9 @@ void ColisionManager::findColisions(Entity *op)
 		sso3 << "Z: " << op->getPosition()->z;
 			
 
-		/*cons.add(sso1.str(), GAME_CONSOLE_ERROR);
-		cons.add(sso2.str(), GAME_CONSOLE_ERROR);
-		cons.add(sso3.str(), GAME_CONSOLE_ERROR);*/
+		/*gServerConsole.addLine(sso1.str(), GAME_CONSOLE_ERROR);
+		gServerConsole.addLine(sso2.str(), GAME_CONSOLE_ERROR);
+		gServerConsole.addLine(sso3.str(), GAME_CONSOLE_ERROR);*/
 
 	if(op->getPosition()->z - op->getRadius() <= ter->getH(D3DXVECTOR3(op->getPosition()->x,op->getPosition()->z,op->getPosition()->y)))
 	{
@@ -40,7 +40,7 @@ void ColisionManager::findColisions(Entity *op)
 		ss1 << "Colision sphere: Ground";
 			
 
-		//gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
+		gServerConsole.addLine(ss1.str(), GAME_CONSOLE_ERROR);
 
 		///////////////////////
 		//op->colision = true;
@@ -48,12 +48,12 @@ void ColisionManager::findColisions(Entity *op)
 
 }
 
-float ColisionManager::groundLevel(Entity *op)
+float ColisionManager::groundLevel(AbstractEntity *op)
 {
 	return op->getPosition()->z - ter->getH(D3DXVECTOR3(op->getPosition()->x,op->getPosition()->z,op->getPosition()->y));
 }
 
-void ColisionManager::update(Entity *op)
+void ColisionManager::update(AbstractEntity *op)
 {
 
 }

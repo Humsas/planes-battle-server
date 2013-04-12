@@ -5,8 +5,10 @@
 #include "mymath.h"
 #include "kamera.h"
 #include "textureManager.h"
-#include "Entity.h"
+#include "AbstractEntity.h"
 #include "quadTree.h"
+#include "declarations.h"
+#include "InvisibleObjectsChecker.h"
 
 class Chunk
 {
@@ -15,7 +17,7 @@ private:
 	TextureManager* textureManager;
 	Kamera* kamera;
 	float x, y, w, h;
-	terrain *ter;
+	Terrain *ter;
 	QuadTree *QT;
 
 
@@ -23,14 +25,15 @@ public:
 	Chunk(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager, Kamera* kamera, string mapname, int x, int y);
 	~Chunk();
 
-	terrain *getTerrain();
+	Terrain *getTerrain();
+	QuadTree *getQuadTree();
 	bool isPointInChunk(Vector *v);
 
 	double getTerrainHeight();
 
 
-	void Update();
-	void Render();
+	void Update(float dt);
+	void Render(InvisibleObjectsChecker *visibilityChecker);
 
 };
 
