@@ -20,8 +20,8 @@ public:
 
 protected:
 	// 
-	Vector *position;
-	Vector *rotarionYawPitchRoll;
+	Vector position;
+	Vector rotarionYawPitchRoll;
 	float scale;
 	EntityType entityType;
 	meshInfo *pMesh;
@@ -61,8 +61,8 @@ public:
 	AbstractEntity(){}
 	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
-		this->position = new Vector(position);
-		this->rotarionYawPitchRoll = new Vector(rotationYPR);
+		this->position = Vector(position);
+		this->rotarionYawPitchRoll = Vector(rotationYPR);
 		this->scale = scale;
 		this->entityType = eEntitType;
 
@@ -72,14 +72,14 @@ public:
 		//gCons.add("ASDF", GAME_CONSOLE_OK);
 
 		setScale(scale);
-		rotateYPR(rotarionYawPitchRoll);
+		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
 	
 	void Create(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
-		this->position = new Vector(position);
-		this->rotarionYawPitchRoll = new Vector(rotationYPR);
+		this->position = Vector(position);
+		this->rotarionYawPitchRoll = Vector(rotationYPR);
 		this->scale = scale;
 		this->entityType = eEntitType;
 
@@ -89,20 +89,20 @@ public:
 		//gCons.add("ASDF", GAME_CONSOLE_OK);
 
 		setScale(scale);
-		rotateYPR(rotarionYawPitchRoll);
+		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
 
 	~AbstractEntity()
 	{
-		delete position;
-		delete rotarionYawPitchRoll;
+		//delete position;
+		//delete rotarionYawPitchRoll;
 	}
 
 	// get
 	Vector *getPosition()
 	{
-		return position;
+		return &position;
 	}
 
 	EntityType getEntityType()
@@ -121,7 +121,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render()
 	{
-		pMeshManager->drawMesh(pMesh, position, transformMatrix);
+		pMeshManager->drawMesh(pMesh, &position, transformMatrix);
 
 		//gCons.add("Rendering...");
 

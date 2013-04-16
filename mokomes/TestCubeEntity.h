@@ -21,8 +21,8 @@ public:
 	}
 	void Create(Mesh *m, Vector &position, Vector &rotation)
 	{
-		this->position = new Vector(position);
-		this->rotarionYawPitchRoll = new Vector(rotation);
+		this->position = Vector(position);
+		this->rotarionYawPitchRoll = Vector(rotation);
 		this->scale = rand() % 100 + 1;
 		this->entityType = ENTITY_STATIC;
 
@@ -32,7 +32,7 @@ public:
 		//gCons.add("ASDF", GAME_CONSOLE_OK);
 
 		setScale(rand() % 100 + 1);
-		rotateYPR(rotarionYawPitchRoll);
+		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
 
@@ -97,7 +97,7 @@ public:
 		constructionBitstream->Read(mType);
 
 		setScale(rand() % 100 + 1);
-		rotateYPR(rotarionYawPitchRoll);
+		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 
 		return true;
@@ -137,7 +137,7 @@ public:
 			deserializeParameters->serializationBitstream[0].Read(mType);
 
 			setScale(rand() % 100 + 1);
-			rotateYPR(rotarionYawPitchRoll);
+			rotateYPR(&rotarionYawPitchRoll);
 			combine();
 		}
 	}
