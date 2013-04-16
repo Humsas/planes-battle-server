@@ -17,10 +17,12 @@
 
 #include "bomb.h"
 
-
 #include "timer.h"
 
+using namespace RakNet;
+
 class Networking;
+
 
 struct enemyBaseStruct
 {
@@ -92,9 +94,9 @@ private:
 	Networking		*mNetwork;
 
 	// ReplicaManager3 requires NetworkIDManager to lookup pointers from numbers.
-	NetworkIDManager mNetworkIdManager;
+	RakNet::NetworkIDManager*	mNetworkIdManager;
 	// The system that performs most of our functionality for this demo
-	ReplicaManager3Sample mReplicaManager;
+	RakNet::ReplicaManager3*	mReplicaManager;
 
 	Timer			*timer;
 
@@ -126,13 +128,16 @@ public:
 	TestCraft* testCraft;
 	//vector<RakNet::RakNetGUID>		mPlayersList;
 
-public:
 	Game(LPDIRECT3DDEVICE9 &d3);
 	~Game();
 
-	SceneManager	*getScene();
-	ColisionManager	*getColisionManager();
-	Networking		*getNetwork();
+	SceneManager*		getScene();
+	ColisionManager*	getColisionManager();
+	Networking*			getNetwork();
+	ReplicaManager3*	getReplicaManager();
+	NetworkIDManager*	getNetworkIDManager();
+
+
 
 	void loadSounds();
 
@@ -150,6 +155,7 @@ public:
 
 	void Update();
 	void Render();
+	void CreateCubes();
 
 };
 
