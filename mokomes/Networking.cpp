@@ -1,9 +1,16 @@
 #include "Networking.h"
 
-Networking::Networking(Console* console, Game* game)
+Networking::Networking(Console* console, Game* game, NetworkIDManager* idManager, ReplicaManager3* netManager)
 {
 	mConsole = console;
+	mGame = game;
 	mServer = RakPeerInterface::GetInstance();
+
+	mServer->AttachPlugin(netManager);
+	// Tell ReplicaManager3 which networkIDManager to use for object lookup, used for automatic serialization
+	netManager->SetNetworkIDManager(idManager);
+	// Do not automatically count new connections, but do drop lost connections automatically
+	netManager->SetAutoManageConnections(false, true);
 
 	//ConnectionData tmp;
 	//ConnectionData tmp1;
@@ -217,3 +224,19 @@ bool Networking::ArePlayersReady()
 
 	return true;
 }
+
+
+
+void Networking::SendCreatedObjectsIDs(vector<NetworkID> ids)
+{
+	BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_NEW_OBJECTS_CREATED);
+	bsOut.Write(ids.size());
+	RakString type = "Cube";
+	bsOut.Write(type);
+	for(int i = 0; i < ids.size(); i++)
+		bsOut.Write(ids[i]);
+		
+	mServer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true); // Siunciam visiem prisijungusiam objektam
+}
+

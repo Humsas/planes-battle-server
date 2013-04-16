@@ -27,6 +27,7 @@ protected:
 	meshInfo *pMesh;
 	Mesh *pMeshManager;
 	LPDIRECT3DDEVICE9 d3;
+	string mType;
 
 	
 
@@ -57,7 +58,27 @@ protected:
 
 
 public:
+
+	AbstractEntity(){}
 	AbstractEntity(LPDIRECT3DDEVICE9 &d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+	{
+		this->d3 = d3;
+		this->position = new Vector(position);
+		this->rotarionYawPitchRoll = new Vector(rotationYPR);
+		this->scale = scale;
+		this->entityType = eEntitType;
+
+		this->pMeshManager = m;
+		this->pMesh = m->getPointer(mesh_ID);
+
+		//gCons.add("ASDF", GAME_CONSOLE_OK);
+
+		setScale(scale);
+		rotateYPR(rotarionYawPitchRoll);
+		combine();
+	}
+	
+	void Create(LPDIRECT3DDEVICE9 &d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->d3 = d3;
 		this->position = new Vector(position);
