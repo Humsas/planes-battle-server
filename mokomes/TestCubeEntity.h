@@ -15,13 +15,12 @@ class TestCubeEntity : public AbstractEntity, public Replica3
 
 public:
 	TestCubeEntity(){}
-	TestCubeEntity(LPDIRECT3DDEVICE9 &d3, Mesh *m, Vector &position, Vector &rotation) : AbstractEntity(d3, m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
+	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
 	{
 		
 	}
-	void Create(LPDIRECT3DDEVICE9 &d3, Mesh *m, Vector &position, Vector &rotation)
+	void Create(Mesh *m, Vector &position, Vector &rotation)
 	{
-		this->d3 = d3;
 		this->position = new Vector(position);
 		this->rotarionYawPitchRoll = new Vector(rotation);
 		this->scale = rand() % 100 + 1;

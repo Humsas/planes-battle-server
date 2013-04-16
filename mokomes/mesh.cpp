@@ -1,6 +1,6 @@
 #include "mesh.h"
 #include "console.h"
-extern Console gServerConsole;
+extern Console gCons;
 
 Mesh::~Mesh()
 {
@@ -45,7 +45,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
 
 	if(FAILED(hr))
 	{
-		//gServerConsole.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
+		//gCons.addLine("Modelis id: \""+id+"\" neuzkrautas", GAME_CONSOLE_ERROR);
 		delete M;
 	}
 	else
@@ -63,7 +63,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
 
 			// Set the ambient color for the material (D3DX does not do this)
 			M->mesh.meshMaterials[i].Ambient = M->mesh.meshMaterials[i].Diffuse;
-     
+	 
 			// Create the texture if it exists - it may not
 			M->mesh.meshTextures[i] = NULL;
 			if (M->mesh.d3dxMaterials[i].pTextureFilename)
@@ -195,7 +195,7 @@ void Mesh::loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &
  
 		this->MESH = M;
 
-		//gServerConsole.addLine("Modelis id: \""+id+"\" uzkrautas");
+		//gCons.addLine("Modelis id: \""+id+"\" uzkrautas");
 	}
 
 }
@@ -227,7 +227,7 @@ b[ln]='\0';
 
 
 
-void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double z, double scale, float rx, float ry, float rz)
+void Mesh::drawMesh(string id, double x, double y, double z, double scale, float rx, float ry, float rz)
 {
 	D3DXMATRIX worldsave, meshworld, scaleM, combo;
 	meshList *M;
@@ -278,7 +278,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double
 				// Set the material and texture for this subset
 				d3->SetMaterial(&M->mesh.meshMaterials[i]);
 				d3->SetTexture(0,M->mesh.meshTextures[i]);
-        
+		
 				// Draw the mesh subset
 				M->mesh.mesh->DrawSubset(i);
   
@@ -322,7 +322,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double
 }
 
 
-void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double z, double scale, D3DXMATRIX &rotMat)
+void Mesh::drawMesh(string id, double x, double y, double z, double scale, D3DXMATRIX &rotMat)
 {
 	D3DXMATRIX worldsave, meshworld, scaleM, combo;
 	meshList *M;
@@ -373,7 +373,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double
 				// Set the material and texture for this subset
 				d3->SetMaterial(&M->mesh.meshMaterials[i]);
 				d3->SetTexture(0,M->mesh.meshTextures[i]);
-        
+		
 				// Draw the mesh subset
 				M->mesh.mesh->DrawSubset(i);
   
@@ -416,7 +416,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double
 
 }
 
-void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, double x, double y, double z, double scale, float rx, float ry, float rz)
+void Mesh::drawMesh(meshInfo *mesh, double x, double y, double z, double scale, float rx, float ry, float rz)
 {
 	D3DXMATRIX worldsave, meshworld, scaleM, combo;
 
@@ -465,7 +465,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, double x, double y, d
 			// Set the material and texture for this subset
 			d3->SetMaterial(&mesh->meshMaterials[i]);
 			d3->SetTexture(0,mesh->meshTextures[i]);
-        
+		
 			// Draw the mesh subset
 			mesh->mesh->DrawSubset(i);
 		}
@@ -513,7 +513,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, double x, double y, d
 
 
 
-void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija, D3DXMATRIX &transformMatrix)
+void Mesh::drawMesh(meshInfo *mesh, D3DXVECTOR3 &pozicija, D3DXMATRIX &transformMatrix)
 {
 	D3DXMATRIX worldsave, meshworld, combo;
 
@@ -541,7 +541,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija
 			// Set the material and texture for this subset
 			d3->SetMaterial(&mesh->meshMaterials[i]);
 			d3->SetTexture(0,mesh->meshTextures[i]);
-        
+		
 			// Draw the mesh subset
 			mesh->mesh->DrawSubset(i);
 		}
@@ -553,7 +553,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija
 	}
 }
 
-void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix)
+void Mesh::drawMesh(meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix)
 {
 	D3DXMATRIX worldsave, meshworld, combo;
 
@@ -580,7 +580,7 @@ void Mesh::drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, Vector *pozicija, D3D
 			// Set the material and texture for this subset
 			d3->SetMaterial(&mesh->meshMaterials[i]);
 			d3->SetTexture(0,mesh->meshTextures[i]);
-        
+		
 			// Draw the mesh subset
 			mesh->mesh->DrawSubset(i);
 		}

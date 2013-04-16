@@ -10,7 +10,7 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 
 	
 	textureManager	= new TextureManager(d3);
-	meshManager		= new Mesh(textureManager);
+	meshManager		= new Mesh(d3, textureManager);
 
 	kamera			= new Kamera();
 	CM				= new ChunkManager(d3, textureManager, kamera);

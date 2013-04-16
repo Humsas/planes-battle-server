@@ -56,6 +56,8 @@ class Mesh
 private:
 	TextureManager* textureManager;
 	meshList *MESH;
+	LPDIRECT3DDEVICE9 d3;
+
 	//LPD3DXMESH mesh;
 	//LPDIRECT3DDEVICE9 *d3d;
 
@@ -64,30 +66,31 @@ public:
 	//LPDIRECT3DDEVICE9* d3d;
 
 	~Mesh();
-	Mesh(TextureManager* textureManager) 
+	Mesh(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager) 
 	{ 
+		this->d3 = d3;
 		this->textureManager = textureManager;
 		MESH = NULL;  
 	}
-	
+
 
 	// pakrauna mesha i sarasa
 	void loadMesh(string path, string filename, string id, LPDIRECT3DDEVICE9 &d3);
 
 	// uzloadina mesha i directx pagal mesho ID
-	void drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double z, double scale, float rx, float ry, float rz);
+	void drawMesh(string id, double x, double y, double z, double scale, float rx, float ry, float rz);
 
-	void drawMesh(LPDIRECT3DDEVICE9 &d3, string id, double x, double y, double z, double scale, D3DXMATRIX &rotMat);
-
-	// uzloadina mesha i directx pagal mesho pointeri
-	void drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, double x, double y, double z, double scale, float rx, float ry, float rz);
-
-
+	void drawMesh(string id, double x, double y, double z, double scale, D3DXMATRIX &rotMat);
 
 	// uzloadina mesha i directx pagal mesho pointeri
-	void drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, D3DXVECTOR3 &pozicija, D3DXMATRIX &transformMatrix);
+	void drawMesh(meshInfo *mesh, double x, double y, double z, double scale, float rx, float ry, float rz);
 
-	void drawMesh(LPDIRECT3DDEVICE9 &d3, meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix);
+
+
+	// uzloadina mesha i directx pagal mesho pointeri
+	void drawMesh(meshInfo *mesh, D3DXVECTOR3 &pozicija, D3DXMATRIX &transformMatrix);
+
+	void drawMesh(meshInfo *mesh, Vector *pozicija, D3DXMATRIX &transformMatrix);
 
 
 

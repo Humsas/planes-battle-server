@@ -75,7 +75,7 @@ void SceneObjects::Render(/*LPDIRECT3DDEVICE9 &d3*/)
 			//meshManager->drawMesh(d3, O->mO.mesh, O->mO.pozicija.x, O->mO.pozicija.y, O->mO.pozicija.z, O->mO.testScale, 0, 0, 0);
 			renderList[i]->o->combine();
 			//O->mO.combine();
-			meshManager->drawMesh(d3, renderList[i]->o->mesh, renderList[i]->o->pozicija, renderList[i]->o->transformMatrix);
+			meshManager->drawMesh(renderList[i]->o->mesh, renderList[i]->o->pozicija, renderList[i]->o->transformMatrix);
 		}
 	}
 

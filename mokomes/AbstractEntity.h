@@ -26,7 +26,6 @@ protected:
 	EntityType entityType;
 	meshInfo *pMesh;
 	Mesh *pMeshManager;
-	LPDIRECT3DDEVICE9 d3;
 	string mType;
 
 	
@@ -60,9 +59,8 @@ protected:
 public:
 
 	AbstractEntity(){}
-	AbstractEntity(LPDIRECT3DDEVICE9 &d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
-		this->d3 = d3;
 		this->position = new Vector(position);
 		this->rotarionYawPitchRoll = new Vector(rotationYPR);
 		this->scale = scale;
@@ -78,9 +76,8 @@ public:
 		combine();
 	}
 	
-	void Create(LPDIRECT3DDEVICE9 &d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+	void Create(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
-		this->d3 = d3;
 		this->position = new Vector(position);
 		this->rotarionYawPitchRoll = new Vector(rotationYPR);
 		this->scale = scale;
@@ -124,7 +121,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render()
 	{
-		pMeshManager->drawMesh(d3, pMesh, position, transformMatrix);
+		pMeshManager->drawMesh(pMesh, position, transformMatrix);
 
 		//gCons.add("Rendering...");
 
