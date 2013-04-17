@@ -47,7 +47,9 @@ public:
 	double getMapHeightAtPoint(Vector &pos);
 
 	void addEntity(AbstractEntity *e);
+
 	
+	MyLinkedList<AbstractEntity> *getDynamicEntityList();
 
 	void Update(float dt);
 	void Render();

@@ -114,6 +114,12 @@ void ChunkManager::addEntity(AbstractEntity *e)
 
 }
 
+MyLinkedList<AbstractEntity> *ChunkManager::getDynamicEntityList()
+{
+	return dynamicEntities;
+}
+
+
 void ChunkManager::Update(float dt)
 {
 	for(int i = 0; i < chunksList->count(); i++)

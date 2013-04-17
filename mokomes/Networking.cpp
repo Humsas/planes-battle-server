@@ -89,6 +89,16 @@ void Networking::Update()
 		}
 	}
 
+
+	MyLinkedList<AbstractEntity> *pEnt = mGame->getScene()->getChunkManager()->getDynamicEntityList();
+	pEnt->networkReadIteratorReset();
+	AbstractEntity *es = NULL;
+	while((es = pEnt->getNextNetwork()) != NULL)
+	{
+		//es->le_funkcija();
+	}
+
+
 	RakSleep(0);
 }
 
