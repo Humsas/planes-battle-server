@@ -36,6 +36,14 @@ public:
 		combine();
 	}
 
+	void addD3andSHIT(LPDIRECT3DDEVICE9 *d3i, Mesh *m)
+	{
+		this->d3 = d3i;
+		this->pMeshManager = m;
+
+		this->pMesh = m->getPointer(mType);
+	}
+
 	~TestCubeEntity()
 	{
 	}
@@ -82,6 +90,7 @@ public:
 
 	virtual void SerializeConstruction(RakNet::BitStream *constructionBitstream, RakNet::Connection_RM3 *destinationConnection) 
 	{
+		gServerConsole.addLine("sukurem");
 		constructionBitstream->Write(position);
 		constructionBitstream->Write(rotarionYawPitchRoll);
 		constructionBitstream->Write(scale);
