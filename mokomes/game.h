@@ -95,8 +95,6 @@ private:
 
 	// ReplicaManager3 requires NetworkIDManager to lookup pointers from numbers.
 	RakNet::NetworkIDManager*	mNetworkIdManager;
-	// The system that performs most of our functionality for this demo
-	RakNet::ReplicaManager3*	mReplicaManager;
 
 	Timer			*timer;
 
@@ -134,7 +132,6 @@ public:
 	SceneManager*		getScene();
 	ColisionManager*	getColisionManager();
 	Networking*			getNetwork();
-	ReplicaManager3*	getReplicaManager();
 	NetworkIDManager*	getNetworkIDManager();
 
 

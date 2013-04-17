@@ -809,5 +809,8 @@
     <ClInclude Include="TestCubeEntity.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkObject.h">
+      <Filter>Header Files\Networking</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
