@@ -15,7 +15,7 @@ class TestCubeEntity : public AbstractEntity, public Replica3
 
 public:
 	TestCubeEntity(){}
-	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
+	TestCubeEntity(Vector &position, Vector &rotation) : AbstractEntity("kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
 	{
 		
 	}
