@@ -36,6 +36,10 @@ public:
 	virtual BitStream*		Serialize(int actionId) = 0;
 	virtual void			Deserialize(BitStream* stream) = 0;
 
+	// Sukurimo updeitai
+	virtual BitStream*		CreateSerialize() = 0;
+	virtual void			CreateDeserialize(BitStream* stream) = 0;
+
 	void					SetNetworkID(int id){mNetworkID = id;}
 	int						GetNetworkId(){return mNetworkID;}
 
