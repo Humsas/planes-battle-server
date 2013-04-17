@@ -9,7 +9,7 @@ class NetworkObject
 {
 protected:
 	BitStream*				mLastSerializationRezult;
-	int						mNetworkID;
+	//int						mNetworkID;
 	bool					mCanUpdate;
 
 public:
@@ -32,16 +32,16 @@ public:
 	}
 
 
-	virtual void			NetworkUpdate(RakPeerInterface* server) = 0;
+	virtual void			NetworkUpdate(RakPeerInterface* peer) = 0;
 	virtual BitStream*		Serialize(int actionId) = 0;
 	virtual void			Deserialize(BitStream* stream) = 0;
 
 	// Sukurimo updeitai
-	virtual BitStream*		CreateSerialize() = 0;
+	virtual void			CreateSerialize(RakPeerInterface* peer) = 0;
 	virtual void			CreateDeserialize(BitStream* stream) = 0;
 
-	void					SetNetworkID(int id){mNetworkID = id;}
-	int						GetNetworkId(){return mNetworkID;}
+	//void					SetNetworkID(int id){mNetworkID = id;}
+	//int						GetNetworkId(){return mNetworkID;}
 
 	bool					IsBitStreamDifferent(BitStream* stream)
 	{
