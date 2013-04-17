@@ -15,11 +15,11 @@ class TestCubeEntity : public AbstractEntity, public Replica3
 
 public:
 	TestCubeEntity(){}
-	TestCubeEntity(LPDIRECT3DDEVICE9 &d3, Mesh *m, Vector &position, Vector &rotation) : AbstractEntity(d3, m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
+	TestCubeEntity(LPDIRECT3DDEVICE9 *d3, Mesh *m, Vector &position, Vector &rotation) : AbstractEntity(d3, m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC)
 	{
 		
 	}
-	void Create(LPDIRECT3DDEVICE9 &d3, Mesh *m, Vector &position, Vector &rotation)
+	void Create(LPDIRECT3DDEVICE9 *d3, Mesh *m, Vector &position, Vector &rotation)
 	{
 		this->d3 = d3;
 		this->position = new Vector(position);
@@ -35,6 +35,14 @@ public:
 		setScale(rand() % 100 + 1);
 		rotateYPR(rotarionYawPitchRoll);
 		combine();
+	}
+
+	void addD3andSHIT(LPDIRECT3DDEVICE9 *d3i, Mesh *m)
+	{
+		this->d3 = d3i;
+		this->pMeshManager = m;
+
+		this->pMesh = m->getPointer(mType);
 	}
 
 	~TestCubeEntity()
@@ -83,6 +91,7 @@ public:
 
 	virtual void SerializeConstruction(RakNet::BitStream *constructionBitstream, RakNet::Connection_RM3 *destinationConnection) 
 	{
+		gServerConsole.addLine("sukurem");
 		constructionBitstream->Write(position);
 		constructionBitstream->Write(rotarionYawPitchRoll);
 		constructionBitstream->Write(scale);
