@@ -5,7 +5,7 @@
 #include "mesh.h"
 #include "console.h"
 
-extern Console gServerConsole;
+extern Console gCons;
 
 enum EntityType
 {
@@ -19,24 +19,23 @@ public:
 	void *_motherBranch;
 
 protected:
-	// 
-	Vector position;
-	Vector rotarionYawPitchRoll;
-	float scale;
-	EntityType entityType;
-	meshInfo *pMesh;
-	Mesh *pMeshManager;
-	LPDIRECT3DDEVICE9* d3;
-	string mType;
+	//
+	Vector		position;
+	Vector		rotarionYawPitchRoll;
+	float		scale;
+	EntityType	entityType;
+	meshInfo *	pMesh;
+	Mesh *		pMeshManager;
+	int			mType;
 
 
 
 
 	// konvertuoti i directx matricas
-	//D3DXVECTOR3	pozicija;
-	D3DXMATRIX	rotationMatrix;
-	D3DXMATRIX	scaleMatrix;
-	D3DXMATRIX	transformMatrix;
+	//D3DXVECTOR3   pozicija;
+	D3DXMATRIX      rotationMatrix;
+	D3DXMATRIX      scaleMatrix;
+	D3DXMATRIX      transformMatrix;
 
 
 	void setScale(float s)
@@ -58,25 +57,9 @@ protected:
 
 
 public:
+
 	AbstractEntity(){}
-	AbstractEntity(LPDIRECT3DDEVICE9 *d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
-	{
-		this->position = Vector(position);
-		this->rotarionYawPitchRoll = Vector(rotationYPR);
-		this->scale = scale;
-		this->entityType = eEntitType;
-
-		this->pMeshManager = m;
-		this->pMesh = m->getPointer(mesh_ID);
-
-		//gCons.add("ASDF", GAME_CONSOLE_OK);
-
-		setScale(scale);
-		rotateYPR(&rotarionYawPitchRoll);
-		combine();
-	}
-
-	void Create(LPDIRECT3DDEVICE9 *d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->position = Vector(position);
 		this->rotarionYawPitchRoll = Vector(rotationYPR);
@@ -121,7 +104,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render()
 	{
-		pMeshManager->drawMesh(*d3, pMesh, position, transformMatrix);
+		pMeshManager->drawMesh(pMesh, &position, transformMatrix);
 
 		//gCons.add("Rendering...");
 

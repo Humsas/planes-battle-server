@@ -8,9 +8,8 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	this->d3 = d3;
 
 	sound		=		new Sound();
-	mReplicaManager =	new SampleRM3();
 	mNetworkIdManager = NetworkIDManager::GetInstance();
-	mNetwork    =		new Networking(&gServerConsole, this, mNetworkIdManager, mReplicaManager);
+	mNetwork    =		new Networking(&gServerConsole, this);
 
 	loadSounds();
 
@@ -46,7 +45,6 @@ Game::~Game()
 {
 	if(sound != NULL)		delete sound;
 	if(mNetwork != NULL)	delete mNetwork;
-	if(mReplicaManager != NULL) delete mReplicaManager;
 	if(scena != NULL)		delete scena;
 	if(kolizijos != NULL)	delete kolizijos;
 	//if(lektuvas != NULL)	delete lektuvas;
@@ -515,11 +513,6 @@ Networking* Game::getNetwork()
 	return mNetwork;
 }
 
-ReplicaManager3* Game::getReplicaManager()
-{
-	return mReplicaManager;
-}
-
 NetworkIDManager* Game::getNetworkIDManager()
 {
 	return mNetworkIdManager;
@@ -545,15 +538,15 @@ void Game::CreateCubes()
 	{
 		for(int j = 0; j < 100; j++)
 		{
+			/*
 			// Gal galima i6 karto sukurti su paturbintu konstruktorium
 			TestCubeEntity *testEntity = new TestCubeEntity();
 
 			testEntity->Create(&d3, scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
 			
-			mReplicaManager->Reference(testEntity);
 			ids.push_back(testEntity->GetNetworkID());
 			testEntity->Create(scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
-			scena->getChunkManager()->addEntity(testEntity);
+			scena->getChunkManager()->addEntity(testEntity);*/
 		}
 	}
 

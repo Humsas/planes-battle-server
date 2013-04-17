@@ -1,16 +1,10 @@
 #include "Networking.h"
 
-Networking::Networking(Console* console, Game* game, NetworkIDManager* idManager, ReplicaManager3* netManager)
+Networking::Networking(Console* console, Game* game)
 {
 	mConsole = console;
 	mGame = game;
 	mServer = RakPeerInterface::GetInstance();
-
-	mServer->AttachPlugin(netManager);
-	// Tell ReplicaManager3 which networkIDManager to use for object lookup, used for automatic serialization
-	netManager->SetNetworkIDManager(idManager);
-	// Do not automatically count new connections, but do drop lost connections automatically
-	netManager->SetAutoManageConnections(false, true);
 
 	//ConnectionData tmp;
 	//ConnectionData tmp1;
