@@ -5,9 +5,10 @@
 #include "AbstractEntity.h"
 #include "NetworkObject.h"
 
+
 using namespace RakNet;
 
-class TestCubeEntity : public AbstractEntity, public NetworkObject
+class TestCubeEntity : public AbstractEntity, public NetworkIDObject,  public NetworkObject
 {
 
 public:
@@ -15,7 +16,7 @@ public:
 	{
 		mType = GAME_ENTITY_CUBE;
 	}
-	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC), NetworkObject(canUpdate)
+	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_CUBE;   
 	}
@@ -40,7 +41,7 @@ public:
 
 
 	//TOFACKINGDO cia reikia paduoti serverio ar klientu adresus ir nurodyti kam siusti, serveriui ar klientam
-	void NetworkUpdate(RakPeerInterface* server)
+	void NetworkUpdate(RakPeerInterface* peer)
 	{
 		// Do not update static entity
 		if(mCanUpdate && entityType != ENTITY_STATIC)
@@ -49,7 +50,7 @@ public:
 
 			// Jei skiriasi streamai siunciam updeita
 			if(stream != NULL)
-				server->Send(stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, UNASSIGNED_SYSTEM_ADDRESS, true);
+				peer->Send(stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, UNASSIGNED_SYSTEM_ADDRESS, true);
 		}
 	}
 
@@ -58,7 +59,7 @@ public:
 		BitStream stream;
 		stream.Write(ID_GAME_MESSAGE_GAME_UPDATE);
 		stream.Write(mType);
-		stream.Write(mNetworkID);
+		//stream.Write(mNetworkID);
 
 		stream.Write(position);
 		stream.Write(rotarionYawPitchRoll);
@@ -77,7 +78,7 @@ public:
 		int actionId;
 		stream->Read(actionId);
 		stream->Read(mType);
-		stream->Read(mNetworkID);
+		//stream->Read(mNetworkID);
 
 		stream->Read(position);
 		stream->Read(rotarionYawPitchRoll);
@@ -85,12 +86,12 @@ public:
 		stream->Read(entityType);
 	}
 
-	BitStream* CreateSerialize()
+	void CreateSerialize(RakPeerInterface* peer)
 	{
 		BitStream stream;
 		stream.Write(ID_GAME_MESSAGE_NEW_OBJECT_CREATED);
 		stream.Write(mType);
-		stream.Write(mNetworkID);
+		stream.Write(this->GetNetworkID());
 
 		stream.Write(position);
 		stream.Write(rotarionYawPitchRoll);
@@ -98,7 +99,7 @@ public:
 		stream.Write(entityType);
 
 		mLastSerializationRezult = &stream;
-		return &stream;
+		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
 
 	void CreateDeserialize(BitStream* stream)
@@ -106,7 +107,9 @@ public:
 		int actionId;
 		stream->Read(actionId);
 		stream->Read(mType);
-		stream->Read(mNetworkID);
+		NetworkID tmp;
+		stream->Read(tmp);
+		this->SetNetworkID(tmp);
 
 		stream->Read(position);
 		stream->Read(rotarionYawPitchRoll);

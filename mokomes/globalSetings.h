@@ -1,7 +1,8 @@
-
 //#define _FS 1  // uzkomentavus - windowed mode; atkomentavus full screen mode
 #ifndef GLOBAL_PLANE_GAME_SETTINGS
 #define GLOBAL_PLANE_GAME_SETTINGS
+
+#include "MessageIdentifiers.h"
 
 #ifndef _FS
 	#define FULL_SCREEN (0)

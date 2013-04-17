@@ -56,10 +56,13 @@ public:
 	Networking(Console* console, Game* game);
 
 	void Update();
+	RakPeerInterface*		GetPeer(){return mServer;}
+
+
 	void SendConnectionDataToPlayer(RakNetGUID id);
 	BitStream* GetPlayerConnectionPacket(RakNetGUID id);
 	bool ArePlayersReady();
-	void SendCreatedObjectsIDs(vector<NetworkID> ids);
+	//void SendCreatedObjectsIDs(vector<NetworkID> ids);
 };
 
 
