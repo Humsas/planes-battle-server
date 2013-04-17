@@ -61,7 +61,6 @@ public:
 
 	AbstractEntity(){}
 	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
-	void Create(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->position = Vector(position);
 		this->rotarionYawPitchRoll = Vector(rotationYPR);
@@ -77,7 +76,7 @@ public:
 		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
-	*/
+	
 
 	~AbstractEntity()
 	{
