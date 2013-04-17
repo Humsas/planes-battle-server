@@ -547,13 +547,15 @@ void Game::CreateCubes()
 		{
 			// Gal galima i6 karto sukurti su paturbintu konstruktorium
 			TestCubeEntity *testEntity = new TestCubeEntity();
+
+			testEntity->Create(&d3, scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
+			
 			mReplicaManager->Reference(testEntity);
 			ids.push_back(testEntity->GetNetworkID());
-
-			testEntity->Create(d3, scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
 			scena->getChunkManager()->addEntity(testEntity);
 		}
 	}
+
 	mNetwork->SendCreatedObjectsIDs(ids);
 }
 
