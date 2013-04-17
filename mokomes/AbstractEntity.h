@@ -5,7 +5,7 @@
 #include "mesh.h"
 #include "console.h"
 
-extern Console gCons;
+extern Console gServerConsole;
 
 enum EntityType
 {
@@ -26,9 +26,10 @@ protected:
 	EntityType entityType;
 	meshInfo *pMesh;
 	Mesh *pMeshManager;
+	LPDIRECT3DDEVICE9* d3;
 	string mType;
 
-	
+
 
 
 	// konvertuoti i directx matricas
@@ -57,9 +58,8 @@ protected:
 
 
 public:
-
 	AbstractEntity(){}
-	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+	AbstractEntity(LPDIRECT3DDEVICE9 *d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->position = Vector(position);
 		this->rotarionYawPitchRoll = Vector(rotationYPR);
@@ -75,8 +75,8 @@ public:
 		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
-	
-	void Create(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
+
+	void Create(LPDIRECT3DDEVICE9 *d3, Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->position = Vector(position);
 		this->rotarionYawPitchRoll = Vector(rotationYPR);
@@ -121,7 +121,7 @@ public:
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render()
 	{
-		pMeshManager->drawMesh(pMesh, &position, transformMatrix);
+		pMeshManager->drawMesh(*d3, pMesh, position, transformMatrix);
 
 		//gCons.add("Rendering...");
 
