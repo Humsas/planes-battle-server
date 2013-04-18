@@ -543,12 +543,29 @@ void Game::CreateCubes()
 			testEntity->SetNetworkIDManager(mNetworkIdManager);
 
 			testEntity->CreateSerialize(mNetwork->GetPeer());
+
 			//ids.push_back(testEntity->GetNetworkID());
 			scena->getChunkManager()->addEntity(testEntity);
 		}
 	}
+}
 
-	//mNetwork->SendCreatedObjectsIDs(ids);
+void Game::MoveCubes()
+{
+	MyLinkedList<AbstractEntity> *pEnt = getScene()->getChunkManager()->getDynamicEntityList();
+	pEnt->networkReadIteratorReset();
+	AbstractEntity *es = NULL;
+	while((es = pEnt->getNextNetwork()) != NULL)
+	{
+		switch (es->getType())
+		{
+		case GAME_ENTITY_CUBE:
+			((TestCubeEntity*)es)->Move(100);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void Game::TestGameInit()

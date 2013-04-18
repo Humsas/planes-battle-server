@@ -69,7 +69,30 @@ void Networking::Update()
 			{
 			}
 			break;
+		case ID_GAME_MESSAGE_OBJECT_CREATION_CONFIRMED:
+			{
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				NetworkID id;
+				int type;
+				bsIn.Read(id);
+				bsIn.Read(type);
 
+				switch (type)
+				{
+				case GAME_ENTITY_CUBE:
+					{
+						TestCubeEntity* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<TestCubeEntity*>(id);
+
+						if(te != NULL)
+							te->SetCreated(true);
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			break;
 		case ID_GAME_MESSAGE_LOADING_COMPLETED:
 			{
 				for(int i = 0; i < mConnectionData.size(); i++)
@@ -106,7 +129,7 @@ void Networking::Update()
 	}
 
 
-	RakSleep(0);
+	RakSleep(30);
 }
 
 

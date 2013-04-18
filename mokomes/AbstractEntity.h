@@ -28,6 +28,7 @@ protected:
 	meshInfo *	pMesh;
 	Mesh *		pMeshManager;
 	int			mType;
+	string		mMeshID;
 
 
 
@@ -68,6 +69,7 @@ public:
 		this->entityType = eEntitType;
 
 		this->pMeshManager = m;
+		mMeshID = mesh_ID;
 		this->pMesh = m->getPointer(mesh_ID);
 
 		//gCons.add("ASDF", GAME_CONSOLE_OK);
@@ -76,7 +78,7 @@ public:
 		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
-	
+
 
 	~AbstractEntity()
 	{
@@ -103,6 +105,11 @@ public:
 	float getRadius()
 	{
 		return scale/2; // spindulys yra puse skersmens
+	}
+
+	void setMeshManager(Mesh *m)
+	{
+		pMeshManager = m;
 	}
 
 
