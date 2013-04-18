@@ -95,6 +95,11 @@ public:
 		return entityType;
 	}
 
+	int getType()
+	{
+		return mType;
+	}
+
 	float getRadius()
 	{
 		return scale/2; // spindulys yra puse skersmens

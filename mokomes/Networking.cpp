@@ -95,7 +95,14 @@ void Networking::Update()
 	AbstractEntity *es = NULL;
 	while((es = pEnt->getNextNetwork()) != NULL)
 	{
-		//es->le_funkcija();
+		switch (es->getType())
+		{
+		case GAME_ENTITY_CUBE:
+			((TestCubeEntity*)es)->NetworkUpdate(mServer);
+			break;
+		default:
+			break;
+		}
 	}
 
 
@@ -230,7 +237,7 @@ bool Networking::ArePlayersReady()
 }
 
 
-
+/*
 void Networking::SendCreatedObjectsIDs(vector<NetworkID> ids)
 {
 	BitStream bsOut;
@@ -244,3 +251,4 @@ void Networking::SendCreatedObjectsIDs(vector<NetworkID> ids)
 	mServer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true); // Siunciam visiem prisijungusiam objektam
 }
 
+*/
