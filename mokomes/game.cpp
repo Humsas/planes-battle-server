@@ -538,19 +538,17 @@ void Game::CreateCubes()
 	{
 		for(int j = 0; j < 100; j++)
 		{
-			/*
 			// Gal galima i6 karto sukurti su paturbintu konstruktorium
-			TestCubeEntity *testEntity = new TestCubeEntity();
+			TestCubeEntity *testEntity = new TestCubeEntity(scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0), true);
+			testEntity->SetNetworkIDManager(mNetworkIdManager);
 
-			testEntity->Create(&d3, scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
-			
-			ids.push_back(testEntity->GetNetworkID());
-			testEntity->Create(scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0));
-			scena->getChunkManager()->addEntity(testEntity);*/
+			testEntity->CreateSerialize(mNetwork->GetPeer());
+			//ids.push_back(testEntity->GetNetworkID());
+			scena->getChunkManager()->addEntity(testEntity);
 		}
 	}
 
-	mNetwork->SendCreatedObjectsIDs(ids);
+	//mNetwork->SendCreatedObjectsIDs(ids);
 }
 
 void Game::TestGameInit()
