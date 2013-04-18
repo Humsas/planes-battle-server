@@ -11,6 +11,8 @@ protected:
 	BitStream*				mLastSerializationRezult;
 	//int						mNetworkID;
 	bool					mCanUpdate;
+	// If object is created on the other client or server then true
+	bool					mCreated;
 
 public:
 
@@ -38,13 +40,17 @@ public:
 
 	// Sukurimo updeitai
 	virtual void			CreateSerialize(RakPeerInterface* peer) = 0;
-	virtual void			CreateDeserialize(BitStream* stream) = 0;
+	virtual void			CreateDeserialize(BitStream* stream, RakPeerInterface* peer) = 0;
 
 	//void					SetNetworkID(int id){mNetworkID = id;}
 	//int						GetNetworkId(){return mNetworkID;}
+	void					SetCreated(bool state){mCreated = state;}
 
 	bool					IsBitStreamDifferent(BitStream* stream)
 	{
+		if(stream->GetNumberOfBitsUsed() > 0 && mLastSerializationRezult == NULL)
+			return true;
+
 		if (stream->GetNumberOfBitsUsed() > 0 &&
 			((stream->GetNumberOfBitsUsed() != mLastSerializationRezult->GetNumberOfBitsUsed() || 
 			memcmp(stream->GetData(), mLastSerializationRezult->GetData(), stream->GetNumberOfBytesUsed()) != 0)))
