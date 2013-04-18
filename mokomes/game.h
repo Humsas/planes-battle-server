@@ -152,7 +152,9 @@ public:
 
 	void Update();
 	void Render();
+
 	void CreateCubes();
+	void MoveCubes();
 
 };
 
