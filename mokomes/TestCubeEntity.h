@@ -76,7 +76,10 @@ public:
 		//stream.Write(entityType);
 
 		if(!IsBitStreamDifferent(stream))
+		{
+			delete stream;
 			return NULL;
+		}
 
 		delete mLastSerializationRezult;
 		mLastSerializationRezult = stream;

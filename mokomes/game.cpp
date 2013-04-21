@@ -568,6 +568,106 @@ void Game::MoveCubes()
 	}
 }
 
+// Processes messages from the clients
+//TODO: reikia atskyrimo kam skirtos zinutes
+void Game::ProcessKeyMessages(BitStream* stream)
+{
+	USHORT keyCode;
+	stream->Read(keyCode);
+
+	switch (keyCode)
+	{
+	case VK_SHIFT:
+		break;
+	case 'Z':
+		break;
+	case 'X':
+		break;
+	case 'W':
+		break;
+	case 'S':
+		break;
+	case 'A':
+		break;
+	case 'D':
+		break;
+	case 'Q':
+		break;
+	case 'E':
+		break;
+	case 'B':
+		break;
+	case 'F':
+		break;
+	case 'G':
+		break;
+	case VK_UP:
+		break;
+	case VK_DOWN:
+		break;
+	case GAME_KEY_QUIT_GAME:
+		gServerConsole.addLine("Klienas quitina");
+		break;
+	case MM_JOY1MOVE:
+		{
+			float elerons, elevator;
+			stream->Read(elerons);
+			stream->Read(elevator);
+
+			break;
+		}
+	case MM_JOY1ZMOVE:
+		{
+			float throttle;
+			stream->Read(throttle);
+
+			break;
+		}
+	case GAME_KEY_JOY_BUTTON1:
+		break;
+	case GAME_KEY_JOY_BUTTON2:
+		break;
+	case GAME_KEY_JOY_BUTTON3:
+		break;
+	case GAME_KEY_JOY_BUTTON4:
+		break;
+	case GAME_KEY_JOY_BUTTON5:
+		break;
+	case GAME_KEY_JOY_BUTTON6:
+		break;
+	case GAME_KEY_JOY_BUTTON7:
+		break;
+	case GAME_KEY_JOY_BUTTON8:
+		break;
+	case GAME_KEY_JOY_BUTTON9:
+		break;
+	case GAME_KEY_JOY_BUTTON10:
+		break;
+	case GAME_KEY_MOUSE_MOVE:
+		{
+			LONG x, y;
+			stream->Read(x);
+			stream->Read(y);
+
+			break;
+		}
+	case GAME_KEY_MOUSE_WHEEL:
+		break;
+	case GAME_KEY_MOUSE_LEFT_BUTTON_DOWN:
+		break;
+	case GAME_KEY_MOUSE_LEFT_BUTTON_UP:
+		break;
+	case GAME_KEY_MOUSE_RIGHT_BUTTON_DOWN:
+		break;
+	case GAME_KEY_MOUSE_RIGHT_BUTTON_UP:
+		break;
+	default:
+		gServerConsole.addLine("Atkeliavo Neatpazintas mygtuko signalas.");
+		break;
+	}
+}
+
+
 void Game::TestGameInit()
 {
 	// add some tree

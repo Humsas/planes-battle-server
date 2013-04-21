@@ -156,6 +156,8 @@ public:
 	void CreateCubes();
 	void MoveCubes();
 
+	void ProcessKeyMessages(BitStream* stream);
+
 };
 
 

@@ -53,22 +53,30 @@ void Networking::Update()
 					mShit2.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
 
 				mGame->playerConnected(tmp.playerId);
-			}
-			break;
+				break;
+			} 
 		case ID_DISCONNECTION_NOTIFICATION:
 			{
 				mConsole->addLine("A client has disconnected.");
+				break;
 			} 
-			break;
+		case ID_GAME_MESSAGE_KEYS_UPDATE:
+			{
+				RakNet::BitStream* bsIn = new RakNet::BitStream(packet->data, packet->length, false);
+				bsIn->IgnoreBytes(sizeof(RakNet::MessageID));
+
+				mGame->ProcessKeyMessages(bsIn);
+				break;
+			} 
 		case ID_CONNECTION_LOST:
 			{
 				mConsole->addLine("A client lost the connection.");
+				break;
 			} 
-			break;
 		case ID_GAME_MESSAGE_PLAYER_DISCONNECTED:
 			{
-			}
-			break;
+				break;
+			} 
 		case ID_GAME_MESSAGE_OBJECT_CREATION_CONFIRMED:
 			{
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
@@ -86,8 +94,8 @@ void Networking::Update()
 
 						if(te != NULL)
 							te->SetCreated(true);
-					}
-					break;
+						break;
+					} 
 				default:
 					break;
 				}
@@ -100,8 +108,9 @@ void Networking::Update()
 					{
 						mConnectionData[i].ready = true;
 					}
-			}
-			break;
+
+				break;
+			} 
 		default:
 			{
 				CHAR temp[MAX_PATH];
@@ -128,8 +137,8 @@ void Networking::Update()
 		}
 	}
 
-
-	RakSleep(30);
+	RakSleep(0);
+	Sleep(30);
 }
 
 
