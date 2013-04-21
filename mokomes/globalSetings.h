@@ -17,7 +17,8 @@
 
 enum GameEntitiesList
 {
-	GAME_ENTITY_CUBE
+	GAME_ENTITY_CUBE,
+	GAME_ENTITY_AIRCRAFT_B17
 };
 
 enum GameChannels

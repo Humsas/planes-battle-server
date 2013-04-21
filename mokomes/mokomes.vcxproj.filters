@@ -86,16 +86,10 @@
       <UniqueIdentifier>{c4d4c09f-a1a9-460b-840e-e308ac2ecc3b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\GameEntities">
-      <UniqueIdentifier>{1504491e-a740-4080-a96c-db9b5f68cf4b}</UniqueIdentifier>
+      <UniqueIdentifier>{18810b48-ccc1-46ac-b929-159c16aa25ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GUI">
-      <UniqueIdentifier>{17eff6df-4c03-45c7-a067-e2beaa80dbf0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Networking">
-      <UniqueIdentifier>{253ea8cf-a643-4b8d-a78d-eca5d0b1d461}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Networking">
-      <UniqueIdentifier>{31c575b6-e668-4ea2-ab28-956cfd728967}</UniqueIdentifier>
+    <Filter Include="Source Files\GameEntities">
+      <UniqueIdentifier>{6cdc8bc7-5fec-40e6-9165-6091263ee972}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -409,10 +403,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Networking.cpp">
-      <Filter>Source Files\Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="ServerConsole.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AircraftB17Entity.cpp">
+      <Filter>Source Files\GameEntities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -792,25 +786,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Networking.h">
-      <Filter>Header Files\Networking</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InvisibleObjectsChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCubeEntity.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WinsockWrapper.h">
-      <Filter>Header Files\Networking</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServerConsole.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AircraftB17Entity.h">
+      <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
     <ClInclude Include="AbstractEntity.h">
       <Filter>Header Files\GameEntities</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCubeEntity.h">
-      <Filter>Header Files\GameEntities</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkObject.h">
-      <Filter>Header Files\Networking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
