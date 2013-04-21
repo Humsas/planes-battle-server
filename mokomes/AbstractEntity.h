@@ -5,6 +5,7 @@
 #include "mesh.h"
 #include "console.h"
 
+
 extern Console gCons;
 
 enum EntityType
@@ -13,6 +14,7 @@ enum EntityType
 	ENTITY_DYNAMIC
 };
 
+class ChunkManager;
 class AbstractEntity
 {
 public:
@@ -29,6 +31,7 @@ protected:
 	Mesh *		pMeshManager;
 	int			mType;
 	string		mMeshID;
+	ChunkManager *CM;
 
 
 
@@ -92,6 +95,11 @@ public:
 		return &position;
 	}
 
+	Vector *getRotation()
+	{
+		return &rotarionYawPitchRoll;
+	}
+
 	EntityType getEntityType()
 	{
 		return entityType;
@@ -110,6 +118,11 @@ public:
 	void setMeshManager(Mesh *m)
 	{
 		pMeshManager = m;
+	}
+
+	void setChunkManager(ChunkManager *cm)
+	{
+		CM = cm;
 	}
 
 
