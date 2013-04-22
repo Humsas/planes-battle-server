@@ -51,6 +51,7 @@ public:
 		mType = GAME_ENTITY_AIRCRAFT_B17;
 		mCreated = false;
 		isClientStub = true;
+		mMeshID = "B17";
 
 
 		FDMExec = new JSBSim::FGFDMExec();
@@ -296,7 +297,7 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		stream.Write(mMeshID);
+		//stream.Write((string)mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
@@ -364,7 +365,7 @@ public:
 		stream->Read(rotarionYawPitchRoll);
 		stream->Read(scale);
 		stream->Read(entityType);
-		stream->Read(mMeshID);
+		//stream->Read((string)mMeshID);
 
 		pMesh = pMeshManager->getPointer(mMeshID);
 
