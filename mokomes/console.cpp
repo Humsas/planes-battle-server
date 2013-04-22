@@ -25,7 +25,7 @@ void Console::inputMessageAppend(char c)
 					}
 				}
 
-			mInputMessagesList.push_front(mInputMessage);
+			mInputMessagesList.push_front(timeToString() + ": " + mInputMessage);
 			mInputMessagesListCursorIndex = -1;
 
 			// Destroying last list messages
@@ -82,7 +82,7 @@ void Console::addLine(string cont)
 		string line;
 		while( getline(ss, line) )
 		{
-			mMessagesList->add(line);
+			mMessagesList->add(timeToString() + ": " + line);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void Console::addLine(string cont, GAME_CONSOLE_ERROR_NUM num)
 		string line;
 		while( getline(ss, line) )
 		{
-			mMessagesList->add(line, num);
+			mMessagesList->add(timeToString() + ": " + line, num);
 		}
 	}
 }
@@ -297,4 +297,16 @@ void Console::changeInputCursorPos(int newPos)
 		else
 			mInputMessage = "";
 	}
+}
+
+// Writtes local time to string
+string Console::timeToString()
+{
+	time_t t = time(0);						// get time now
+	struct tm * now = localtime( &t );
+	CHAR temp[MAX_PATH];
+
+	sprintf_s(temp, "%02d:%02d:%02d", now->tm_hour, now->tm_min, now->tm_sec);
+
+	return temp;
 }

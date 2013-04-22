@@ -56,7 +56,7 @@ public:
 	Networking(Console* console, Game* game);
 
 	void Update();
-	RakPeerInterface*		GetPeer(){return mServer;}
+	RakPeerInterface*		GetServer(){return mServer;}
 
 
 	void SendConnectionDataToPlayer(RakNetGUID id);

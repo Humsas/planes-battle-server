@@ -2,6 +2,7 @@
 #define NETWORK_OBJECT_PLANE_BATTLE
 
 #include "RakPeerInterface.h"
+#include "BitStream.h"
 
 using namespace RakNet;
 
@@ -9,7 +10,8 @@ class NetworkObject
 {
 protected:
 	BitStream*				mLastSerializationRezult;
-	//int						mNetworkID;
+
+	// Pas mus tik serveris gali updatinti, tai tik ten ir true
 	bool					mCanUpdate;
 	// If object is created on the other client or server then true
 	bool					mCreated;
@@ -31,6 +33,7 @@ public:
 
 	~NetworkObject()
 	{
+		delete mLastSerializationRezult;
 	}
 
 

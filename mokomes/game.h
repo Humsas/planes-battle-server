@@ -14,6 +14,8 @@
 #include "RakPeerInterface.h"
 
 #include "JSBSIMAircraft.h"
+#include "AircraftB17Entity.h"
+#include "TestCubeEntity.h"
 
 #include "bomb.h"
 
@@ -121,10 +123,7 @@ private:
 	
 
 public:
-	//AircraftPhysics* lektuvas;
-
-	TestCraft* testCraft;
-	//vector<RakNet::RakNetGUID>		mPlayersList;
+	AircraftB17* lektuvas;
 
 	Game(LPDIRECT3DDEVICE9 &d3);
 	~Game();
