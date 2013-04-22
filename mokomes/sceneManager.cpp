@@ -129,8 +129,8 @@ void SceneManager::Update(float dt)
 	kamera->Update();
 
 	ter->Update();
-	Vector &vv = kamera->getCamP();
-	sceneObjects->Update(vv.x, vv.y, vv.z);
+	//Vector &vv = kamera->getCamP();
+	//sceneObjects->Update(vv.x, vv.y, vv.z);
 	//sceneObjects->Update(0, 0, 0);
 }
 

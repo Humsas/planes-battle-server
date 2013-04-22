@@ -18,11 +18,8 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 
 	timer		= new Timer();
 	
-	
-	testCraft	= new TestCraft(kolizijos, Vector(7500, 20000, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))));
-
-	ooo = scena->addObject("B17");
-	ooo->scale(20, 20, 20);
+	lektuvas = NULL;
+	//lektuvas	= new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 
 
 	//enemyBaseList	= new MyLinkedList<enemyBaseStruct>();
@@ -34,6 +31,8 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 
 	dropOn = false;
 	lastDropTime = timeGetTime();
+
+	//scena->getChunkManager()->addEntity(lektuvas);
 
 	TestGameInit();
 	sound->playSound("engine_loop", true);
@@ -48,7 +47,7 @@ Game::~Game()
 	if(scena != NULL)		delete scena;
 	if(kolizijos != NULL)	delete kolizijos;
 	//if(lektuvas != NULL)	delete lektuvas;
-	if(testCraft != NULL)	delete testCraft;
+	if(lektuvas != NULL)	delete lektuvas;
 							//delete enemyBaseList;
 							//delete bombList;
 							//delete cannonsList;
@@ -56,214 +55,32 @@ Game::~Game()
 
 void Game::Render()
 {
-	Update();
 	scena->Render();
 }
 
 void Game::Update()
 {
 	// update all the game physics
-
 	timer->Update();
-
 	
-	
-	//lektuvas->StepSimulation(timer->getDeltaT());
-
-	testCraft->setElevation(scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(testCraft->pozicija.y, testCraft->pozicija.z, testCraft->pozicija.x)));
-	testCraft->Update(timer->getDeltaT());
-
-
-	//scena->getCamera()->setPos(lektuvas->Airplane.vPosition.y*0.3048 , lektuvas->Airplane.vPosition.z*0.3048 ,-lektuvas->Airplane.vPosition.x*0.3048);
-
-	//scena->getHud()->getAltimeter()->SetAltitude(lektuvas->Airplane.vPosition.z*0.3048);
-	//scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->GetSpeed());
-	//scena->getHud()->getAnglemeter()->SetAngle(-lektuvas->Airplane.vEulerAngles.x);
-
-
-	//oo->pozicija.x = lektuvas->Airplane.vPosition.y*0.3048;
-	//oo->pozicija.y = lektuvas->Airplane.vPosition.z*0.3048;
-	//oo->pozicija.z = -lektuvas->Airplane.vPosition.x*0.3048;
-
-	//oo->rotateYPR(	-lektuvas->Airplane.vEulerAngles.z, 
-					//-lektuvas->Airplane.vEulerAngles.y, 
-					//lektuvas->Airplane.vEulerAngles.x);
-
-
-	// testcraft
-
-	scena->getHud()->getSpeedometer()->SetSpeed(testCraft->getSpeed());
-	scena->getHud()->getAltimeter()->SetAltitude(testCraft->pozicija.z);
-	scena->getHud()->getAnglemeter()->SetAngle(testCraft->rotacija.x);
-
-	ooo->pozicija.x = testCraft->pozicija.y;
-	ooo->pozicija.y = testCraft->pozicija.z+1;
-	ooo->pozicija.z = testCraft->pozicija.x;
-
-	scena->getCamera()->setPos(ooo->pozicija.x, ooo->pozicija.y, ooo->pozicija.z);
-
-	ooo->rotateYPR(	-testCraft->rotacija.z-90, 
-					testCraft->rotacija.y, 
-					-testCraft->rotacija.x);
-
-	if(testCraft->getStall() && timer->getTime()-2500 > lastWarningTime)
+	if(lektuvas != NULL)
 	{
-		sound->playSound("stall_warning");
-		lastWarningTime = timer->getTime();
+		//lektuvas->setElevation(scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(lektuvas->getPosition()->y, lektuvas->getPosition()->z, lektuvas->getPosition()->x)));
+		//lektuvas->Update(timer->getDeltaT());
+
+
+
+
+		// testcraft
+		scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->getSpeed());
+		scena->getHud()->getAltimeter()->SetAltitude(lektuvas->getPosition()->z);
+		scena->getHud()->getAnglemeter()->SetAngle(lektuvas->getRotation()->x);
+
+		scena->Update(timer->getDeltaT());
 	}
 
 
-	//// shot new bombs
-	//if(fireOn == true && lastShotTime + 150 < timeGetTime())
-	//{
-	//	shotBomb();
-	//	lastShotTime = timeGetTime();
-	//}
-
-
-	//if(dropOn == true && lastDropTime + 500 < timeGetTime())
-	//{
-	//	dropBomb();
-	//	lastDropTime = timeGetTime();
-	//}
-
-	/*
-	// update bombs
-
-	bombStruct *bs = NULL;
-	bombList->iteratorReset();
-	while((bs = bombList->getNext()) != NULL)
-	{
-		if(bs->hitTime == 0)
-		{
-			bs->bomba->Update(timer->getDeltaT());
-
-			bs->oo->pozicija.x = bs->op->pozicija.x = bs->bomba->bomba.position.x;
-			bs->oo->pozicija.z = bs->op->pozicija.y = bs->bomba->bomba.position.y;
-			bs->oo->pozicija.y = bs->op->pozicija.z = bs->bomba->bomba.position.z;
-
-			bs->oo->rotateYPR(-bs->bomba->yaw()+90, -bs->bomba->pitch(), 0);
-
-
-
-			if(kolizijos->groundLevel(bs->op) <= 0 || bs->TTL <= timer->getTime())
-			{	
-				//kolizijos->update(bs->op);
-				bs->hitTime = timer->getTime();	
-				sound->playSound("explosion");
-				bs->oo->mesh = scena->getMeshManager()->getPointer("sfera");
-			}
-		}
-		else
-		{
-			float killRadius = (float)(timer->getTime() - bs->hitTime)/1000 * 300; 
-			if(killRadius < bs->killRadius)
-			{
-				bs->op->radius = killRadius;
-				bs->oo->scale(killRadius, killRadius, killRadius);
-				kolizijos->getQuadTree()->updateElement(bs->op);
-				kolizijos->getQuadTree()->findColisions(bs->op);			
-			}
-			else
-			{
-				kolizijos->getQuadTree()->removeElement(bs->op); 
-				scena->removeObject(bs->oo);
-				bombList->remove(bs);
-			}
-
-		}
-		
-
-
-
-	}
-
-
-
-	// update bases
-
-	enemyBaseStruct *eb = NULL;
-	enemyBaseList->iteratorReset();
-	while((eb = enemyBaseList->getNext()) != NULL)
-	{
-		if(eb->op->colision == true)
-		{ //naikinam baze
-
-			stringstream ss1;//create a stringstream
-			ss1 << "Naikinama baze: " << eb;
-			cons.add(ss1.str(),GAME_CONSOLE_WARNING);
-
-			// naikinam kolizini objekta
-			kolizijos->getQuadTree()->removeElement(eb->op);
-
-			//naikinam grafini objekta
-			scena->removeObject(eb->oo);
-
-			enemyBaseList->remove(eb);
-		}
-
-	}
-
-
-
-	// update bases
-
-	enemyCannonStruct *ec = NULL;
-	cannonsList->iteratorReset();
-	while((ec = cannonsList->getNext()) != NULL)
-	{
-		if(ec->op->colision == true)
-		{ //naikinam baze
-
-			stringstream ss1;//create a stringstream
-			ss1 << "Naikinama patranka: " << ec;
-			cons.add(ss1.str(),GAME_CONSOLE_WARNING);
-
-			// naikinam kolizini objekta
-			kolizijos->getQuadTree()->removeElement(ec->op);
-
-			//naikinam grafini objekta
-			scena->removeObject(ec->oo);
-			scena->removeObject(ec->ooBarrel);
-
-			cannonsList->remove(ec);
-		}
-		else
-		{ // patranka saudo i lektuva
-			if(ec->lastShotTime + 1000 < timeGetTime() && lektuvas->Airplane.vPosition.z*0.3048 >= ec->op->pozicija.z)
-			{
-
-				cannonShot(ec);
-				ec->lastShotTime = timeGetTime();
-			}
-		}
-
-	}
-
-	
-
-
-	*/
-
-
-
-
-
-
-
-
-
-	scena->Update(timer->getDeltaT());
 	sound->update();
-
-	
-
-	//stringstream sss;//create a stringstream
-	//	sss << " Z: " << scena->getCamera()->getCamP('x')
-	//		<< " Y: " << scena->getCamera()->getCamP().y
-	//		<< " X: " << scena->getCamera()->getCamP().x;
-
-	//	cons.add(sss.str());
 }
 
 
@@ -527,6 +344,11 @@ NetworkIDManager* Game::getNetworkIDManager()
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
 	//Start data sending here
+	lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
+	lektuvas->SetNetworkIDManager(mNetworkIdManager);
+	lektuvas->CreateSerialize(mNetwork->GetServer());
+
+	scena->getChunkManager()->addEntity(lektuvas);
 }
 
 
@@ -541,10 +363,8 @@ void Game::CreateCubes()
 			// Gal galima i6 karto sukurti su paturbintu konstruktorium
 			TestCubeEntity *testEntity = new TestCubeEntity(scena->getMeshManager(), Vector(20000+i*150, 7500+j*150, scena->getChunkManager()->getMapHeightAtPoint(Vector(20000+i*150, 7500+j*150, 0))), Vector(0, 0, 0), true);
 			testEntity->SetNetworkIDManager(mNetworkIdManager);
+			testEntity->CreateSerialize(mNetwork->GetServer());
 
-			testEntity->CreateSerialize(mNetwork->GetPeer());
-
-			//ids.push_back(testEntity->GetNetworkID());
 			scena->getChunkManager()->addEntity(testEntity);
 		}
 	}
@@ -569,10 +389,11 @@ void Game::MoveCubes()
 }
 
 // Processes messages from the clients
-//TODO: reikia atskyrimo kam skirtos zinutes
+//TODO: reikia atskyrimo kam skirtos zinutes(kuris klientas)
 void Game::ProcessKeyMessages(BitStream* stream)
 {
 	USHORT keyCode;
+	bool isUp;
 	stream->Read(keyCode);
 
 	switch (keyCode)
@@ -580,30 +401,67 @@ void Game::ProcessKeyMessages(BitStream* stream)
 	case VK_SHIFT:
 		break;
 	case 'Z':
+		stream->Read(isUp);
+		(isUp)? lektuvas->startEngine(false) : lektuvas->startEngine(true);
+
 		break;
 	case 'X':
+		stream->Read(isUp);
+		(isUp)? "" : lektuvas->stopEngine();
+
 		break;
 	case 'W':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setElevator(0) : lektuvas->setElevator(1.0);
+
 		break;
 	case 'S':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setElevator(0) : lektuvas->setElevator(-1.0);
+
 		break;
 	case 'A':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setElerons(0) : lektuvas->setElerons(1.0);
+
 		break;
 	case 'D':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setElerons(0) : lektuvas->setElerons(-1.0);
+
 		break;
 	case 'Q':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setRuder(0) : lektuvas->setRuder(-1.0);
+
 		break;
 	case 'E':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setRuder(0) : lektuvas->setRuder(1.0);
+
 		break;
 	case 'B':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setBrakes(false) : lektuvas->setBrakes(true);
+
 		break;
 	case 'F':
+		stream->Read(isUp);
+		(isUp)? lektuvas->setFlaps(0.0) : lektuvas->setFlaps(1.0);
+
 		break;
 	case 'G':
+		stream->Read(isUp);
+		(isUp)? "" : lektuvas->gearUpDown();
+
 		break;
 	case VK_UP:
+		(isUp)? "" : lektuvas->increaseThrottle();
+
 		break;
 	case VK_DOWN:
+		(isUp)? "" : lektuvas->decreaseThrottle();
+
 		break;
 	case GAME_KEY_QUIT_GAME:
 		gServerConsole.addLine("Klienas quitina");
@@ -624,42 +482,87 @@ void Game::ProcessKeyMessages(BitStream* stream)
 			break;
 		}
 	case GAME_KEY_JOY_BUTTON1:
-		break;
+		{
+			stream->Read(isUp);
+			if(!isUp)
+				lektuvas->decreaseThrottle();
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON2:
-		break;
+		{
+			stream->Read(isUp);
+			if(!isUp)
+				lektuvas->increaseMixture();
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON3:
-		break;
+		{
+			stream->Read(isUp);
+			if(!isUp)
+				lektuvas->decreaseMixture();
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON4:
-		break;
+		{
+			stream->Read(isUp);
+			if(!isUp)
+				lektuvas->increaseThrottle();
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON5:
-		break;
+		{
+			stream->Read(isUp);
+			(isUp)? lektuvas->setRuder(0.0) : lektuvas->setRuder(-1.0);
+
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON6:
 		break;
 	case GAME_KEY_JOY_BUTTON7:
-		break;
+		{
+			stream->Read(isUp);
+			(isUp)? lektuvas->setRuder(0.0) : lektuvas->setRuder(1.0);
+
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON8:
 		break;
 	case GAME_KEY_JOY_BUTTON9:
-		break;
+		{
+			stream->Read(isUp);
+			(isUp)? lektuvas->startEngine(false) : lektuvas->startEngine(true);
+
+			break;
+		}
 	case GAME_KEY_JOY_BUTTON10:
-		break;
+		{
+			stream->Read(isUp);
+			if(!isUp)
+				lektuvas->stopEngine();
+			break;
+		}
 	case GAME_KEY_MOUSE_MOVE:
 		{
 			LONG x, y;
 			stream->Read(x);
 			stream->Read(y);
+			//getScene()->getCamera()->updateAngle(x, y);
 
 			break;
 		}
 	case GAME_KEY_MOUSE_WHEEL:
 		break;
 	case GAME_KEY_MOUSE_LEFT_BUTTON_DOWN:
+		fire(true);
 		break;
 	case GAME_KEY_MOUSE_LEFT_BUTTON_UP:
+		fire(false);
 		break;
 	case GAME_KEY_MOUSE_RIGHT_BUTTON_DOWN:
+		drop(true);
 		break;
 	case GAME_KEY_MOUSE_RIGHT_BUTTON_UP:
+		drop(false);
 		break;
 	default:
 		gServerConsole.addLine("Atkeliavo Neatpazintas mygtuko signalas.");

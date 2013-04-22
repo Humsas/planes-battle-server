@@ -8,6 +8,7 @@
 #include <tchar.h>
 #include <deque>
 #include <omp.h>
+#include <ctime>			// laiko rasymui i loga
 
 #include "masyvas.h"
 #include "globalSetings.h"
@@ -137,6 +138,8 @@ public:
 	void increaseInputCursorPos();
 	void decreaseInputCursorPos();
 	void changeInputCursorPos(int newPos);
+
+	string timeToString();
 };
 
 

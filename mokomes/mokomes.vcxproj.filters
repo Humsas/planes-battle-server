@@ -405,6 +405,9 @@
     <ClCompile Include="Networking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ServerConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="AircraftB17Entity.cpp">
       <Filter>Source Files\GameEntities</Filter>
     </ClCompile>
@@ -788,19 +791,25 @@
     <ClInclude Include="Networking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InvisibleObjectsChecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCubeEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WinsockWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractEntity.h">
+      <Filter>Header Files\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AircraftB17Entity.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractEntity.h">
+    <ClInclude Include="TestCubeEntity.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
   </ItemGroup>
