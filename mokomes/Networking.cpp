@@ -95,6 +95,14 @@ void Networking::Update()
 						if(te != NULL)
 							te->SetCreated(true);
 						break;
+					}
+				case GAME_ENTITY_AIRCRAFT_B17:
+					{
+						AircraftB17* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<AircraftB17*>(id);
+
+						if(te != NULL)
+							te->SetCreated(true);
+						break;
 					} 
 				default:
 					break;
@@ -131,6 +139,9 @@ void Networking::Update()
 		{
 		case GAME_ENTITY_CUBE:
 			((TestCubeEntity*)es)->NetworkUpdate(mServer);
+			break;
+		case GAME_ENTITY_AIRCRAFT_B17:
+			((AircraftB17*)es)->NetworkUpdate(mServer);
 			break;
 		default:
 			break;

@@ -74,7 +74,7 @@ void Game::Update()
 		// testcraft
 		scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->getSpeed());
 		scena->getHud()->getAltimeter()->SetAltitude(lektuvas->getPosition()->z);
-		scena->getHud()->getAnglemeter()->SetAngle(lektuvas->getRotation()->x);
+		scena->getHud()->getAnglemeter()->SetAngle(-lektuvas->getRotation()->z);
 
 		scena->Update(timer->getDeltaT());
 	}
@@ -456,10 +456,12 @@ void Game::ProcessKeyMessages(BitStream* stream)
 
 		break;
 	case VK_UP:
+		stream->Read(isUp);
 		(isUp)? "" : lektuvas->increaseThrottle();
 
 		break;
 	case VK_DOWN:
+		stream->Read(isUp);
 		(isUp)? "" : lektuvas->decreaseThrottle();
 
 		break;
