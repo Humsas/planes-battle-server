@@ -39,6 +39,8 @@ private:
 
 	bool isClientStub;
 
+	RakNetGUID	mOwnerId;
+
 	// returns
 	double stallWarn;
 
