@@ -32,22 +32,12 @@ using namespace RakNet;
 
 class Game;
 
-struct ConnectionData 
-{
-	RakNetGUID	playerId;
-	bool		ready;
-};
-
-
 class Networking
 {
 private:
 
 	RakPeerInterface*		mServer;
 	Console*				mConsole;
-	vector<ConnectionData>	mConnectionData;
-	BitStream				mShit1;
-	BitStream				mShit2;
 	Game*					mGame;
 
 	bool OpenUPNP();
@@ -60,7 +50,6 @@ public:
 
 
 	void SendConnectionDataToPlayer(RakNetGUID id);
-	BitStream* GetPlayerConnectionPacket(RakNetGUID id);
 	bool ArePlayersReady();
 	//void SendCreatedObjectsIDs(vector<NetworkID> ids);
 };

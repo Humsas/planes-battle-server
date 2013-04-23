@@ -156,7 +156,7 @@ public:
 	void CreateCubes();
 	void MoveCubes();
 
-	void ProcessKeyMessages(BitStream* stream);
+	void ProcessKeyMessages(BitStream* stream, RakNetGUID playerID);
 
 };
 
