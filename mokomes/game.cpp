@@ -65,22 +65,13 @@ void Game::Update()
 	// update all the game physics
 	timer->Update();
 	
-	if(lektuvas != NULL)
-	{
-		//lektuvas->setElevation(scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(lektuvas->getPosition()->y, lektuvas->getPosition()->z, lektuvas->getPosition()->x)));
-		//lektuvas->Update(timer->getDeltaT());
 
+	// testcraft
+	//scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->getSpeed());
+	//scena->getHud()->getAltimeter()->SetAltitude(lektuvas->getPosition()->z);
+	//scena->getHud()->getAnglemeter()->SetAngle(-lektuvas->getRotation()->z);
 
-
-
-		// testcraft
-		scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->getSpeed());
-		scena->getHud()->getAltimeter()->SetAltitude(lektuvas->getPosition()->z);
-		scena->getHud()->getAnglemeter()->SetAngle(-lektuvas->getRotation()->z);
-
-		scena->Update(timer->getDeltaT());
-	}
-
+	scena->Update(timer->getDeltaT());
 
 	sound->update();
 }
@@ -346,11 +337,14 @@ NetworkIDManager* Game::getNetworkIDManager()
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
 	//Start data sending here
-	lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
+	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 	lektuvas->SetNetworkIDManager(mNetworkIdManager);
+	lektuvas->setOwnerId(playerID);
 	lektuvas->CreateSerialize(mNetwork->GetServer());
+	lektuvas->setReadyToPlay(false);
 
 	scena->getChunkManager()->addEntity(lektuvas);
+	mLektuvai.push_back(lektuvas);
 }
 
 
@@ -392,8 +386,16 @@ void Game::MoveCubes()
 
 // Processes messages from the clients
 //TODO: reikia atskyrimo kam skirtos zinutes(kuris klientas)
-void Game::ProcessKeyMessages(BitStream* stream)
+void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 {
+	AircraftB17* plane;
+	for (int i = 0; i < mLektuvai.size(); i++)
+		if(mLektuvai[i]->getOwnerId() == playerID)
+		{
+			plane = mLektuvai[i];
+			break;
+		}
+
 	USHORT keyCode;
 	bool isUp;
 	stream->Read(keyCode);
@@ -404,71 +406,72 @@ void Game::ProcessKeyMessages(BitStream* stream)
 		break;
 	case 'Z':
 		stream->Read(isUp);
-		(isUp)? lektuvas->startEngine(false) : lektuvas->startEngine(true);
+		(isUp)? plane->startEngine(false) : plane->startEngine(true);
 
 		break;
 	case 'X':
 		stream->Read(isUp);
-		(isUp)? "" : lektuvas->stopEngine();
+		(isUp)? "" : plane->stopEngine();
 
 		break;
 	case 'W':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setElevator(0) : lektuvas->setElevator(1.0);
+		(isUp)? plane->setElevator(0) : plane->setElevator(1.0);
 
 		break;
 	case 'S':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setElevator(0) : lektuvas->setElevator(-1.0);
+		(isUp)? plane->setElevator(0) : plane->setElevator(-1.0);
 
 		break;
 	case 'A':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setElerons(0) : lektuvas->setElerons(1.0);
+		(isUp)? plane->setElerons(0) : plane->setElerons(1.0);
 
 		break;
 	case 'D':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setElerons(0) : lektuvas->setElerons(-1.0);
+		(isUp)? plane->setElerons(0) : plane->setElerons(-1.0);
 
 		break;
 	case 'Q':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setRuder(0) : lektuvas->setRuder(-1.0);
+		(isUp)? plane->setRuder(0) : plane->setRuder(-1.0);
 
 		break;
 	case 'E':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setRuder(0) : lektuvas->setRuder(1.0);
+		(isUp)? plane->setRuder(0) : plane->setRuder(1.0);
 
 		break;
 	case 'B':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setBrakes(false) : lektuvas->setBrakes(true);
+		(isUp)? plane->setBrakes(false) : plane->setBrakes(true);
 
 		break;
 	case 'F':
 		stream->Read(isUp);
-		(isUp)? lektuvas->setFlaps(0.0) : lektuvas->setFlaps(1.0);
+		(isUp)? plane->setFlaps(0.0) : plane->setFlaps(1.0);
 
 		break;
 	case 'G':
 		stream->Read(isUp);
-		(isUp)? "" : lektuvas->gearUpDown();
+		(isUp)? "" : plane->gearUpDown();
 
 		break;
 	case VK_UP:
 		stream->Read(isUp);
-		(isUp)? "" : lektuvas->increaseThrottle();
+		(isUp)? "" : plane->increaseThrottle();
 
 		break;
 	case VK_DOWN:
 		stream->Read(isUp);
-		(isUp)? "" : lektuvas->decreaseThrottle();
+		(isUp)? "" : plane->decreaseThrottle();
 
 		break;
 	case GAME_KEY_QUIT_GAME:
 		gServerConsole.addLine("Klienas quitina");
+		PostQuitMessage(1);
 		break;
 	case MM_JOY1MOVE:
 		{
@@ -489,34 +492,34 @@ void Game::ProcessKeyMessages(BitStream* stream)
 		{
 			stream->Read(isUp);
 			if(!isUp)
-				lektuvas->decreaseThrottle();
+				plane->decreaseThrottle();
 			break;
 		}
 	case GAME_KEY_JOY_BUTTON2:
 		{
 			stream->Read(isUp);
 			if(!isUp)
-				lektuvas->increaseMixture();
+				plane->increaseMixture();
 			break;
 		}
 	case GAME_KEY_JOY_BUTTON3:
 		{
 			stream->Read(isUp);
 			if(!isUp)
-				lektuvas->decreaseMixture();
+				plane->decreaseMixture();
 			break;
 		}
 	case GAME_KEY_JOY_BUTTON4:
 		{
 			stream->Read(isUp);
 			if(!isUp)
-				lektuvas->increaseThrottle();
+				plane->increaseThrottle();
 			break;
 		}
 	case GAME_KEY_JOY_BUTTON5:
 		{
 			stream->Read(isUp);
-			(isUp)? lektuvas->setRuder(0.0) : lektuvas->setRuder(-1.0);
+			(isUp)? plane->setRuder(0.0) : plane->setRuder(-1.0);
 
 			break;
 		}
@@ -525,7 +528,7 @@ void Game::ProcessKeyMessages(BitStream* stream)
 	case GAME_KEY_JOY_BUTTON7:
 		{
 			stream->Read(isUp);
-			(isUp)? lektuvas->setRuder(0.0) : lektuvas->setRuder(1.0);
+			(isUp)? plane->setRuder(0.0) : plane->setRuder(1.0);
 
 			break;
 		}
@@ -534,7 +537,7 @@ void Game::ProcessKeyMessages(BitStream* stream)
 	case GAME_KEY_JOY_BUTTON9:
 		{
 			stream->Read(isUp);
-			(isUp)? lektuvas->startEngine(false) : lektuvas->startEngine(true);
+			(isUp)? plane->startEngine(false) : plane->startEngine(true);
 
 			break;
 		}
@@ -542,7 +545,7 @@ void Game::ProcessKeyMessages(BitStream* stream)
 		{
 			stream->Read(isUp);
 			if(!isUp)
-				lektuvas->stopEngine();
+				plane->stopEngine();
 			break;
 		}
 	case GAME_KEY_MOUSE_MOVE:

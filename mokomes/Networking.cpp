@@ -41,18 +41,8 @@ void Networking::Update()
 		case ID_NEW_INCOMING_CONNECTION:
 			{
 				mConsole->addLine("A connection is incoming.");
-				ConnectionData tmp;
-				tmp.ready = false;
-				tmp.playerId = packet->guid;
-				mConnectionData.push_back(tmp);
 
-				int i = mConnectionData.size();
-				if(i == 1)
-					mShit1.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
-				else if(i == 2)
-					mShit2.Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
-
-				mGame->playerConnected(tmp.playerId);
+				mGame->playerConnected(packet->guid);
 				break;
 			} 
 		case ID_DISCONNECTION_NOTIFICATION:
@@ -65,12 +55,15 @@ void Networking::Update()
 				RakNet::BitStream* bsIn = new RakNet::BitStream(packet->data, packet->length, false);
 				bsIn->IgnoreBytes(sizeof(RakNet::MessageID));
 
-				mGame->ProcessKeyMessages(bsIn);
+				mGame->ProcessKeyMessages(bsIn, packet->guid);
 				break;
 			} 
 		case ID_CONNECTION_LOST:
 			{
 				mConsole->addLine("A client lost the connection.");
+				//Nutraukiam zaidima
+				PostQuitMessage(1);
+
 				break;
 			} 
 		case ID_GAME_MESSAGE_PLAYER_DISCONNECTED:
@@ -101,7 +94,10 @@ void Networking::Update()
 						AircraftB17* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<AircraftB17*>(id);
 
 						if(te != NULL)
+						{
 							te->SetCreated(true);
+							te->setReadyToPlay(true);
+						}
 						break;
 					} 
 				default:
@@ -111,11 +107,11 @@ void Networking::Update()
 			break;
 		case ID_GAME_MESSAGE_LOADING_COMPLETED:
 			{
-				for(int i = 0; i < mConnectionData.size(); i++)
-					if(mConnectionData[i].playerId == packet->guid)
-					{
-						mConnectionData[i].ready = true;
-					}
+				//for(int i = 0; i < mConnectionData.size(); i++)
+				//	if(mConnectionData[i].playerId == packet->guid)
+				//	{
+				//		mConnectionData[i].ready = true;
+				//	}
 
 				break;
 			} 
@@ -235,45 +231,30 @@ bool Networking::OpenUPNP()
 
 void Networking::SendConnectionDataToPlayer(RakNetGUID id)
 {
-	for (int i = 0; i < mConnectionData.size(); i++)
-		if(mConnectionData[i].playerId == id)
-		{
-			if(i == 0)
-			{
-				mServer->Send(&mShit1, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
-				mShit1.Reset();
-			}
-			else if(i == 1)
-			{
-				mServer->Send(&mShit2, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
-				mShit2.Reset();
-			}
-			break;
-		}
+	//for (int i = 0; i < mConnectionData.size(); i++)
+	//	if(mConnectionData[i].playerId == id)
+	//	{
+	//		if(i == 0)
+	//		{
+	//			mServer->Send(&mShit1, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
+	//			mShit1.Reset();
+	//		}
+	//		else if(i == 1)
+	//		{
+	//			mServer->Send(&mShit2, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, mServer->GetSystemAddressFromGuid(id), false);
+	//			mShit2.Reset();
+	//		}
+	//		break;
+	//	}
 }
-
-
-BitStream* Networking::GetPlayerConnectionPacket(RakNetGUID id)
-{
-	for (int i = 0; i < mConnectionData.size(); i++)
-	{
-		if(mConnectionData[i].playerId == id)
-		{
-			if(i == 0)
-				return &mShit1;
-			else if(i == 1)
-				return &mShit2;
-			break;
-		}
-	}
-	return NULL;
-}
-
 
 bool Networking::ArePlayersReady()
 {
-	for (int i = 0; i < mConnectionData.size(); i++)
-		if(mConnectionData[i].ready == false)
+	if(mGame->mLektuvai.size() < 2)
+		return false;
+
+	for (int i = 0; i < mGame->mLektuvai.size(); i++)
+		if(mGame->mLektuvai[i]->isReadyToPlay() == false)
 			return false;
 
 	return true;
