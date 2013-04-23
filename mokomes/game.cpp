@@ -18,7 +18,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 
 	timer		= new Timer();
 	
-	lektuvas = NULL;
+	//lektuvas = NULL;
 	//lektuvas	= new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 
 
@@ -46,8 +46,10 @@ Game::~Game()
 	if(mNetwork != NULL)	delete mNetwork;
 	if(scena != NULL)		delete scena;
 	if(kolizijos != NULL)	delete kolizijos;
-	//if(lektuvas != NULL)	delete lektuvas;
-	if(lektuvas != NULL)	delete lektuvas;
+
+	for(int i = mLektuvai.size(); i > 0; i--)
+		if(mLektuvai[i] != NULL)	
+			delete mLektuvai[i];
 							//delete enemyBaseList;
 							//delete bombList;
 							//delete cannonsList;
