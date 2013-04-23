@@ -1,61 +1,61 @@
 #include "bomb.h"
+//#include "console.h"
+//extern Console gCons;
+
 
 void ProjectileBomb::Update(float deltaT)
 {
-	bomba.speed.z = bomba.speed.z - gravity * deltaT;
+	speed.z = speed.z - gravity * deltaT;
 
-	bomba.position.x += bomba.speed.x * deltaT;
-	bomba.position.y += bomba.speed.y * deltaT;
+	position.x += speed.x * deltaT;
+	position.y += speed.y * deltaT;
 
-	bomba.position.z += bomba.speed.z * deltaT - 0.5 * gravity * deltaT * deltaT;
+	position.z += speed.z * deltaT - 0.5 * gravity * deltaT * deltaT;
 
-}
+	rotarionYawPitchRoll.x = -yaw() + 90;
+	rotarionYawPitchRoll.y = -pitch();
 
-ProjectileBomb::ProjectileBomb(float x, float y, float z, float sx, float sy, float sz)
-{
-	bomba.position.x = x;
-	bomba.position.y = y;
-	bomba.position.z = z;
-
-	bomba.speed.x = sx;
-	bomba.speed.y = sy;
-	bomba.speed.z = sz;
+	//stringstream ss;
+	//ss << "Y: " << rotarionYawPitchRoll.x << " P: " << rotarionYawPitchRoll.y << " R: " << rotarionYawPitchRoll.z;
+	//gCons.add(ss.str());
+	rotateYPR(&rotarionYawPitchRoll);
+	combine();
 }
 
 
 void ProjectileBomb::Reset(float x, float y, float z, Vector speed)
 {
-	bomba.position.x = x;
-	bomba.position.y = y;
-	bomba.position.z = z;
+	position.x = x;
+	position.y = y;
+	position.z = z;
 
-	bomba.speed.x = speed.x;
-	bomba.speed.y = speed.y;
-	bomba.speed.z = speed.z;
+	speed.x = speed.x;
+	speed.y = speed.y;
+	speed.z = speed.z;
 }
 
 
 float ProjectileBomb::yaw()
 {
-	return angle(bomba.speed.x, bomba.speed.y);
+	return angle(speed.x, speed.y);
 	//// ilgis vienrtinis
-	//float len = sqrt(bomba.speed.x*bomba.speed.x + bomba.speed.y*bomba.speed.y);
+	//float len = sqrt(speed.x*speed.x + speed.y*speed.y);
 
-	//float angle = acos(abs(bomba.speed.x) / len) * (180/3.141592654);
+	//float angle = acos(abs(speed.x) / len) * (180/3.141592654);
 
 	//// kampo taisymas
-	//if(bomba.speed.x >= 0 && bomba.speed.y >= 0)
+	//if(speed.x >= 0 && speed.y >= 0)
 	//{ // I
 	//}
-	//else if(bomba.speed.x < 0 && bomba.speed.y >= 0)
+	//else if(speed.x < 0 && speed.y >= 0)
 	//{ // II
 	//	angle = 180 - angle;
 	//}
-	//else if(bomba.speed.x < 0 && bomba.speed.y < 0)
+	//else if(speed.x < 0 && speed.y < 0)
 	//{ // III
 	//	angle = 180 + angle;
 	//}
-	//else if(bomba.speed.x >= 0 && bomba.speed.y < 0)
+	//else if(speed.x >= 0 && speed.y < 0)
 	//{ // IV
 	//	angle = 360 - angle;
 	//}
@@ -67,7 +67,7 @@ float ProjectileBomb::pitch()
 {
 	//pitch = acos(w.x / cos(yaw))
 	//double pitch = Math.asin(deltaY/distance);
-	return asin(bomba.speed.z/bomba.speed.Magnitude())* (180/3.141592654);
+	return asin(speed.z/speed.Magnitude())* (180/3.141592654);
 }
 
 float ProjectileBomb::angle(float x, float y)
