@@ -360,9 +360,6 @@
     <ClCompile Include="speedometer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bomb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -405,10 +402,10 @@
     <ClCompile Include="Networking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ServerConsole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AircraftB17Entity.cpp">
+      <Filter>Source Files\GameEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="bomb.cpp">
       <Filter>Source Files\GameEntities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -740,9 +737,6 @@
     <ClInclude Include="speedometer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bomb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -791,25 +785,22 @@
     <ClInclude Include="Networking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InvisibleObjectsChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCubeEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="WinsockWrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractEntity.h">
-      <Filter>Header Files\GameEntities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AircraftB17Entity.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
-    <ClInclude Include="TestCubeEntity.h">
+    <ClInclude Include="AbstractEntity.h">
+      <Filter>Header Files\GameEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="bomb.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
   </ItemGroup>
