@@ -123,7 +123,8 @@ private:
 	
 
 public:
-	AircraftB17* lektuvas;
+	vector<AircraftB17*> mLektuvai;
+	//AircraftB17* lektuvas;
 
 	Game(LPDIRECT3DDEVICE9 &d3);
 	~Game();
@@ -155,7 +156,7 @@ public:
 	void CreateCubes();
 	void MoveCubes();
 
-	void ProcessKeyMessages(BitStream* stream);
+	void ProcessKeyMessages(BitStream* stream, RakNetGUID playerID);
 
 };
 
