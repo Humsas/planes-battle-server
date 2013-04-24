@@ -39,6 +39,9 @@ private:
 
 	bool isClientStub;
 
+	RakNetGUID	mOwnerId;
+	bool		mReadyToPlay;
+
 	// returns
 	double stallWarn;
 
@@ -206,9 +209,11 @@ public:
 
 	void Update(float dt);
 
-
-
-
+	RakNetGUID	getOwnerId()				{return mOwnerId;}
+	void		setOwnerId(RakNetGUID id)	{mOwnerId = id;}
+	bool		isReadyToPlay()				{return mReadyToPlay;}
+	void		setReadyToPlay(bool status)	{mReadyToPlay = status;}
+	void		setIsClientStub(bool status){isClientStub = status;}
 
 
 
@@ -277,6 +282,7 @@ public:
 		stream.Write(mType);
 		stream.Write((NetworkID)this->GetNetworkID());
 
+		stream.Write((RakNetGUID)mOwnerId);
 		stream.Write((Vector)initPos);
 		stream.Write((FGColumnVector3)FDMExec->GetPropagate()->GetEuler());
 		stream.Write((double)FDMExec->GetFCS()->GetGearPos());
@@ -321,7 +327,7 @@ public:
 
 		double tmpData;
 
-
+		stream->Read(mOwnerId);
 		stream->Read(initPos);
 		
 		FGColumnVector3 fgv3;
