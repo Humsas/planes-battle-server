@@ -1,0 +1,64 @@
+// 8 textures splatt shader
+// t0 koordinates kai tekstura uztempta ant viso zemelapio
+// t1 koordinates pasikartojancios teksturos
+
+
+
+ps_2_0
+dcl_2d s0
+dcl_2d s1
+dcl_2d s2
+dcl_2d s3
+dcl_2d s4
+dcl_2d s5
+dcl_2d s6
+dcl_2d s7
+dcl_2d s8
+dcl_2d s9
+
+dcl_2d s10
+dcl_2d s11
+
+dcl t0.xy
+dcl t1.xy
+
+
+    
+texld r0, t0, s0 // combined alpha 1
+texld r1, t0, s1 // combined alpha 2
+
+// 8 textures
+	
+texld r2, t1, s2
+texld r3, t1, s3
+texld r4, t1, s4
+texld r5, t1, s5
+
+texld r6, t1, s6
+texld r7, t1, s7
+texld r8, t1, s8
+texld r9, t1, s9
+
+texld r10, t0, s10
+texld r11, t0, s11
+
+
+   
+
+// Combine textures together based off of their alphamaps
+mul r2, r2, r0.x
+lrp r3, r0.y, r3, r2
+lrp r4, r0.z, r4, r3
+lrp r5, r0.w, r5, r4
+
+lrp r6, r1.x, r6, r5
+lrp r7, r1.y, r7, r6
+lrp r8, r1.z, r8, r7
+lrp r9, r1.w, r9, r8
+
+mul r10, r10, r9
+add r11, r11, r10
+
+//mad r11, r10, r11, r9
+
+mov oC0, r10
