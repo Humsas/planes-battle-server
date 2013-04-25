@@ -29,11 +29,17 @@ public:
 		mCreated = false;
 		speed = Vector(0, 0, 0);
 	}
-	ProjectileBomb(Mesh *m, Vector &position, Vector &rotation, Vector &speed, bool canUpdate) : AbstractEntity(m, "bomba", position, rotation, 3, ENTITY_DYNAMIC), NetworkObject(canUpdate)
+	ProjectileBomb(Mesh *m, Vector &position, Vector &rotation, int speed, bool canUpdate) : AbstractEntity(m, "bomba", position, rotation, 3, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_PROJECTILE_BOMB; 
 		mCreated = false;
-		this->speed = speed;
+
+		Vector r(rotation);
+		r.x = -r.x - 90;
+		float x = cos(DEGTORAD(r.x))*cos(DEGTORAD(r.y));
+		float y = sin(DEGTORAD(r.x))*cos(DEGTORAD(r.y));
+		float z = sin(DEGTORAD(r.y));
+		this->speed = Vector(x*speed, y*speed, z*speed);
 	}
 
 	~ProjectileBomb()
@@ -123,6 +129,23 @@ public:
 		stream.Write(mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
+
+	void CreateSerialize(RakPeerInterface* peer, RakNetGUID idToSendTo)
+	{
+		BitStream stream;
+		stream.Write((RakNet::MessageID)ID_GAME_MESSAGE_NEW_OBJECT_CREATED);
+		stream.Write(mType);
+		stream.Write((NetworkID)this->GetNetworkID());
+
+		stream.Write((Vector)position);
+		stream.Write((Vector)rotarionYawPitchRoll);
+		stream.Write((Vector)speed);
+		stream.Write((float)scale);
+		stream.Write(entityType);
+		stream.Write(mMeshID);
+
+		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
 	}
 
 	void CreateDeserialize(BitStream* stream, RakPeerInterface* peer)
