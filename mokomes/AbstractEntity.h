@@ -24,6 +24,7 @@ protected:
 	//
 
 	Vector		position;
+	Vector		positionForRender;
 	Vector		rotarionYawPitchRoll;
 	float		scale;
 	EntityType	entityType;
@@ -33,6 +34,7 @@ protected:
 	string		mMeshID;
 	ChunkManager *CM;
 
+	bool isRenderPositionForceUpdated;
 
 
 
@@ -63,14 +65,25 @@ protected:
 
 public:
 
-	AbstractEntity(){}
+	AbstractEntity()
+	{
+		position = Vector(0, 0, 0);
+		positionForRender = Vector(20000, 7500, 2000);
+		rotarionYawPitchRoll = Vector(0, 0, 0);
+		isRenderPositionForceUpdated = false;
+		//setScale(1);
+		//rotateYPR(&rotarionYawPitchRoll);
+		//combine();
+	}
+
 	AbstractEntity(Mesh *m, string mesh_ID, Vector &position, Vector &rotationYPR, float scale, EntityType eEntitType)
 	{
 		this->position = Vector(position);
+		this->positionForRender = Vector(position);
 		this->rotarionYawPitchRoll = Vector(rotationYPR);
 		this->scale = scale;
 		this->entityType = eEntitType;
-
+		isRenderPositionForceUpdated = false;
 		this->pMeshManager = m;
 		mMeshID = mesh_ID;
 		this->pMesh = m->getPointer(mesh_ID);
@@ -93,6 +106,17 @@ public:
 	Vector *getPosition()
 	{
 		return &position;
+	}
+
+	Vector *getPositionForRender()
+	{
+		return &positionForRender;
+	}
+
+	void forceUpdateRenderPosition()
+	{
+		positionForRender = position;
+		isRenderPositionForceUpdated = true;
 	}
 
 	Vector *getRotation()
@@ -130,8 +154,11 @@ public:
 	// virtual
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render()
-	{
-		pMeshManager->drawMesh(pMesh, &position, transformMatrix);
+	{	
+		pMeshManager->drawMesh(pMesh, &positionForRender, transformMatrix);
+
+		if(!isRenderPositionForceUpdated)
+			positionForRender = position;
 
 		//gCons.add("Rendering...");
 
