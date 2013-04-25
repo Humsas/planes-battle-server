@@ -116,6 +116,22 @@ public:
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
 
+	void CreateSerialize(RakPeerInterface* peer, RakNetGUID idToSendTo)
+	{
+		BitStream stream;
+		stream.Write((RakNet::MessageID)ID_GAME_MESSAGE_NEW_OBJECT_CREATED);
+		stream.Write(mType);
+		stream.Write((NetworkID)this->GetNetworkID());
+
+		stream.Write((Vector)position);
+		stream.Write((Vector)rotarionYawPitchRoll);
+		stream.Write((float)scale);
+		stream.Write(entityType);
+		stream.Write(mMeshID);
+
+		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
+	}
+
 	void CreateDeserialize(BitStream* stream, RakPeerInterface* peer)
 	{
 		stream->ResetReadPointer();

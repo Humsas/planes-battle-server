@@ -43,6 +43,7 @@ public:
 
 	// Sukurimo updeitai
 	virtual void			CreateSerialize(RakPeerInterface* peer) = 0;
+	virtual void			CreateSerialize(RakPeerInterface* peer, RakNetGUID idToSendTo) = 0;
 	virtual void			CreateDeserialize(BitStream* stream, RakPeerInterface* peer) = 0;
 
 	//void					SetNetworkID(int id){mNetworkID = id;}

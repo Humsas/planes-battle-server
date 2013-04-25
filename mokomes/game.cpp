@@ -345,6 +345,37 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 
 	scena->getChunkManager()->addEntity(lektuvas);
 	mLektuvai.push_back(lektuvas);
+
+	//Check that new connected player should have every new object created before
+	if(mLektuvai.size() > 1)
+	{
+		BitStream *stream = new BitStream();
+		stream->Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
+
+		MyLinkedList<AbstractEntity> *pEnt = getScene()->getChunkManager()->getDynamicEntityList();
+		stream->Write((int)pEnt->count());
+		pEnt->networkReadIteratorReset();
+		AbstractEntity *es = NULL;
+		while((es = pEnt->getNextNetwork()) != NULL)
+		{
+			switch (es->getType())
+			{
+			case GAME_ENTITY_CUBE:
+				stream->Write((NetworkID)((TestCubeEntity*)es)->GetNetworkID());
+				break;
+			case GAME_ENTITY_AIRCRAFT_B17:
+				stream->Write((NetworkID)((AircraftB17*)es)->GetNetworkID());
+				break;
+			default:
+				break;
+			}
+			stream->Write((int)es->getType());
+		}
+
+		//Send only to the connected player
+		mNetwork->GetServer()->Send(stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, playerID, false);
+		delete stream;
+	}
 }
 
 

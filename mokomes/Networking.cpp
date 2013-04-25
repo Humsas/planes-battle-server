@@ -115,6 +115,42 @@ void Networking::Update()
 
 				break;
 			} 
+		case ID_GAME_MESSAGE_CONNECTION_DATA:
+			{
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				NetworkID id;
+				int size = 0;
+
+				bsIn.Read(size);
+				for(int i = 0; i < size; i++)
+				{
+					id = -1;
+					int type = -1;
+					bsIn.Read(id);
+					bsIn.Read(type);
+
+					switch (type)
+					{
+						case GAME_ENTITY_CUBE:
+							{
+								TestCubeEntity* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<TestCubeEntity*>(id);
+								te->CreateSerialize(mServer, packet->guid);
+								break;
+							}
+						case GAME_ENTITY_AIRCRAFT_B17:
+							{
+								AircraftB17* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<AircraftB17*>(id);
+								te->CreateSerialize(mServer, packet->guid);
+								break;
+							}
+						default:
+							break;
+					}
+				}
+
+				break;
+			} 
 		default:
 			{
 				CHAR temp[MAX_PATH];

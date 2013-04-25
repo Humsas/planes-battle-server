@@ -308,6 +308,39 @@ public:
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
 
+	void CreateSerialize(RakPeerInterface* peer, RakNetGUID idToSendTo)
+	{
+		BitStream stream;
+		stream.Write((RakNet::MessageID)ID_GAME_MESSAGE_NEW_OBJECT_CREATED);
+		stream.Write(mType);
+		stream.Write((NetworkID)this->GetNetworkID());
+
+		stream.Write((RakNetGUID)mOwnerId);
+		stream.Write((Vector)initPos);
+		stream.Write((FGColumnVector3)FDMExec->GetPropagate()->GetEuler());
+		stream.Write((double)FDMExec->GetFCS()->GetGearPos());
+		stream.Write((double)FDMExec->GetFCS()->GetDfPos());
+		stream.Write((double)FDMExec->GetFCS()->GetDaLPos());
+		stream.Write((double)FDMExec->GetFCS()->GetDaRPos());
+		stream.Write((double)FDMExec->GetFCS()->GetDePos());
+		stream.Write((double)FDMExec->GetFCS()->GetDrPos());
+
+		for(int i = 0; i < FDMExec->GetPropulsion()->GetNumEngines(); i++)
+		{
+			stream.Write((double)FDMExec->GetFCS()->GetThrottlePos(i));
+			stream.Write((double)FDMExec->GetFCS()->GetMixturePos(i));
+			stream.Write((double)FDMExec->GetFCS()->GetPropAdvance(i));
+		}
+
+		stream.Write((Vector)position);
+		stream.Write((Vector)rotarionYawPitchRoll);
+		stream.Write((float)scale);
+		stream.Write(entityType);
+		//stream.Write((string)mMeshID);
+
+		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
+	}
+
 	void CreateDeserialize(BitStream* stream, RakPeerInterface* peer)
 	{
 		stream->ResetReadPointer();
