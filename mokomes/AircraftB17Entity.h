@@ -250,6 +250,7 @@ public:
 
 		stream->Write(position);
 		stream->Write(rotarionYawPitchRoll);
+		stream->Write(speed);
 		//stream.Write(scale);
 		//stream.Write(entityType);
 
@@ -271,6 +272,7 @@ public:
 
 		stream->Read(position);
 		stream->Read(rotarionYawPitchRoll);
+		stream->Read(speed);
 		//stream->Read(scale);
 		//stream->Read(entityType);
 	}
