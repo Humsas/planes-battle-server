@@ -147,7 +147,7 @@ public:
 
 	void TestGameInit();
 
-	void fire(bool set);
+	void fire(AircraftB17* plane, RakNetGUID id);
 	void drop(bool set);
 
 	void Update();

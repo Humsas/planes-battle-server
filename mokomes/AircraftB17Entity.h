@@ -5,6 +5,7 @@
 #include "AbstractEntity.h"
 #include "NetworkObject.h"
 #include "NetworkIDObject.h"
+#include "CooldownRegulator.h"
 
 #include "chunkManager.h"
 
@@ -39,8 +40,9 @@ private:
 
 	bool isClientStub;
 
-	RakNetGUID	mOwnerId;
+	bool		mLeftButtonDown;
 	bool		mReadyToPlay;
+	CooldownRegulator mProjectileBombCooldown;
 
 	// returns
 	double stallWarn;
@@ -53,9 +55,11 @@ public:
 	{
 		mType = GAME_ENTITY_AIRCRAFT_B17;
 		mCreated = false;
+		mLeftButtonDown = false;
 		isClientStub = true;
 		mMeshID = "B17";
-
+		mProjectileBombCooldown = CooldownRegulator(GAME_CONFIG_PROJECTILE_WEAPON_COOLDOWN);
+		
 
 		FDMExec = new JSBSim::FGFDMExec();
 		FDMExec->SetDebugLevel(0);
@@ -99,8 +103,10 @@ public:
 	{
 		mType = GAME_ENTITY_AIRCRAFT_B17; 
 		mCreated = false;
+		mLeftButtonDown = false;
 		isClientStub = false;
 		CM = cm;
+		mProjectileBombCooldown = CooldownRegulator(GAME_CONFIG_PROJECTILE_WEAPON_COOLDOWN);
 
 		this->initPos = position;
 
@@ -209,11 +215,11 @@ public:
 
 	void Update(float dt);
 
-	RakNetGUID	getOwnerId()				{return mOwnerId;}
-	void		setOwnerId(RakNetGUID id)	{mOwnerId = id;}
-	bool		isReadyToPlay()				{return mReadyToPlay;}
-	void		setReadyToPlay(bool status)	{mReadyToPlay = status;}
-	void		setIsClientStub(bool status){isClientStub = status;}
+	bool		isReadyToPlay()					{return mReadyToPlay;}
+	void		setReadyToPlay(bool status)		{mReadyToPlay = status;}
+	void		setIsClientStub(bool status)	{isClientStub = status;}
+	void		setLeftButtonDown(bool status)	{mLeftButtonDown = status;}
+	bool		isReadyToShootProjectileBomb()	{return (mLeftButtonDown) ? mProjectileBombCooldown.isReady() : false;}
 
 
 

@@ -108,6 +108,8 @@ void AircraftB17::Update(float dt)
 {
 	if(!isClientStub)
 	{
+		mProjectileBombCooldown.UpdateCooldowns(dt);
+
 		setElevation(CM->getMapHeightAtPoint(position));
 
 		FDMExec->GetState()->Setdt(dt);

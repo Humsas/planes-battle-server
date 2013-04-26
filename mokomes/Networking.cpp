@@ -15,6 +15,7 @@ Networking::Networking(Console* console, Game* game)
 	mServer->Startup(MAX_CLIENTS, &sd, 1);
 
 	mServer->SetMaximumIncomingConnections(MAX_CLIENTS);
+	mServer->SetTimeoutTime(300000, UNASSIGNED_SYSTEM_ADDRESS);
 
 	OpenUPNP();
 }
@@ -99,7 +100,15 @@ void Networking::Update()
 							te->setReadyToPlay(true);
 						}
 						break;
-					} 
+					}
+				case GAME_ENTITY_PROJECTILE_BOMB:
+					{
+						ProjectileBomb* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<ProjectileBomb*>(id);
+
+						if(te != NULL)
+							te->SetCreated(true);
+						break;
+					}
 				default:
 					break;
 				}
@@ -115,7 +124,7 @@ void Networking::Update()
 
 				break;
 			} 
-		case ID_GAME_MESSAGE_CONNECTION_DATA:
+		case ID_GAME_MESSAGE_CONNECTION_DATA: //Data when player first connects to server
 			{
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
@@ -141,6 +150,12 @@ void Networking::Update()
 						case GAME_ENTITY_AIRCRAFT_B17:
 							{
 								AircraftB17* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<AircraftB17*>(id);
+								te->CreateSerialize(mServer, packet->guid);
+								break;
+							}
+						case GAME_ENTITY_PROJECTILE_BOMB:
+							{
+								ProjectileBomb* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<ProjectileBomb*>(id);
 								te->CreateSerialize(mServer, packet->guid);
 								break;
 							}
@@ -174,6 +189,9 @@ void Networking::Update()
 			break;
 		case GAME_ENTITY_AIRCRAFT_B17:
 			((AircraftB17*)es)->NetworkUpdate(mServer);
+			break;
+		case GAME_ENTITY_PROJECTILE_BOMB:
+			((ProjectileBomb*)es)->NetworkUpdate(mServer);
 			break;
 		default:
 			break;

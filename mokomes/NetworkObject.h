@@ -15,6 +15,7 @@ protected:
 	bool					mCanUpdate;
 	// If object is created on the other client or server then true
 	bool					mCreated;
+	RakNetGUID				mOwnerId;
 
 public:
 
@@ -48,7 +49,9 @@ public:
 
 	//void					SetNetworkID(int id){mNetworkID = id;}
 	//int						GetNetworkId(){return mNetworkID;}
-	void					SetCreated(bool state){mCreated = state;}
+	void					SetCreated(bool state)		{mCreated = state;}
+	RakNetGUID				GetOwnerId()				{return mOwnerId;}
+	void					SetOwnerId(RakNetGUID id)	{mOwnerId = id;}
 
 	bool					IsBitStreamDifferent(BitStream* stream)
 	{
