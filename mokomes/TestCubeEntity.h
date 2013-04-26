@@ -17,7 +17,7 @@ public:
 		mType = GAME_ENTITY_CUBE;
 		mCreated = false;
 	}
-	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_DYNAMIC), NetworkObject(canUpdate)
+	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_CUBE; 
 		mCreated = false;
