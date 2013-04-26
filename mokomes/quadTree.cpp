@@ -208,6 +208,21 @@ MyLinkedList<AbstractEntity> *QuadTree::getList()
 	return list;
 }
 
+void QuadTree::getAllEntitiesList(MyLinkedList<AbstractEntity> *l)
+{
+	for(int i = 0; i < 4; i++)
+	{
+		if(QT[i] != NULL) QT[i]->getAllEntitiesList(l);
+	}
+
+	list->readAllListsIteratorReset();
+	AbstractEntity *e = NULL;
+	while((e = list->getNextReadAllLists()) != NULL)
+	{
+		l->add(e, false);
+	}
+}
+
 
 /*
 Vector *QuadTree::getCenterPosition()

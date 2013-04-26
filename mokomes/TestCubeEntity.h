@@ -16,6 +16,7 @@ public:
 	{
 		mType = GAME_ENTITY_CUBE;
 		mCreated = false;
+		mMeshID = "kubas";
 	}
 	TestCubeEntity(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "kubas", position, rotation, rand() % 100 + 1, ENTITY_STATIC), NetworkObject(canUpdate)
 	{
@@ -111,7 +112,7 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		stream.Write(mMeshID);
+		//stream.Write(mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
@@ -127,7 +128,7 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		stream.Write(mMeshID);
+		//stream.Write(mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
 	}
@@ -151,7 +152,7 @@ public:
 		stream->Read(rotarionYawPitchRoll);
 		stream->Read(scale);
 		stream->Read(entityType);
-		stream->Read(mMeshID);
+		//stream->Read(mMeshID);
 
 		pMesh = pMeshManager->getPointer(mMeshID);
 

@@ -67,6 +67,7 @@ public:
 	//void paste(AbstractEntity *op);
 
 	MyLinkedList<AbstractEntity> *getList();
+	void getAllEntitiesList(MyLinkedList<AbstractEntity> *l);
 
 
 	//void addElement(objectPosition *op);

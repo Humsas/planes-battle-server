@@ -408,9 +408,6 @@
     <ClCompile Include="bomb.cpp">
       <Filter>Source Files\GameEntities</Filter>
     </ClCompile>
-    <ClCompile Include="ServerConsole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -788,6 +785,9 @@
     <ClInclude Include="Networking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InvisibleObjectsChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="WinsockWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -802,15 +802,6 @@
     </ClInclude>
     <ClInclude Include="TestCubeEntity.h">
       <Filter>Header Files\GameEntities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NetworkObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerConsole.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CooldownRegulator.h">
       <Filter>Header Files</Filter>

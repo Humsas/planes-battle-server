@@ -46,6 +46,11 @@ double Chunk::getTerrainHeight()
 	return 0;//ter->getH();
 }
 
+void Chunk::getAllEntitiesList(MyLinkedList<AbstractEntity> *list)
+{
+	QT->getAllEntitiesList(list);
+}
+
 
 void Chunk::Update(float dt)
 {

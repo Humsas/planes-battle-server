@@ -30,6 +30,7 @@ public:
 	bool isPointInChunk(Vector *v);
 
 	double getTerrainHeight();
+	void getAllEntitiesList(MyLinkedList<AbstractEntity> *list);
 
 
 	void Update(float dt);

@@ -120,6 +120,31 @@ MyLinkedList<AbstractEntity> *ChunkManager::getDynamicEntityList()
 }
 
 
+void ChunkManager::getAllEntitiesList(MyLinkedList<AbstractEntity> *list)
+{
+	for(int i = 0; i < chunksList->count(); i++)
+	{
+		chunksList->get(i)->getAllEntitiesList(list);
+	}
+
+
+	stacicEntityLeftovers->readAllListsIteratorReset();
+	AbstractEntity *es = NULL;
+	while((es = stacicEntityLeftovers->getNextReadAllLists()) != NULL)
+	{
+		list->add(es, false);
+	}
+
+
+	dynamicEntities->readAllListsIteratorReset();
+	AbstractEntity *ed = NULL;
+	while((ed = dynamicEntities->getNextReadAllLists()) != NULL)
+	{
+		list->add(ed, false);
+	}
+}
+
+
 void ChunkManager::Update(float dt)
 {
 	for(int i = 0; i < chunksList->count(); i++)

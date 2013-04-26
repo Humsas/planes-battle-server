@@ -10,6 +10,7 @@
 #include "InvisibleObjectsChecker.h"
 
 
+
 class ChunkManager
 {
 private:
@@ -50,6 +51,8 @@ public:
 
 	
 	MyLinkedList<AbstractEntity> *getDynamicEntityList();
+
+	void getAllEntitiesList(MyLinkedList<AbstractEntity> *list);
 
 	void Update(float dt);
 	void Render();

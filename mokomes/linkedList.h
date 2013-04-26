@@ -42,6 +42,7 @@ private:
 	Node *renderPointer;
 	Node *updatePointer;
 	Node *networkReadPointer;
+	Node *readAllListsPointer;
 
 
 	Node *getElementPosition(T *t)
@@ -85,6 +86,7 @@ public:
 		updatePointer = NULL;
 		renderPointer = NULL;
 		networkReadPointer = NULL;
+		readAllListsPointer = NULL;
 		counter = 0;
 	}
 
@@ -218,6 +220,10 @@ public:
 	{
 		networkReadPointer = LIST;
 	}
+	void readAllListsIteratorReset()
+	{
+		readAllListsPointer = LIST;
+	}
 
 	T *getNextUpdate()
 	{
@@ -232,6 +238,11 @@ public:
 	T *getNextNetwork()
 	{
 		return getNextOf(&networkReadPointer);
+	}
+
+	T *getNextReadAllLists()
+	{
+		return getNextOf(&readAllListsPointer);
 	}
 
 	T *getNext()
