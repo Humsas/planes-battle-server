@@ -64,16 +64,16 @@ void Game::Update()
 {
 	// update all the game physics
 	timer->Update();
-	
-
-	// testcraft
-	//scena->getHud()->getSpeedometer()->SetSpeed(lektuvas->getSpeed());
-	//scena->getHud()->getAltimeter()->SetAltitude(lektuvas->getPosition()->z);
-	//scena->getHud()->getAnglemeter()->SetAngle(-lektuvas->getRotation()->z);
 
 	scena->Update(timer->getDeltaT());
 
 	sound->update();
+	//Shooting
+	for (int i = 0; i < mLektuvai.size(); i++)
+		if(mLektuvai[i]->isReadyToShootProjectileBomb())
+		{
+			fire(mLektuvai[i], mLektuvai[i]->GetOwnerId());
+		}
 }
 
 
@@ -339,7 +339,7 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 	//Start data sending here
 	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 	lektuvas->SetNetworkIDManager(mNetworkIdManager);
-	lektuvas->setOwnerId(playerID);
+	lektuvas->SetOwnerId(playerID);
 	lektuvas->CreateSerialize(mNetwork->GetServer());
 	lektuvas->setReadyToPlay(false);
 
@@ -365,6 +365,9 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 				break;
 			case GAME_ENTITY_AIRCRAFT_B17:
 				stream->Write((NetworkID)((AircraftB17*)es)->GetNetworkID());
+				break;
+			case GAME_ENTITY_PROJECTILE_BOMB:
+				stream->Write((NetworkID)((ProjectileBomb*)es)->GetNetworkID());
 				break;
 			default:
 				break;
@@ -421,7 +424,7 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 {
 	AircraftB17* plane;
 	for (int i = 0; i < mLektuvai.size(); i++)
-		if(mLektuvai[i]->getOwnerId() == playerID)
+		if(mLektuvai[i]->GetOwnerId() == playerID)
 		{
 			plane = mLektuvai[i];
 			break;
@@ -595,16 +598,18 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 	case GAME_KEY_MOUSE_WHEEL:
 		break;
 	case GAME_KEY_MOUSE_LEFT_BUTTON_DOWN:
-		fire(true);
+		//fire(plane, playerID, true);
+		plane->setLeftButtonDown(true);
 		break;
 	case GAME_KEY_MOUSE_LEFT_BUTTON_UP:
-		fire(false);
+		plane->setLeftButtonDown(false);
+		//fire(false);
 		break;
 	case GAME_KEY_MOUSE_RIGHT_BUTTON_DOWN:
-		drop(true);
+		//drop(true);
 		break;
 	case GAME_KEY_MOUSE_RIGHT_BUTTON_UP:
-		drop(false);
+		//drop(false);
 		break;
 	default:
 		gServerConsole.addLine("Atkeliavo Neatpazintas mygtuko signalas.");
@@ -752,9 +757,14 @@ void Game::TestGameInit()
 
 }
 
-void Game::fire(bool set)
+void Game::fire(AircraftB17* plane, RakNetGUID id)
 {
-	this->fireOn = set;
+	ProjectileBomb *bomb = new ProjectileBomb(scena->getMeshManager(), *plane->getPosition(), *plane->getRotation(), 300+plane->getSpeed(), true);
+	bomb->SetNetworkIDManager(mNetworkIdManager);
+	bomb->SetOwnerId(id);
+	bomb->CreateSerialize(mNetwork->GetServer());
+
+	scena->getChunkManager()->addEntity(bomb);
 }
 
 void Game::drop(bool set)
