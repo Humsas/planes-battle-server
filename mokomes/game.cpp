@@ -510,12 +510,16 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 			stream->Read(elerons);
 			stream->Read(elevator);
 
+			plane->setElerons(elerons);
+			plane->setElevator(elevator);
+
 			break;
 		}
 	case MM_JOY1ZMOVE:
 		{
 			float throttle;
 			stream->Read(throttle);
+			plane->setThrottle(throttle);
 
 			break;
 		}
