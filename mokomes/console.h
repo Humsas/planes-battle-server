@@ -41,6 +41,10 @@ private:
 	deque<string>	mInputMessagesList;
 	int				mInputMessagesListCursorIndex;
 
+	// For text scrolling
+	int				mDrawPointer;
+	int				mMaxDrawPointer;
+
 	void sendCopyDataMessage();
 
 	TLVERTEX		mBodyColor[4];
@@ -54,6 +58,8 @@ public:
 		mInputMessagesListCursorIndex = -1;
 		mMessagesList = new Masyvas(); 
 		mInputMessage = ""; 
+		mMaxDrawPointer = -(int)((SCREEN_HEIGHT-55)/15);
+		mDrawPointer = -(int)((SCREEN_HEIGHT-55)/15);
 
 		mBodyColor[0].x = 5;
 		mBodyColor[0].y = 5;
@@ -138,6 +144,12 @@ public:
 	void increaseInputCursorPos();
 	void decreaseInputCursorPos();
 	void changeInputCursorPos(int newPos);
+
+	// Scrolling functions
+	void increaseDrawingPointer();
+	void decreaseDrawingPointer();
+	void drawingHome();
+	void drawingEnd();
 
 	string timeToString();
 };
