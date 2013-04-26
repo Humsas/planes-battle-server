@@ -361,19 +361,21 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 
 					if (raw->data.mouse.usButtonFlags & RI_MOUSE_WHEEL)
 					{ 
-						/*
+						
 						// read the mouse data
 						if((SHORT)raw->data.mouse.usButtonData > 0) 
 						{
 							//Obj.mouseRatas(30);
-							game->getScene()->getCamera()->Zoom(10);
+							//game->getScene()->getCamera()->Zoom(10);
+							gServerConsole.increaseDrawingPointer();
 						}
 						else
 						{
+							gServerConsole.decreaseDrawingPointer();
 							//Obj.mouseRatas(-30);
-							game->getScene()->getCamera()->Zoom(-10);
+							//game->getScene()->getCamera()->Zoom(-10);
 						}
-						*/
+						
 					}
 
 					/*
@@ -407,6 +409,12 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	
 					switch (keyCode)
 					{
+					case VK_HOME:
+						gServerConsole.drawingHome();
+						break;
+					case VK_END:
+						gServerConsole.drawingEnd();
+						break;
 						//case VK_OEM_3:
 						//	(keyUp)? "" : cons.enableDisableConsole();
 						//break;
@@ -917,6 +925,21 @@ void CheckForCommand(string c)
 			cycles++;
 			if(cycles >= 10)
 				break;
+		}
+		if(c.size() > spacePos+1)
+		{
+			string tmp = c.substr(spacePos+1, c.size()-(spacePos+1));
+			if(tmp.size() != 0)
+			{
+				while(tmp[0] == ' ')
+					tmp = tmp.substr(1, tmp.size()-1);
+
+				while(tmp[tmp.size()-1] == ' ')
+					tmp.resize(tmp.size()-1);
+
+				RakString la = tmp.c_str();
+				parametersList.push_back(la);
+			}
 		}
 	}
 	else

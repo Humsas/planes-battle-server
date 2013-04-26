@@ -82,6 +82,8 @@ void Console::addLine(string cont)
 		string line;
 		while( getline(ss, line) )
 		{
+			if(mDrawPointer < mMaxDrawPointer)
+				mDrawPointer--;
 			mMessagesList->add(timeToString() + ": " + line);
 		}
 	}
@@ -97,6 +99,8 @@ void Console::addLine(string cont, GAME_CONSOLE_ERROR_NUM num)
 		string line;
 		while( getline(ss, line) )
 		{
+			if(mDrawPointer < mMaxDrawPointer)
+				mDrawPointer--;
 			mMessagesList->add(timeToString() + ": " + line, num);
 		}
 	}
@@ -160,13 +164,18 @@ void Console::render(LPDIRECT3DDEVICE9 &d3)
 		//create font
 		D3DXCreateFontIndirect(d3, &FontDesc, &g_Font);
 
-		mMessagesList->setPointer(-(int)((SCREEN_HEIGHT-55)/15));
+		mMessagesList->setPointer(mDrawPointer);
 		string tmpStr;
 		console_content tmpCont;
 		wstringstream ss;
+		int size = 0;
 
 		while(mMessagesList->get(tmpCont))
 		{
+			size++;
+			if(size > -mMaxDrawPointer)
+				break;
+
 			ss.str(L"");
 			ss.clear();
 			ss << tmpCont.value.c_str();
@@ -225,6 +234,7 @@ void Console::render(LPDIRECT3DDEVICE9 &d3)
 			FontPosition.top += 15;
 		}
 
+		//Zaidejo ivedamas tekstas
 		FontPosition.top = SCREEN_HEIGHT - 35;
 		ss.str(L"");
 		ss.clear();
@@ -309,4 +319,27 @@ string Console::timeToString()
 	sprintf_s(temp, "%02d:%02d:%02d", now->tm_hour, now->tm_min, now->tm_sec);
 
 	return temp;
+}
+
+
+void Console::increaseDrawingPointer()
+{
+	if(mMessagesList->count() > -mMaxDrawPointer && -mDrawPointer < mMessagesList->count())
+		mDrawPointer--;
+};
+void Console::decreaseDrawingPointer()
+{
+	//if(mMessagesList->count() >= -mMaxDrawPointer && (mMessagesList->count() - (-mMaxDrawPointer) > (-mMaxDrawPointer + mKazkas)))
+	if(mDrawPointer < mMaxDrawPointer)	
+		mDrawPointer++;
+};
+
+void Console::drawingHome()
+{
+	mDrawPointer = mDrawPointer - (mMessagesList->count() - (-mMaxDrawPointer));
+}
+
+void Console::drawingEnd()
+{
+	mDrawPointer = mMaxDrawPointer;
 }
