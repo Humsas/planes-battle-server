@@ -14,7 +14,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	loadSounds();
 
 	scena		= new SceneManager(d3);
-	kolizijos	= new ColisionManager(scena->getTerrain());
+	//kolizijos	= new ColisionManager(scena->getTerrain());
 
 	timer		= new Timer();
 	
@@ -45,7 +45,7 @@ Game::~Game()
 	if(sound != NULL)		delete sound;
 	if(mNetwork != NULL)	delete mNetwork;
 	if(scena != NULL)		delete scena;
-	if(kolizijos != NULL)	delete kolizijos;
+	//if(kolizijos != NULL)	delete kolizijos;
 
 	for(int i = mLektuvai.size(); i > 0; i--)
 		if(mLektuvai[i] != NULL)	
@@ -313,10 +313,10 @@ SceneManager *Game::getScene()
 	return scena;
 }
 
-ColisionManager *Game::getColisionManager()
-{
-	return kolizijos;
-}
+//ColisionManager *Game::getColisionManager()
+//{
+//	return kolizijos;
+//}
 
 Networking* Game::getNetwork()
 {
@@ -337,7 +337,7 @@ NetworkIDManager* Game::getNetworkIDManager()
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
 	//Start data sending here
-	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
+	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(30000, 30000, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30000, 4000, 30000))), Vector(0, 0, 0), true, scena->getChunkManager());
 	lektuvas->SetNetworkIDManager(mNetworkIdManager);
 	lektuvas->SetOwnerId(playerID);
 	lektuvas->CreateSerialize(mNetwork->GetServer());

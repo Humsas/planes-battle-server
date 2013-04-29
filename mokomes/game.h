@@ -92,7 +92,7 @@ private:
 	LPDIRECT3DDEVICE9 d3;
 	Sound			*sound;
 	SceneManager	*scena;
-	ColisionManager *kolizijos;
+	//ColisionManager *kolizijos;
 	Networking		*mNetwork;
 
 	// ReplicaManager3 requires NetworkIDManager to lookup pointers from numbers.
@@ -130,7 +130,7 @@ public:
 	~Game();
 
 	SceneManager*		getScene();
-	ColisionManager*	getColisionManager();
+	//ColisionManager*	getColisionManager();
 	Networking*			getNetwork();
 	NetworkIDManager*	getNetworkIDManager();
 

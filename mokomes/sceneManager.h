@@ -31,7 +31,7 @@ private:
 	TextureManager	*textureManager;
 	ChunkManager	*CM;
 
-	Terrain			*ter;
+	//Terrain			*ter;
 	Kamera			*kamera;
 	Mesh			*meshManager;
 	SceneObjects	*sceneObjects;
@@ -58,7 +58,7 @@ public:
 	void LoadObjects();
 
 	Kamera		*getCamera();
-	Terrain		*getTerrain();
+	//Terrain		*getTerrain();
 	Mesh		*getMeshManager();
 	Hud			*getHud();
 	ChunkManager *getChunkManager();

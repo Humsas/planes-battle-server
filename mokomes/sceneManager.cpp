@@ -15,7 +15,7 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 	kamera			= new Kamera();
 	CM				= new ChunkManager(d3, textureManager, kamera);
 
-	ter				= new Terrain(d3, textureManager, kamera, "Maps/Map0/map.BMP");
+	//ter				= new Terrain(d3, textureManager, kamera, "Maps/Map0/map.BMP");
 	
 	
 	sceneObjects	= new SceneObjects(d3, meshManager);
@@ -29,8 +29,8 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 
 	LoadObjects();
 
-	ter->generateTerain();
-	ter->Update();
+	//ter->generateTerain();
+	//ter->Update();
 	//ter->update(6000, 6000, 0, 0);
 }
 
@@ -38,7 +38,7 @@ SceneManager::SceneManager(LPDIRECT3DDEVICE9 &d3)
 SceneManager::~SceneManager()
 {
 	delete CM;
-	if(ter != NULL)				delete ter;
+	//if(ter != NULL)				delete ter;
 	if(kamera != NULL)			delete kamera;
 	if(meshManager != NULL)		delete meshManager;
 	if(sceneObjects != NULL)	delete sceneObjects;
@@ -128,7 +128,7 @@ void SceneManager::Update(float dt)
 	CM->Update(dt);
 	kamera->Update();
 
-	ter->Update();
+	//ter->Update();
 	//Vector &vv = kamera->getCamP();
 	//sceneObjects->Update(vv.x, vv.y, vv.z);
 	//sceneObjects->Update(0, 0, 0);
@@ -194,10 +194,11 @@ Kamera *SceneManager::getCamera()
 	return kamera;
 }
 
-Terrain *SceneManager::getTerrain()
-{
-	return ter;
-}
+
+//Terrain *SceneManager::getTerrain()
+//{
+//	return ter;
+//}
 
 Mesh *SceneManager::getMeshManager()
 {
