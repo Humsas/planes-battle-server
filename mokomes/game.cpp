@@ -47,9 +47,9 @@ Game::~Game()
 	if(scena != NULL)		delete scena;
 	if(kolizijos != NULL)	delete kolizijos;
 
-	for(int i = mLektuvai.size(); i > 0; i--)
-		if(mLektuvai[i] != NULL)	
-			delete mLektuvai[i];
+	for(int i = mPlayers.size(); i > 0; i--)
+		if(mPlayers[i] != NULL)	
+			delete mPlayers[i];
 							//delete enemyBaseList;
 							//delete bombList;
 							//delete cannonsList;
@@ -69,13 +69,9 @@ void Game::Update()
 
 	sound->update();
 	//Shooting
-	for (int i = 0; i < mLektuvai.size(); i++)
-		if(mLektuvai[i]->isReadyToShootProjectileBomb())
-		{
-			fire(mLektuvai[i], mLektuvai[i]->GetOwnerId());
-		}
+	for (int i = 0; i < mPlayers.size(); i++)
+		mPlayers[i]->Update();
 }
-
 
 //void Game::dropBomb()
 //{
@@ -336,6 +332,9 @@ NetworkIDManager* Game::getNetworkIDManager()
 
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
+	Player* player = new Player(this, playerID);
+	mPlayers.push_back(player);
+
 	//Start data sending here
 	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 	lektuvas->SetNetworkIDManager(mNetworkIdManager);
@@ -344,10 +343,10 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 	lektuvas->setReadyToPlay(false);
 
 	scena->getChunkManager()->addEntity(lektuvas);
-	mLektuvai.push_back(lektuvas);
+	player->SetPlane(lektuvas);
 
 	//Check that new connected player should have every new object created before
-	if(mLektuvai.size() >= 1)
+	if(mPlayers.size() >= 1)
 	{
 		BitStream *stream = new BitStream();
 		stream->Write((RakNet::MessageID)ID_GAME_MESSAGE_CONNECTION_DATA);
@@ -425,10 +424,10 @@ void Game::MoveCubes()
 void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 {
 	AircraftB17* plane;
-	for (int i = 0; i < mLektuvai.size(); i++)
-		if(mLektuvai[i]->GetOwnerId() == playerID)
+	for (int i = 0; i < mPlayers.size(); i++)
+		if(mPlayers[i]->GetOwnerId() == playerID)
 		{
-			plane = mLektuvai[i];
+			plane = mPlayers[i]->GetPlane();
 			break;
 		}
 
@@ -443,7 +442,7 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 	case 'Z':
 		stream->Read(isUp);
 		(isUp)? plane->startEngine(false) : plane->startEngine(true);
-
+		
 		break;
 	case 'X':
 		stream->Read(isUp);
@@ -757,16 +756,6 @@ void Game::TestGameInit()
 
 
 
-}
-
-void Game::fire(AircraftB17* plane, RakNetGUID id)
-{
-	ProjectileBomb *bomb = new ProjectileBomb(scena->getMeshManager(), *plane->getPosition(), *plane->getRotation(), 300+plane->getSpeed(), true);
-	bomb->SetNetworkIDManager(mNetworkIdManager);
-	bomb->SetOwnerId(id);
-	bomb->CreateSerialize(mNetwork->GetServer());
-
-	scena->getChunkManager()->addEntity(bomb);
 }
 
 void Game::drop(bool set)
