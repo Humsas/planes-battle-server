@@ -14,6 +14,7 @@
 #include "globalSetings.h"
 using namespace std;
 
+//Saved commands list size
 #define INPUT_MESSAGE_LIST_SIZE 100
 #define INPUT_MESSAGE_SIZE 110
 
@@ -45,7 +46,8 @@ private:
 	int				mDrawPointer;
 	int				mMaxDrawPointer;
 
-	void sendCopyDataMessage();
+	void	sendCopyDataMessage();
+	string	timeToString();
 
 	TLVERTEX		mBodyColor[4];
 	TLVERTEX		mBorderColor[4];
@@ -54,7 +56,7 @@ private:
 public:
 	Console() 
 	{ 
-		mInputMessagesList.resize(INPUT_MESSAGE_LIST_SIZE);
+		//mInputMessagesList.resize(INPUT_MESSAGE_LIST_SIZE);
 		mInputMessagesListCursorIndex = -1;
 		mMessagesList = new Masyvas(); 
 		mInputMessage = ""; 
@@ -150,8 +152,6 @@ public:
 	void decreaseDrawingPointer();
 	void drawingHome();
 	void drawingEnd();
-
-	string timeToString();
 };
 
 
