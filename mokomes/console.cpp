@@ -25,7 +25,7 @@ void Console::inputMessageAppend(char c)
 					}
 				}
 
-			mInputMessagesList.push_front(timeToString() + ": " + mInputMessage);
+			mInputMessagesList.push_front(mInputMessage);
 			mInputMessagesListCursorIndex = -1;
 
 			// Destroying last list messages
@@ -65,7 +65,7 @@ void Console::inputMessageAppend(char c)
 		if(mInputMessage.size() >= INPUT_MESSAGE_SIZE)
 			return;
 
-		if(!isalnum(c) && !(c==' '))
+		if(!isalnum(c) && (c!=' ') && (c!='.'))
 			return;
 
 		mInputMessage += c;
@@ -77,7 +77,6 @@ void Console::addLine(string cont)
 {
 #pragma omp critical(konsole)
 	{
-		//mMessagesList->add(cont);
 		stringstream ss(cont);
 		string line;
 		while( getline(ss, line) )
@@ -93,8 +92,6 @@ void Console::addLine(string cont, GAME_CONSOLE_ERROR_NUM num)
 {
 #pragma omp critical(konsole)
 	{
-		//mMessagesList->add(cont, num);
-
 		stringstream ss(cont);
 		string line;
 		while( getline(ss, line) )
@@ -309,7 +306,7 @@ void Console::changeInputCursorPos(int newPos)
 	}
 }
 
-// Writtes local time to string
+// Writes local time to string
 string Console::timeToString()
 {
 	time_t t = time(0);						// get time now

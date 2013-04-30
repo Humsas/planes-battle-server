@@ -304,11 +304,11 @@ void Networking::SendConnectionDataToPlayer(RakNetGUID id)
 
 bool Networking::ArePlayersReady()
 {
-	if(mGame->mLektuvai.size() < 2)
+	if(mGame->mPlayers.size() < 2)
 		return false;
 
-	for (int i = 0; i < mGame->mLektuvai.size(); i++)
-		if(mGame->mLektuvai[i]->isReadyToPlay() == false)
+	for (int i = 0; i < mGame->mPlayers.size(); i++)
+		if(mGame->mPlayers[i]->isReadyToPlay() == false)
 			return false;
 
 	return true;

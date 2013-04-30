@@ -18,12 +18,13 @@
 #include "TestCubeEntity.h"
 
 #include "bomb.h"
-
+#include "Player.h"
 #include "timer.h"
 
 using namespace RakNet;
 
 class Networking;
+class Player;
 
 
 struct enemyBaseStruct
@@ -123,8 +124,7 @@ private:
 	
 
 public:
-	vector<AircraftB17*> mLektuvai;
-	//AircraftB17* lektuvas;
+	vector<Player*> mPlayers;
 
 	Game(LPDIRECT3DDEVICE9 &d3);
 	~Game();
@@ -147,7 +147,6 @@ public:
 
 	void TestGameInit();
 
-	void fire(AircraftB17* plane, RakNetGUID id);
 	void drop(bool set);
 
 	void Update();
