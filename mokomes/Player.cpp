@@ -4,6 +4,7 @@
 Player::Player(Game* game, RakNetGUID playerID) 
 { 
 	mGame = game;
+	mPlayerId = playerID;
 }
 
 Player::~Player()
@@ -38,4 +39,19 @@ void Player::fire(AircraftB17* plane, RakNetGUID id)
 bool Player::isReadyToPlay()
 {
 	return mPlane->isReadyToPlay();
+}
+
+
+void Player::BuildBase()
+{
+	int maxBuildingHealth = 100;
+
+	Building* building = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(30000, 30000, 
+		mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30000, 4000, 30000))), Vector(0, 0, 0), maxBuildingHealth, true);
+
+	building->SetNetworkIDManager(mGame->getNetworkIDManager());
+	building->SetOwnerId(mPlayerId);
+	building->CreateSerialize(mGame->getNetwork()->GetServer());
+
+	mGame->getScene()->getChunkManager()->addEntity(building);
 }

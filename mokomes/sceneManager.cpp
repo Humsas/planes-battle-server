@@ -158,7 +158,7 @@ void SceneManager::LoadObjects()
 
 	meshManager->loadMesh("Models/Tree/eglute/","eglute.x","eglute",d3);
 
-	
+	meshManager->loadMesh("Models/Buildings/Fishing_house/","fish_house.x","fish_house",d3);
 
 }
 

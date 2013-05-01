@@ -109,11 +109,31 @@ void Networking::Update()
 							te->SetCreated(true);
 						break;
 					}
+				case GAME_ENTITY_BUILDING:
+					{
+						Building* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Building*>(id);
+
+						if(te != NULL)
+							te->SetCreated(true);
+						break;
+					}
 				default:
 					break;
 				}
 			}
 			break;
+		case ID_GAME_MESSAGE_DELETE_OBJECT:
+			{
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				NetworkID id;
+				int type;
+				bsIn.Read(id);
+				bsIn.Read(type);
+
+				DeleteObjectReceived(id, type);
+				break;
+			} 
 		case ID_GAME_MESSAGE_LOADING_COMPLETED:
 			{
 				//for(int i = 0; i < mConnectionData.size(); i++)
@@ -159,6 +179,12 @@ void Networking::Update()
 								te->CreateSerialize(mServer, packet->guid);
 								break;
 							}
+						case GAME_ENTITY_BUILDING:
+							{
+								Building* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Building*>(id);
+								te->CreateSerialize(mServer, packet->guid);
+								break;
+							}
 						default:
 							break;
 					}
@@ -193,6 +219,9 @@ void Networking::Update()
 		case GAME_ENTITY_PROJECTILE_BOMB:
 			((ProjectileBomb*)es)->NetworkUpdate(mServer);
 			break;
+		case GAME_ENTITY_BUILDING:
+			((Building*)es)->NetworkUpdate(mServer);
+			break;
 		default:
 			break;
 		}
@@ -214,10 +243,9 @@ bool Networking::OpenUPNP()
 		struct UPNPDev * device;
 		for(device = devlist; device; device = device->pNext)
 		{
-			RakString str;
-			str = "      desc: "+*(device->descURL);
-			str = str + " st: " + (device->st);
-			mConsole->addLine(str.C_String());
+			CHAR temp[MAX_PATH];
+			sprintf_s(temp, "      desc: %s \n      st: %s", (device->descURL), (device->st));
+			mConsole->addLine(temp);
 		}
 
 		char lanaddr[64];	// my ip address on the LAN
@@ -240,10 +268,7 @@ bool Networking::OpenUPNP()
 			if(r!=UPNPCOMMAND_SUCCESS)
 			{
 				CHAR temp[MAX_PATH];
-				//stringstream ss;
-				//ss << "AddPortMapping(" << eport << ", " << iport << ", " << lanaddr << ") failed with code " << r << " (" << strupnperror(r) << ")";
 				sprintf_s(temp, "AddPortMapping(%s, %s, %s) failed with code %d (%s)", eport, iport, lanaddr, r, strupnperror(r));
-				//StringCbPrintfA(temp, MAX_PATH * sizeof(CHAR), "AddPortMapping(%s, %s, %s) failed with code %d (%s)", eport, iport, lanaddr, r, strupnperror(r));
 				mConsole->addLine(temp);
 			}
 
@@ -314,6 +339,68 @@ bool Networking::ArePlayersReady()
 	return true;
 }
 
+//Send message to all clients about object deletion
+void Networking::DeleteObjectSend(NetworkID id, int type)
+{
+	BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_DELETE_OBJECT);
+	bsOut.Write((NetworkID)id);
+	bsOut.Write(type);
+	mServer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
+}
+
+//Received message to delete specific object
+void Networking::DeleteObjectReceived(NetworkID id, int type)
+{
+	switch (type)
+	{
+	case GAME_ENTITY_CUBE:
+		{
+			TestCubeEntity* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<TestCubeEntity*>(id);
+
+			if(te != NULL)
+			{
+
+			}
+			break;
+		}
+	case GAME_ENTITY_AIRCRAFT_B17:
+		{
+			AircraftB17* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<AircraftB17*>(id);
+
+			if(te != NULL)
+			{
+
+			}
+			break;
+		}
+	case GAME_ENTITY_PROJECTILE_BOMB:
+		{
+			ProjectileBomb* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<ProjectileBomb*>(id);
+
+			if(te != NULL)
+			{
+
+			}
+			break;
+		}
+	case GAME_ENTITY_BUILDING:
+		{
+			Building* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Building*>(id);
+
+			if(te != NULL)
+			{
+
+			}
+			break;
+		}
+	default:
+		break;
+	}
+
+	// Resending message to clients about deletion
+	DeleteObjectSend(id, type);
+}
 
 /*
 void Networking::SendCreatedObjectsIDs(vector<NetworkID> ids)
