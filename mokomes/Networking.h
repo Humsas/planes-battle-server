@@ -41,6 +41,7 @@ private:
 	Game*					mGame;
 
 	bool OpenUPNP();
+	void DeleteObjectReceived(NetworkID id, int type);
 
 public:
 	Networking(Console* console, Game* game);
@@ -51,6 +52,7 @@ public:
 
 	void SendConnectionDataToPlayer(RakNetGUID id);
 	bool ArePlayersReady();
+	void DeleteObjectSend(NetworkID id, int type);
 	//void SendCreatedObjectsIDs(vector<NetworkID> ids);
 };
 

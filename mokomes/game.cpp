@@ -333,7 +333,6 @@ NetworkIDManager* Game::getNetworkIDManager()
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
 	Player* player = new Player(this, playerID);
-	mPlayers.push_back(player);
 
 	//Start data sending here
 	AircraftB17* lektuvas = new AircraftB17(scena->getMeshManager(), Vector(30000, 30000, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30000, 4000, 30000))), Vector(0, 0, 0), true, scena->getChunkManager());
@@ -344,6 +343,8 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 
 	scena->getChunkManager()->addEntity(lektuvas);
 	player->SetPlane(lektuvas);
+	player->BuildBase();
+	mPlayers.push_back(player);
 
 	//Check that new connected player should have every new object created before
 	if(mPlayers.size() >= 1)
@@ -356,6 +357,7 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 		stream->Write((int)pEnt->count());
 		pEnt->networkReadIteratorReset();
 		AbstractEntity *es = NULL;
+
 		while((es = pEnt->getNextNetwork()) != NULL)
 		{
 			switch (es->getType())
@@ -368,6 +370,9 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 				break;
 			case GAME_ENTITY_PROJECTILE_BOMB:
 				stream->Write((NetworkID)((ProjectileBomb*)es)->GetNetworkID());
+				break;
+			case GAME_ENTITY_BUILDING:
+				stream->Write((NetworkID)((Building*)es)->GetNetworkID());
 				break;
 			default:
 				break;
