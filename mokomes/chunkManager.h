@@ -20,8 +20,8 @@ private:
 	InvisibleObjectsChecker* visibilityChecker;
 	
 	MyLinkedList<Chunk> *chunksList;
-	MyLinkedList<AbstractEntity> *stacicEntityLeftovers;
 
+	MyLinkedList<AbstractEntity> *stacicEntityLeftovers;
 	MyLinkedList<AbstractEntity> *dynamicEntities;
 	
 	
@@ -49,6 +49,7 @@ public:
 
 	void addEntity(AbstractEntity *e);
 
+	AbstractEntity *searchForColision(AbstractEntity *e);
 	
 	MyLinkedList<AbstractEntity> *getDynamicEntityList();
 

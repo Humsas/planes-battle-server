@@ -114,6 +114,46 @@ void ChunkManager::addEntity(AbstractEntity *e)
 
 }
 
+
+AbstractEntity *ChunkManager::searchForColision(AbstractEntity *e)
+{
+	if(e != NULL)
+	{
+		dynamicEntities->updateIteratorReset();
+		AbstractEntity *ed = NULL;
+		while((ed = dynamicEntities->getNextUpdate()) != NULL)
+		{
+			if(ed != e && ed->checkForBaseColision(e))
+			{
+				return ed;
+			}
+		}
+
+		stacicEntityLeftovers->updateIteratorReset();
+		AbstractEntity *es = NULL;
+		while((es = stacicEntityLeftovers->getNextUpdate()) != NULL)
+		{
+			if(es != e && es->checkForBaseColision(e))
+			{
+				return es;
+			}
+		}
+
+		AbstractEntity *tmpE = NULL;
+		for(int i = 0; i < chunksList->count(); i++)
+		{
+			tmpE = chunksList->get(i)->searchForColision(e);
+			if (tmpE != NULL)
+			{
+				return tmpE;
+			}
+		}
+
+		return NULL;
+	}
+	return NULL;
+}
+
 MyLinkedList<AbstractEntity> *ChunkManager::getDynamicEntityList()
 {
 	return dynamicEntities;

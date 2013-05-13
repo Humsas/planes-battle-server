@@ -22,16 +22,16 @@ QuadTree::QuadTree(int level, int cellID, float startX, float startY, float endX
 	centerPos = new Vector(startX + width/2, startY + height/2, 0);
 
 	radius = Vector(startX - endX,
-					startY - endY,
-					0).Magnitude()/2;
+		startY - endY,
+		0).Magnitude()/2;
 
 	/*
 	if(level > 0)
 	{
-		QT[0]			= new QuadTree(level-1, 0, startX,				startY + height/2,	startX + width/2,	endY,				this);
-		QT[1]			= new QuadTree(level-1, 1, startX + width/2,	startY + height/2,	endX,				endY,				this);
-		QT[2]			= new QuadTree(level-1, 2, startX,				startY,				startX + width/2,	startY + height/2,	this);
-		QT[3]			= new QuadTree(level-1, 3, startX + width/2,	startY,				endX,				startY + height/2,	this);
+	QT[0]			= new QuadTree(level-1, 0, startX,				startY + height/2,	startX + width/2,	endY,				this);
+	QT[1]			= new QuadTree(level-1, 1, startX + width/2,	startY + height/2,	endX,				endY,				this);
+	QT[2]			= new QuadTree(level-1, 2, startX,				startY,				startX + width/2,	startY + height/2,	this);
+	QT[3]			= new QuadTree(level-1, 3, startX + width/2,	startY,				endX,				startY + height/2,	this);
 	}*/
 }
 
@@ -48,26 +48,26 @@ QuadTree::~QuadTree()
 bool QuadTree::wouldItFitInQuad(AbstractEntity *e, float startX, float startY, float endX, float endY)
 {
 	return (e->getPosition()->x - e->getRadius() > startX &&
-			e->getPosition()->x + e->getRadius() < endX &&
-			e->getPosition()->y - e->getRadius() > startY &&
-			e->getPosition()->y + e->getRadius() < endY);
+		e->getPosition()->x + e->getRadius() < endX &&
+		e->getPosition()->y - e->getRadius() > startY &&
+		e->getPosition()->y + e->getRadius() < endY);
 }
 
 bool QuadTree::canItFit(AbstractEntity *op)
 {
 	return(	op->getPosition()->x - op->getRadius() > startX &&
-			op->getPosition()->x + op->getRadius() < endX &&
-			op->getPosition()->y - op->getRadius() > startY &&
-			op->getPosition()->y + op->getRadius() < endY);
+		op->getPosition()->x + op->getRadius() < endX &&
+		op->getPosition()->y - op->getRadius() > startY &&
+		op->getPosition()->y + op->getRadius() < endY);
 }
 
 bool QuadTree::isColidingWithQuadBoundaries(AbstractEntity *op)
 {
 	return(	canItFit(op) ||
-			op->getPosition()->x-op->getRadius() <= startX && startX	<= op->getPosition()->x+op->getRadius() ||
-			op->getPosition()->x-op->getRadius() <= endX	&& endX		<= op->getPosition()->x+op->getRadius() ||
-			op->getPosition()->y-op->getRadius() <= startY && startY	<= op->getPosition()->y+op->getRadius() ||
-			op->getPosition()->y-op->getRadius() <= endY	&& endY		<= op->getPosition()->y+op->getRadius());
+		op->getPosition()->x-op->getRadius() <= startX && startX	<= op->getPosition()->x+op->getRadius() ||
+		op->getPosition()->x-op->getRadius() <= endX	&& endX		<= op->getPosition()->x+op->getRadius() ||
+		op->getPosition()->y-op->getRadius() <= startY && startY	<= op->getPosition()->y+op->getRadius() ||
+		op->getPosition()->y-op->getRadius() <= endY	&& endY		<= op->getPosition()->y+op->getRadius());
 }
 
 
@@ -133,38 +133,38 @@ bool QuadTree::isColidingWithQuadBoundaries(AbstractEntity *op)
 /*
 void QuadTree::addElement(AbstractEntity *op, bool deleteOnDestruction = false)
 {	
-	bool added = false;
-	if(level > 0)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(QT[i]->canItFit(op))
-			{
-				QT[i]->addElement(op);
-				added = true;
-				break;
-			}
-		}
-	}
-	if(!added)
-	{
-		/////////////////////////////////////////////////////
-		op->_motherBranch = this;
-		list->add(op, deleteOnDestruction); 	
-	}
+bool added = false;
+if(level > 0)
+{
+for(int i = 0; i < 4; i++)
+{
+if(QT[i]->canItFit(op))
+{
+QT[i]->addElement(op);
+added = true;
+break;
+}
+}
+}
+if(!added)
+{
+/////////////////////////////////////////////////////
+op->_motherBranch = this;
+list->add(op, deleteOnDestruction); 	
+}
 }*/
 
 /*
 bool QuadTree::removeElement(AbstractEntity *op)
 {
-	return ((QuadTree*)op->_motherBranch)->getList()->remove(op);
+return ((QuadTree*)op->_motherBranch)->getList()->remove(op);
 }
 */
 /*
 void QuadTree::paste(AbstractEntity *op)
 {
-	list->paste(((QuadTree*)op->_motherBranch)->getList()->cut(op));
-	op->_motherBranch = this;
+list->paste(((QuadTree*)op->_motherBranch)->getList()->cut(op));
+op->_motherBranch = this;
 }
 */
 /*
@@ -176,26 +176,26 @@ void QuadTree::cutAndPaste(objectPosition *op)
 /*
 void QuadTree::updateElement(AbstractEntity *op)
 {
-	bool added = false;
-	if(level > 0)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(QT[i]->canItFit(op))
-			{
-				QT[i]->updateElement(op);
-				added = true;
-				break;
-			}
-		}
-	}
-	if(!added)
-	{
-		//op->_motherBranch = this;
-		paste(op);
-		op->_motherBranch = this;
-		//list->add(op); 	
-	}
+bool added = false;
+if(level > 0)
+{
+for(int i = 0; i < 4; i++)
+{
+if(QT[i]->canItFit(op))
+{
+QT[i]->updateElement(op);
+added = true;
+break;
+}
+}
+}
+if(!added)
+{
+//op->_motherBranch = this;
+paste(op);
+op->_motherBranch = this;
+//list->add(op); 	
+}
 
 
 
@@ -227,7 +227,7 @@ void QuadTree::getAllEntitiesList(MyLinkedList<AbstractEntity> *l)
 /*
 Vector *QuadTree::getCenterPosition()
 {
-	return centerPos;
+return centerPos;
 }*/
 
 bool QuadTree::add(AbstractEntity *e, bool deleteOnDestruction)
@@ -302,9 +302,9 @@ bool QuadTree::add(AbstractEntity *e, bool deleteOnDestruction)
 		// perskaiciuojam spinduli ir atnaujinam jei reikia
 		// centro taskas ir spindulys naudojamas patikrinimui ar quadas patenka i matymo zona
 		float r = Vector(centerPos->x - e->getPosition()->x,
-						 centerPos->y - e->getPosition()->y,
-						 centerPos->z - e->getPosition()->z).Magnitude()+ e->getRadius();
-		
+			centerPos->y - e->getPosition()->y,
+			centerPos->z - e->getPosition()->z).Magnitude()+ e->getRadius();
+
 		if(r > radius) radius = r;
 
 		return true;
@@ -312,6 +312,39 @@ bool QuadTree::add(AbstractEntity *e, bool deleteOnDestruction)
 	return false;
 }
 
+
+
+AbstractEntity *QuadTree::searchForColision(AbstractEntity *e)
+{
+	if(e != NULL && isColidingWithQuadBoundaries(e))
+	{
+		list->updateIteratorReset();
+		AbstractEntity *ee = NULL;
+		while((ee = list->getNextUpdate()) != NULL)
+		{
+			if(ee->checkForBaseColision(e))
+			{
+				return ee;
+			}
+		}
+
+
+		AbstractEntity *tmpE = NULL;
+		for(int i = 0; i < 4; i++)
+		{
+			if(QT[i] != NULL) 
+			{
+				tmpE = QT[i]->searchForColision(e);
+				if(tmpE != NULL)
+				{
+					return tmpE;
+				}
+			}
+		}
+		return NULL;
+	}
+	return NULL;
+}
 
 
 void QuadTree::Update(float dt)
@@ -337,7 +370,7 @@ void QuadTree::Render(InvisibleObjectsChecker *visibilityChecker)
 		{
 			if(QT[i] != NULL) QT[i]->Render(visibilityChecker);
 		}
-		
+
 		list->renderIteratorReset();
 		AbstractEntity *e = NULL;
 		while((e = list->getNextRender()) != NULL)

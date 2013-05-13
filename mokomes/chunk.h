@@ -32,6 +32,7 @@ public:
 	double getTerrainHeight();
 	void getAllEntitiesList(MyLinkedList<AbstractEntity> *list);
 
+	AbstractEntity *searchForColision(AbstractEntity *e);
 
 	void Update(float dt);
 	void Render(InvisibleObjectsChecker *visibilityChecker);
