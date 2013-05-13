@@ -19,6 +19,9 @@ private:
 	RakNetGUID				mPlayerId;
 
 
+	void AddBuilding(Building* b);
+
+
 public:
 	Player(Game* game, RakNetGUID playerID);
 	~Player();

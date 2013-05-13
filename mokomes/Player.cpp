@@ -46,12 +46,25 @@ void Player::BuildBase()
 {
 	int maxBuildingHealth = 100;
 
-	Building* building = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(30000, 30000, 
-		mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30000, 4000, 30000))), Vector(0, 0, 0), maxBuildingHealth, true);
+	Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(30809, 26254, 
+		mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30809, 1315, 26254))), Vector(0, 0, 0), maxBuildingHealth, true);
 
-	building->SetNetworkIDManager(mGame->getNetworkIDManager());
-	building->SetOwnerId(mPlayerId);
-	building->CreateSerialize(mGame->getNetwork()->GetServer());
+	Building* building2 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(30709, 26254, 
+		mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30809, 1315, 26254))), Vector(0, 0, 0), maxBuildingHealth, true);
 
-	mGame->getScene()->getChunkManager()->addEntity(building);
+	Building* building3 = new Building(mGame->getScene()->getMeshManager(), "gas_station", Vector(30909, 26254, 
+		mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30809, 1315, 26254))), Vector(0, 0, 0), maxBuildingHealth, true);
+
+	AddBuilding(building);
+	AddBuilding(building2);
+	AddBuilding(building3);
+}
+
+void Player::AddBuilding(Building* b)
+{
+	b->SetNetworkIDManager(mGame->getNetworkIDManager());
+	b->SetOwnerId(mPlayerId);
+	b->CreateSerialize(mGame->getNetwork()->GetServer());
+
+	mGame->getScene()->getChunkManager()->addEntity(b);
 }
