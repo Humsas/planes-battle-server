@@ -139,6 +139,11 @@ public:
 		return scale/2; // spindulys yra puse skersmens
 	}
 
+	float getScale()
+	{
+		return scale; 
+	}
+
 	void setMeshManager(Mesh *m)
 	{
 		pMeshManager = m;
@@ -149,6 +154,21 @@ public:
 		CM = cm;
 	}
 
+
+
+	bool checkForBaseColision(AbstractEntity *e)
+	{
+		if(e != NULL)
+		{
+			Vector *tmpPos = e->getPosition();
+			float distance =	(tmpPos->x - position.x * tmpPos->x - position.x)+
+				(tmpPos->y - position.y * tmpPos->y - position.y)+
+				(tmpPos->z - position.z * tmpPos->z - position.z);
+
+			return  distance <= (scale + e->getScale()) * (scale + e->getScale()); 
+		}
+		return false;
+	}
 
 
 	// virtual
@@ -163,7 +183,6 @@ public:
 		//gCons.add("Rendering...");
 
 	}
-
 
 };
 #endif
