@@ -76,6 +76,8 @@ public:
 
 	bool add(AbstractEntity *e, bool deleteOnDestruction = false);
 
+	AbstractEntity *searchForColision(AbstractEntity *e);
+
 	void Update(float dt);
 	void Render(InvisibleObjectsChecker *visibilityChecker); 
 };

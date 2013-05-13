@@ -52,6 +52,15 @@ void Chunk::getAllEntitiesList(MyLinkedList<AbstractEntity> *list)
 }
 
 
+AbstractEntity *Chunk::searchForColision(AbstractEntity *e)
+{
+	if(e != NULL)
+	{
+		return QT->searchForColision(e);
+	}
+	return NULL;
+}
+
 void Chunk::Update(float dt)
 {
 	// TODO
