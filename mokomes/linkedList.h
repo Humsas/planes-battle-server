@@ -78,6 +78,35 @@ private:
 	}
 
 
+	//0-first, 1-midd, 2-end
+	void fixItarators(char itPosition)
+	{
+		fixIterator(&it, itPosition);
+		fixIterator(&networkReadPointer, itPosition);
+		fixIterator(&renderPointer, itPosition);
+		fixIterator(&updatePointer, itPosition);
+		fixIterator(&readAllListsPointer, itPosition);
+	}
+
+	void fixIterator(Node **l, char itPosition)
+	{
+		switch (itPosition)
+		{
+		case 0: // pirmas
+			*l = LIST;
+			break;
+
+		case 1: // vidurys
+		case 2: //galas
+			*l = (*l)->prev;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+
 public:
 	MyLinkedList()
 	{ 
@@ -160,6 +189,48 @@ public:
 		}
 	}
 
+	// netrina, o tik pasalina is listo
+	bool safeRemove(T *t)
+	{
+		bool r = false;
+		Node *l = getElementPosition(t);
+		if(l != NULL)
+		{
+			// vidurinis elementas
+			if(l->prev != NULL && l->next != NULL)
+			{
+				l->prev->next = l->next;
+				l->next->prev = l->prev;
+				fixItarators(1);
+				//it = l->prev;
+			}
+			else
+			{
+				// pirmas arba galinis
+				if(l->prev == NULL)
+				{ // pirmas
+					LIST = l->next;
+					fixItarators(0);
+					//it = LIST;
+					if(LIST != NULL)
+					{
+						LIST->prev = NULL;
+					}
+				}
+				else
+				{ // paskutinis
+					l->prev->next = NULL;
+					fixItarators(2);
+					//it = l->prev;
+				}
+			}
+
+			//delete l;
+			counter--;
+			r = true;
+		}
+		return r;
+	}
 
 	bool remove(T *t)
 	{
