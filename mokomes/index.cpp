@@ -839,7 +839,7 @@ void SetupPixelFog(DWORD Color, DWORD Mode)
 }
 
 /*
-// Instaliuojam global¯ keyhook‡
+// Instaliuojam globalÅEkeyhookÅE
 void installhook()          // su WH_JOURNALPLAYBACK galima insertinti savo signalus
 {
 	gHookHandle = NULL;
@@ -848,7 +848,7 @@ void installhook()          // su WH_JOURNALPLAYBACK galima insertinti savo sign
 		MessageBox(NULL, L"Unable to install hook", L"Error!", MB_OK);
 }
 
-// Cia pareina keyhooko signalai, tinkant· signal‡, jau nepersiunËiu kitoms programoms
+// Cia pareina keyhooko signalai, tinkantÅEsignalÅE jau nepersiunËiu kitoms programoms
 LRESULT WINAPI KeyEvent(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	bool keyDown = (wParam == WM_SYSKEYDOWN) || (wParam == WM_KEYDOWN);

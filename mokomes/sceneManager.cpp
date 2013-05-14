@@ -159,6 +159,21 @@ void SceneManager::LoadObjects()
 	meshManager->loadMesh("Models/Tree/eglute/","eglute.x","eglute",d3);
 
 	meshManager->loadMesh("Models/Buildings/Fishing_house/","fish_house.x","fish_house",d3);
+	meshManager->loadMesh("Models/Buildings/Pilis/","pilis.x","pilis",d3);
+	meshManager->loadMesh("Models/Buildings/Gas_station/","gas_station.x","gas_station",d3);
+	meshManager->loadMesh("Models/Buildings/Lusna/","lusna.x","lusna",d3);
+	meshManager->loadMesh("Models/Buildings/Lusna2/","lusna2.x","lusna2",d3);
+	meshManager->loadMesh("Models/Buildings/Mansion/","mansion.x","mansion",d3);
+	meshManager->loadMesh("Models/Buildings/Namas01/","namas01.x","namas01",d3);
+	meshManager->loadMesh("Models/Buildings/Namas1/","namas1.x","namas1",d3);
+	meshManager->loadMesh("Models/Buildings/Namas2/","namas2.x","namas2",d3);
+	meshManager->loadMesh("Models/Buildings/Namas5/","namas5.x","namas5",d3);
+	meshManager->loadMesh("Models/Buildings/Namas6/","namas6.x","namas6",d3);
+	meshManager->loadMesh("Models/Buildings/Namas7/","namas7.x","namas7",d3);
+	meshManager->loadMesh("Models/Buildings/Namas8/","namas8.x","namas8",d3);
+	meshManager->loadMesh("Models/Buildings/Namas9/","namas9.x","namas9",d3);
+	meshManager->loadMesh("Models/Buildings/Store/","store.x","store",d3);
+	meshManager->loadMesh("Models/Buildings/Tavern/","tavern.x","tavern",d3);
 
 }
 

@@ -29,7 +29,7 @@ void Networking::Update()
 		switch (packet->data[0])
 		{
 			//ID_CONNECTION_ATTEMPT_FAILED - kai klientui nepavyksta prisijungt
-			//Remote siun2ia kitiem klientam =inute kad prisijunge kitas clientas(Man neveikë)
+			//Remote siun2ia kitiem klientam =inute kad prisijunge kitas clientas(Man neveikE
 		case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 			mConsole->addLine("Another client has disconnected.");
 			break;
