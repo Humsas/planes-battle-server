@@ -19,6 +19,8 @@ ChunkManager::ChunkManager(LPDIRECT3DDEVICE9 &d3, TextureManager* textureManager
 	stacicEntityLeftovers = new MyLinkedList<AbstractEntity>();
 	dynamicEntities = new MyLinkedList<AbstractEntity>();
 
+	deletedEntities = new MyLinkedList<AbstractEntity>();
+
 	//entityList = new MyLinkedList<AbstractEntity>();
 
 	init();
@@ -32,6 +34,7 @@ ChunkManager::~ChunkManager()
 	//delete QTLeftovers;
 	delete stacicEntityLeftovers;
 	delete dynamicEntities;
+	delete deletedEntities;
 	//delete entityList;
 }
 
@@ -152,6 +155,32 @@ AbstractEntity *ChunkManager::searchForColision(AbstractEntity *e)
 		return NULL;
 	}
 	return NULL;
+}
+
+void ChunkManager::safeRemove(AbstractEntity *e)
+{
+	if(e != NULL)
+	{
+		dynamicEntities->safeRemove(e);
+		stacicEntityLeftovers->safeRemove(e);
+
+		for(int i = 0; i < chunksList->count(); i++)
+		{
+			chunksList->get(i)->safeRemove(e);
+		}
+
+
+		deletedEntities->readAllListsIteratorReset();
+		bool found = false;
+		AbstractEntity *de = NULL;
+		while((de = stacicEntityLeftovers->getNextReadAllLists()) != NULL)
+		{
+			if(de == e) { found = true; }
+		}
+
+		if(!found) { deletedEntities->add(e,true); }
+
+	}
 }
 
 MyLinkedList<AbstractEntity> *ChunkManager::getDynamicEntityList()
