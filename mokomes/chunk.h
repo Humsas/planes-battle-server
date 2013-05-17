@@ -33,6 +33,7 @@ public:
 	void getAllEntitiesList(MyLinkedList<AbstractEntity> *list);
 
 	AbstractEntity *searchForColision(AbstractEntity *e);
+	void safeRemove(AbstractEntity *e);
 
 	void Update(float dt);
 	void Render(InvisibleObjectsChecker *visibilityChecker);

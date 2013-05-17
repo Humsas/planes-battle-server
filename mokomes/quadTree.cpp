@@ -346,6 +346,20 @@ AbstractEntity *QuadTree::searchForColision(AbstractEntity *e)
 	return NULL;
 }
 
+void QuadTree::safeRemove(AbstractEntity *e)
+{
+	if(e != NULL && isColidingWithQuadBoundaries(e))
+	{
+
+		for(int i = 0; i < 4; i++)
+		{
+			if(QT[i] != NULL) QT[i]->safeRemove(e);
+		}
+
+		list->safeRemove(e);
+	}
+}
+
 
 void QuadTree::Update(float dt)
 {

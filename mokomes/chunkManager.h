@@ -25,6 +25,7 @@ private:
 	MyLinkedList<AbstractEntity> *dynamicEntities;
 	
 	
+	MyLinkedList<AbstractEntity> *deletedEntities;
 	//QuadTree *QTLeftovers;
 
 	void init();
@@ -50,6 +51,8 @@ public:
 	void addEntity(AbstractEntity *e);
 
 	AbstractEntity *searchForColision(AbstractEntity *e);
+
+	void safeRemove(AbstractEntity *e);
 	
 	MyLinkedList<AbstractEntity> *getDynamicEntityList();
 

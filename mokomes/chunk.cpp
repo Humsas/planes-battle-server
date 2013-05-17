@@ -61,6 +61,14 @@ AbstractEntity *Chunk::searchForColision(AbstractEntity *e)
 	return NULL;
 }
 
+void Chunk::safeRemove(AbstractEntity *e)
+{
+	if(e != NULL)
+	{
+		QT->safeRemove(e);
+	}
+}
+
 void Chunk::Update(float dt)
 {
 	// TODO
