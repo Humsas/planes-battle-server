@@ -23,7 +23,7 @@ public:
 		mMaxHealth = -1;
 		mHealth = -1;
 	}
-	Building(Mesh *m, std::string meshId, Vector &position, Vector &rotation, int maxhealth, bool canUpdate) : AbstractEntity(m, meshId, position, rotation, rand() % 100 + 1, ENTITY_DYNAMIC), NetworkObject(canUpdate)
+	Building(Mesh *m, std::string meshId, Vector &position, Vector &rotation, int scale, int maxhealth, bool canUpdate) : AbstractEntity(m, meshId, position, rotation, scale, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_BUILDING; 
 		mCreated = false;
