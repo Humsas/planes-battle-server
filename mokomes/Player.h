@@ -7,6 +7,8 @@
 #include "Building.h"
 #include "Game.h"
 
+#define BUILDING_HEALTH 100
+
 using namespace RakNet;
 
 class Game;
@@ -35,7 +37,7 @@ public:
 	AircraftB17*			GetPlane()						{return mPlane;}
 	void					SetPlane(AircraftB17* plane)	{mPlane = plane;}
 	RakNetGUID				GetOwnerId()					{return mPlayerId;}
-	void					BuildBase();
+	void					BuildBase(int count);
 };
 
 
