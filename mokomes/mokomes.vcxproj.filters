@@ -91,6 +91,9 @@
     <Filter Include="Source Files\GameEntities">
       <UniqueIdentifier>{6cdc8bc7-5fec-40e6-9165-6091263ee972}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UsefulStuff">
+      <UniqueIdentifier>{6b8b7547-6967-4032-b136-b078e22a93a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp">
@@ -814,6 +817,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSLimiter.h">
+      <Filter>Header Files\UsefulStuff</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
