@@ -92,6 +92,57 @@ AircraftB17::~AircraftB17()
 	delete FDMExec;
 }
 
+void AircraftB17::reset()
+{
+	FDMExec->GetIC()->SetTerrainElevationFtIC(initPos.z/0.3048);
+
+
+	FDMExec->GetIC()->SetPhiDegIC(-initRotation.z);
+	FDMExec->GetIC()->SetThetaDegIC(initRotation.y);
+	FDMExec->GetIC()->SetPsiDegIC(-(initRotation.x+90));
+
+	/*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
+
+
+	/*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
+	FDMExec->GetAtmosphere()->SetExDensity(1);
+	FDMExec->GetAtmosphere()->SetExPressure(200);*/
+	/*FDMExec->GetPropagate()->SetSeaLevelRadius(0);
+	FDMExec->GetAtmosphere()->SetWindNED(1,0,0);
+	FDMExec->GetAtmosphere()->SetWindspeed(10);*/
+
+	//FDMExec->GetIC()->Load("reset00");
+	//FDMExec->RunIC();
+
+	FDMExec->DoTrim(JSBSim::tGround);
+
+	//startEngine();
+
+	//FDMExec->GetPropagate()->GetLocation().
+
+	// initial settings
+	throttle	= 0.0;
+	ailerons	= 0.0;
+	elevator	= 0.0;
+	ruder		= 0.0;
+	flaps		= 0.0;
+	propAdvance = 0.0;
+	starter		= 0;
+	magnetos	= 0;
+	mixture		= 1.0;
+	speed		= 0.0;
+	brakes		= 0.0;
+	gearDown	= 1;
+	stallWarn	= 0.0;
+
+	this->position.x = initPos.x;
+	this->position.y = initPos.y;
+	this->position.z = initPos.z;
+
+	copyToJSBSim();
+	FDMExec->RunIC();
+	copyFromJSBSim();
+}
 
 void AircraftB17::startEngine(bool starter)
 {
