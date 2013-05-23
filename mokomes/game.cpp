@@ -68,9 +68,25 @@ void Game::Update()
 	scena->Update(timer->getDeltaT());
 
 	sound->update();
+
 	//Shooting
 	for (int i = 0; i < mPlayers.size(); i++)
 		mPlayers[i]->Update();
+
+	if(mPlayers.size() > 0)
+	{
+		AbstractEntity * obj = getScene()->getChunkManager()->searchForColision(mPlayers[0]->GetPlane());
+		if(obj != NULL)
+		{
+			switch (obj->getType())
+			{
+			case GAME_ENTITY_AIRCRAFT_B17:
+
+				// abu lektuvai sunaikinami
+				break;
+			}
+		}
+	}
 }
 
 //void Game::dropBomb()
