@@ -21,6 +21,9 @@ class AircraftB17 : public AbstractEntity, public NetworkIDObject,  public Netwo
 private:
 	FGFDMExec *FDMExec;	
 
+	int mMaxHealth;
+	int mHealth;
+
 	Vector initPos;
 	//ColisionManager *colisionManager;
 
@@ -59,7 +62,8 @@ public:
 		isClientStub = true;
 		mMeshID = "B17";
 		mProjectileBombCooldown = CooldownRegulator(GAME_CONFIG_PROJECTILE_WEAPON_COOLDOWN);
-		
+		mMaxHealth = -1;
+		mHealth = -1;
 
 		FDMExec = new JSBSim::FGFDMExec();
 		FDMExec->SetDebugLevel(0);
@@ -107,6 +111,8 @@ public:
 		isClientStub = false;
 		CM = cm;
 		mProjectileBombCooldown = CooldownRegulator(GAME_CONFIG_PROJECTILE_WEAPON_COOLDOWN);
+		mMaxHealth = MAX_HEALTH_PLANE;
+		mHealth = MAX_HEALTH_PLANE;
 
 		this->initPos = position;
 
@@ -228,7 +234,15 @@ public:
 		position.z = position.z + amount;
 	}
 
+	//Returns true if plane is destroyed
+	bool TakeDamage(int dmg)
+	{
+		mHealth -= dmg;
+		if(mHealth <= 0)
+			return true;
 
+		return false;
+	}
 
 
 	//TOFACKINGDO cia reikia paduoti serverio ar klientu adresus ir nurodyti kam siusti, serveriui ar klientam
@@ -257,6 +271,7 @@ public:
 		stream->Write(position);
 		stream->Write(rotarionYawPitchRoll);
 		stream->Write(speed);
+		stream->Write(mHealth);
 		//stream.Write(scale);
 		//stream.Write(entityType);
 
@@ -279,6 +294,7 @@ public:
 		stream->Read(position);
 		stream->Read(rotarionYawPitchRoll);
 		stream->Read(speed);
+		stream->Read(mHealth);
 		//stream->Read(scale);
 		//stream->Read(entityType);
 	}
@@ -311,6 +327,8 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
+		stream.Write(mHealth);
+		stream.Write(mMaxHealth);
 		//stream.Write((string)mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
@@ -344,6 +362,8 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
+		stream.Write(mHealth);
+		stream.Write(mMaxHealth);
 		//stream.Write((string)mMeshID);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
@@ -412,6 +432,8 @@ public:
 		stream->Read(rotarionYawPitchRoll);
 		stream->Read(scale);
 		stream->Read(entityType);
+		stream->Read(mHealth);
+		stream->Read(mMaxHealth);
 		//stream->Read((string)mMeshID);
 
 		pMesh = pMeshManager->getPointer(mMeshID);

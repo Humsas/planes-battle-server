@@ -19,6 +19,7 @@ private:
 	AircraftB17*			mPlane;
 	Game*					mGame;
 	RakNetGUID				mPlayerId;
+	vector<ProjectileBomb*> mBombList;
 
 
 	void AddBuilding(Building* b);

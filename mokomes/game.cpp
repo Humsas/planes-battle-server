@@ -335,10 +335,10 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 	Player* player = new Player(this, playerID);
 	AircraftB17* lektuvas;
 
-	if(mPlayers.size() == 1)
-		lektuvas = new AircraftB17(scena->getMeshManager(), Vector(30642, 26290, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30642, 4000, 26290))), Vector(-149, 0, 0), true, scena->getChunkManager());
+	if(mPlayers.size() == 0)
+		lektuvas = new AircraftB17(scena->getMeshManager(), Vector(30810.7, 26266.7, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30810.7, 4000, 26266.7))), Vector(-149, 0, 0), true, scena->getChunkManager());
 	else
-		lektuvas = new AircraftB17(scena->getMeshManager(), Vector(50557, 45383.9, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50557, 4000, 45383.9))), Vector(-298, 0, 0), true, scena->getChunkManager());
+		lektuvas = new AircraftB17(scena->getMeshManager(), Vector(50394.9, 45404.7, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50394.9, 4000, 45404.7))), Vector(-298, 0, 0), true, scena->getChunkManager());
 
 	lektuvas->SetNetworkIDManager(mNetworkIdManager);
 	lektuvas->SetOwnerId(playerID);
