@@ -51,6 +51,7 @@ public:
 	void addEntity(AbstractEntity *e);
 
 	AbstractEntity *searchForColision(AbstractEntity *e);
+	bool checkGroundColision(AbstractEntity *e);
 
 	void safeRemove(AbstractEntity *e);
 	

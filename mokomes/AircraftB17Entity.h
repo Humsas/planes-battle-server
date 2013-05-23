@@ -25,6 +25,7 @@ private:
 	int mHealth;
 
 	Vector initPos;
+	Vector initRotation;
 	//ColisionManager *colisionManager;
 
 	// controls
@@ -115,6 +116,7 @@ public:
 		mHealth = MAX_HEALTH_PLANE;
 
 		this->initPos = position;
+		this->initRotation = rotation;
 
 
 		FDMExec = new JSBSim::FGFDMExec();
@@ -188,6 +190,7 @@ public:
 	~AircraftB17();
 
 
+	void reset();
 
 	void startEngine(bool starter);
 	void stopEngine();
