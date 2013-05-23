@@ -94,33 +94,35 @@ AircraftB17::~AircraftB17()
 
 void AircraftB17::reset()
 {
-	FDMExec->GetIC()->SetTerrainElevationFtIC(initPos.z/0.3048);
+	//FDMExec->ResetToInitialConditions();
+
+	//FDMExec->GetIC()->SetTerrainElevationFtIC(initPos.z/0.3048);
 
 
-	FDMExec->GetIC()->SetPhiDegIC(-initRotation.z);
-	FDMExec->GetIC()->SetThetaDegIC(initRotation.y);
-	FDMExec->GetIC()->SetPsiDegIC(-(initRotation.x+90));
+	//FDMExec->GetIC()->SetPhiDegIC(-initRotation.z);
+	//FDMExec->GetIC()->SetThetaDegIC(initRotation.y);
+	//FDMExec->GetIC()->SetPsiDegIC(-(initRotation.x+90));
 
-	/*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
+	///*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
 
 
-	/*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
-	FDMExec->GetAtmosphere()->SetExDensity(1);
-	FDMExec->GetAtmosphere()->SetExPressure(200);*/
-	/*FDMExec->GetPropagate()->SetSeaLevelRadius(0);
-	FDMExec->GetAtmosphere()->SetWindNED(1,0,0);
-	FDMExec->GetAtmosphere()->SetWindspeed(10);*/
+	///*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
+	//FDMExec->GetAtmosphere()->SetExDensity(1);
+	//FDMExec->GetAtmosphere()->SetExPressure(200);*/
+	///*FDMExec->GetPropagate()->SetSeaLevelRadius(0);
+	//FDMExec->GetAtmosphere()->SetWindNED(1,0,0);
+	//FDMExec->GetAtmosphere()->SetWindspeed(10);*/
 
-	//FDMExec->GetIC()->Load("reset00");
-	//FDMExec->RunIC();
+	////FDMExec->GetIC()->Load("reset00");
+	////FDMExec->RunIC();
 
 	FDMExec->DoTrim(JSBSim::tGround);
 
-	//startEngine();
+	////startEngine();
 
-	//FDMExec->GetPropagate()->GetLocation().
+	////FDMExec->GetPropagate()->GetLocation().
 
-	// initial settings
+	//// initial settings
 	throttle	= 0.0;
 	ailerons	= 0.0;
 	elevator	= 0.0;
@@ -135,13 +137,13 @@ void AircraftB17::reset()
 	gearDown	= 1;
 	stallWarn	= 0.0;
 
-	this->position.x = initPos.x;
-	this->position.y = initPos.y;
-	this->position.z = initPos.z;
+	//this->position.x = initPos.x;
+	//this->position.y = initPos.y;
+	//this->position.z = initPos.z;
 
-	copyToJSBSim();
+	//copyToJSBSim();
 	FDMExec->RunIC();
-	copyFromJSBSim();
+	//copyFromJSBSim();
 }
 
 void AircraftB17::startEngine(bool starter)
@@ -169,6 +171,23 @@ void AircraftB17::Update(float dt)
 
 
 		FDMExec->Run();
+			/*{
+			reset();
+			}*/
+
+
+		FGJSBBase::Message* msg;
+		while ((msg = FDMExec->ProcessMessage()) != NULL) {
+			//      msg = fdmex->ProcessNextMessage();
+			switch (msg->type) {
+			case FGJSBBase::Message::eText:
+				if (msg->text == "Crash Detected: Simulation FREEZE.")
+					reset();		
+				break;
+			}
+		}
+
+
 
 		// info istraukimas
 
