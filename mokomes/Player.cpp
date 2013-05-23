@@ -9,8 +9,8 @@ Player::Player(Game* game, RakNetGUID playerID)
 
 Player::~Player()
 {
-	if(mPlane != NULL)	
-		delete mPlane;
+	/*if(mPlane != NULL)	
+		delete mPlane;*/
 }
 
 void Player::Render()

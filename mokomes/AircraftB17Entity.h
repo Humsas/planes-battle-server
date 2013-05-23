@@ -22,6 +22,7 @@ private:
 	FGFDMExec *FDMExec;	
 
 	Vector initPos;
+	Vector initRotation;
 	//ColisionManager *colisionManager;
 
 	// controls
@@ -109,6 +110,7 @@ public:
 		mProjectileBombCooldown = CooldownRegulator(GAME_CONFIG_PROJECTILE_WEAPON_COOLDOWN);
 
 		this->initPos = position;
+		this->initRotation = rotation;
 
 
 		FDMExec = new JSBSim::FGFDMExec();
@@ -182,6 +184,7 @@ public:
 	~AircraftB17();
 
 
+	void reset();
 
 	void startEngine(bool starter);
 	void stopEngine();
