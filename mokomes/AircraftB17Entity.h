@@ -130,14 +130,14 @@ public:
 		FDMExec->GetIC()->SetWBodyFpsIC(0.0);
 
 		FDMExec->GetIC()->SetLatitudeDegIC(0);
-		FDMExec->GetIC()->SetLongitudeDegIC(0);
+		FDMExec->GetIC()->SetLongitudeDegIC(0);*/
 
-		FDMExec->GetIC()->SetPhiDegIC(0.0);
-		FDMExec->GetIC()->SetThetaDegIC(0.0);
-		FDMExec->GetIC()->SetPsiDegIC(12.0);
+		FDMExec->GetIC()->SetPhiDegIC(-rotation.z);
+		FDMExec->GetIC()->SetThetaDegIC(rotation.y);
+		FDMExec->GetIC()->SetPsiDegIC(-(rotation.x+90));
 
-		FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);
-		*/
+		/*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
+		
 
 		/*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
 		FDMExec->GetAtmosphere()->SetExDensity(1);
