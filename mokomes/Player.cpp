@@ -25,6 +25,16 @@ void Player::Update()
 
 	for (int i = 0; i < mBombList.size(); i++)
 	{
+		//Kolizija su zeme
+		if(mGame->getScene()->getChunkManager()->checkGroundColision(mBombList[i]))
+		{
+			bombsToRemove.push_back(i);
+			mGame->getScene()->getChunkManager()->safeRemove(mBombList[i]);
+			mGame->getNetwork()->DeleteObjectSend(mBombList[i]->GetNetworkID(), mBombList[i]->getType());
+
+			continue;
+		}
+
 		AbstractEntity * obj = mGame->getScene()->getChunkManager()->searchForColision(mBombList[i]);
 
 		//Collision Detected
@@ -32,7 +42,7 @@ void Player::Update()
 		{
 			//Same owner, do not damage
 			if(((NetworkObject*)obj)->GetOwnerId() == mPlayerId)
-				break;
+				continue;
 
 			bombsToRemove.push_back(i);
 
