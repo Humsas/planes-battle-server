@@ -40,15 +40,14 @@ void Player::Update()
 		//Collision Detected
 		if(obj != NULL)
 		{
-			//Same owner, do not damage
-			if(((NetworkObject*)obj)->GetOwnerId() == mPlayerId)
-				continue;
-
-			bombsToRemove.push_back(i);
-
 			switch (obj->getType())
 			{
 			case GAME_ENTITY_AIRCRAFT_B17:
+				//Same owner, do not damage
+				if(((AircraftB17*)obj)->GetOwnerId() == mPlayerId)
+					continue;
+				bombsToRemove.push_back(i);
+
 				if(((AircraftB17*)obj)->TakeDamage(mBombList[i]->GetDamage()))
 				{
 					//Sunaikintas lektuvas
@@ -56,6 +55,11 @@ void Player::Update()
 				break;
 			case GAME_ENTITY_PROJECTILE_BOMB:
 				{
+					//Same owner, do not damage
+					if(((ProjectileBomb*)obj)->GetOwnerId() == mPlayerId)
+						continue;
+					bombsToRemove.push_back(i);
+
 					//Abi susiprastina
 					mGame->getScene()->getChunkManager()->safeRemove(obj);
 
@@ -65,6 +69,11 @@ void Player::Update()
 					break;
 				}
 			case GAME_ENTITY_BUILDING:
+				//Same owner, do not damage
+				if(((Building*)obj)->GetOwnerId() == mPlayerId)
+					continue;
+				bombsToRemove.push_back(i);
+
 				if(((Building*)obj)->TakeDamage(mBombList[i]->GetDamage()))
 				{
 					//Sunaikintas pastatas

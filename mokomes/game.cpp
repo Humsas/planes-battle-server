@@ -47,7 +47,7 @@ Game::~Game()
 	if(scena != NULL)		delete scena;
 	//if(kolizijos != NULL)	delete kolizijos;
 
-	for(int i = mPlayers.size(); i > 0; i--)
+	for(int i = mPlayers.size()-1; i > 0; i--)
 		if(mPlayers[i] != NULL)	
 			delete mPlayers[i];
 							//delete enemyBaseList;
