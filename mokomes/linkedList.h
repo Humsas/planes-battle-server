@@ -90,19 +90,22 @@ private:
 
 	void fixIterator(Node **l, char itPosition)
 	{
-		switch (itPosition)
+		if(*l != NULL)
 		{
-		case 0: // pirmas
-			*l = LIST;
-			break;
+			switch (itPosition)
+			{
+			case 0: // pirmas
+				*l = LIST;
+				break;
 
-		case 1: // vidurys
-		case 2: //galas
-			*l = (*l)->prev;
-			break;
+			case 1: // vidurys
+			case 2: //galas
+				*l = (*l)->prev;
+				break;
 
-		default:
-			break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -185,7 +188,7 @@ public:
 		for(Node *l = LIST; l != NULL; l = l->next)
 		{
 			std::cout << l << " " << l->prev << " " << l->next << endl;
-			
+
 		}
 	}
 
@@ -354,7 +357,7 @@ public:
 				}
 
 				if(it == l) { it = NULL; }
-				
+
 				counter--;
 				r = l;
 			}
@@ -376,7 +379,7 @@ public:
 			}
 			else
 			{ // jungiam prie pabaigos
-			
+
 				//ieskom galinio elemento
 				for(Node *l = LIST; l != NULL; l = l->next)
 				{
