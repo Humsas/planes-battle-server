@@ -43,6 +43,7 @@ public:
 		float y = sin(DEGTORAD(r.x))*cos(DEGTORAD(r.y));
 		float z = sin(DEGTORAD(r.y));
 		this->speed = Vector(x*speed, y*speed, z*speed);
+
 	}
 
 	~ProjectileBomb()
