@@ -46,6 +46,11 @@ enum GameMessages
 	ID_GAME_MESSAGE_KEYS_UPDATE
 };
 
+#define MAX_HEALTH_PLANE						30
+#define MAX_HEALTH_BUILDING						2
+
+#define DAMAGE_PROJECTILE_BOMB					10
+
 //Additional Game keys
 #define GAME_KEY_QUIT_GAME						0x1A0
 #define GAME_KEY_JOY_BUTTON1					0x1A1

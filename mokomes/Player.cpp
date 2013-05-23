@@ -9,8 +9,6 @@ Player::Player(Game* game, RakNetGUID playerID)
 
 Player::~Player()
 {
-	if(mPlane != NULL)	
-		delete mPlane;
 }
 
 void Player::Render()
@@ -19,11 +17,67 @@ void Player::Render()
 
 void Player::Update()
 {
+	vector<int> bombsToRemove;
 
 	//Shooting
 	if(mPlane->isReadyToShootProjectileBomb())
 		fire(mPlane, mPlane->GetOwnerId());
 
+	for (int i = 0; i < mBombList.size(); i++)
+	{
+		AbstractEntity * obj = mGame->getScene()->getChunkManager()->searchForColision(mBombList[i]);
+
+		//Collision Detected
+		if(obj != NULL)
+		{
+			//Same owner, do not damage
+			if(((NetworkObject*)obj)->GetOwnerId() == mPlayerId)
+				break;
+
+			bombsToRemove.push_back(i);
+
+			switch (obj->getType())
+			{
+			case GAME_ENTITY_AIRCRAFT_B17:
+				if(((AircraftB17*)obj)->TakeDamage(mBombList[i]->GetDamage()))
+				{
+					//Sunaikintas lektuvas
+				}
+				break;
+			case GAME_ENTITY_PROJECTILE_BOMB:
+				{
+					//Abi susiprastina
+					mGame->getScene()->getChunkManager()->safeRemove(obj);
+
+					// Siunciam istrynimo zinute klientams
+					mGame->getNetwork()->DeleteObjectSend(((ProjectileBomb*)obj)->GetNetworkID(), obj->getType());
+
+					break;
+				}
+			case GAME_ENTITY_BUILDING:
+				if(((Building*)obj)->TakeDamage(mBombList[i]->GetDamage()))
+				{
+					//Sunaikintas pastatas
+					mGame->getScene()->getChunkManager()->safeRemove(obj);
+					mGame->getNetwork()->DeleteObjectSend(((Building*)obj)->GetNetworkID(), obj->getType());
+				}
+				break;
+			default:
+				break;
+			}
+
+			mGame->getScene()->getChunkManager()->safeRemove(mBombList[i]);
+			mGame->getNetwork()->DeleteObjectSend(mBombList[i]->GetNetworkID(), mBombList[i]->getType());
+		}
+	}
+
+	if(bombsToRemove.size() > 0)
+	{
+		for (int i = bombsToRemove.size()-1; i >= 0; i--)
+		{
+			mBombList.erase(mBombList.begin()+bombsToRemove[i]);
+		}
+	}
 }
 
 void Player::fire(AircraftB17* plane, RakNetGUID id)
@@ -34,6 +88,7 @@ void Player::fire(AircraftB17* plane, RakNetGUID id)
 	bomb->CreateSerialize(mGame->getNetwork()->GetServer());
 
 	mGame->getScene()->getChunkManager()->addEntity(bomb);
+	mBombList.push_back(bomb);
 }
 
 bool Player::isReadyToPlay()
@@ -44,7 +99,7 @@ bool Player::isReadyToPlay()
 
 void Player::BuildBase(int count)
 {
-	if(count == 2)
+	if(count == 1)
 	{
 		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(29883.3, 26343.8, 1175.33), Vector(-86, 0, 0), 358, BUILDING_HEALTH, true);
 		Building* building1 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(30435.3, 26237.8, 
@@ -144,8 +199,6 @@ void Player::BuildBase(int count)
 		AddBuilding(building14);
 		AddBuilding(building15);
 	}
-
-
 }
 
 void Player::AddBuilding(Building* b)

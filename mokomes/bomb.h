@@ -15,6 +15,7 @@ class ProjectileBomb : public AbstractEntity, public NetworkIDObject,  public Ne
 {
 private:
 	Vector speed;
+	int		mDamage;
 
 	float angle(float x, float y);
 
@@ -25,12 +26,14 @@ public:
 
 	ProjectileBomb()
 	{
+		mDamage = DAMAGE_PROJECTILE_BOMB;
 		mType = GAME_ENTITY_PROJECTILE_BOMB;
 		mCreated = false;
 		speed = Vector(0, 0, 0);
 	}
 	ProjectileBomb(Mesh *m, Vector &position, Vector &rotation, int speed, bool canUpdate) : AbstractEntity(m, "bomba", position, rotation, 3, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
+		mDamage = DAMAGE_PROJECTILE_BOMB;
 		mType = GAME_ENTITY_PROJECTILE_BOMB; 
 		mCreated = false;
 
@@ -59,7 +62,10 @@ public:
 
 
 
-
+	int GetDamage()
+	{
+		return mDamage;
+	}
 
 	//TOFACKINGDO cia reikia paduoti serverio ar klientu adresus ir nurodyti kam siusti, serveriui ar klientam
 	void NetworkUpdate(RakPeerInterface* peer)
