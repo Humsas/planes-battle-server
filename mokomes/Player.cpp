@@ -101,6 +101,7 @@ void Player::Update()
 
 void Player::fire(AircraftB17* plane, RakNetGUID id)
 {
+	//Vector bombPosition(*plane->getPosition());
 	ProjectileBomb *bomb = new ProjectileBomb(mGame->getScene()->getMeshManager(), *plane->getPosition(), *plane->getRotation(), 300+plane->getSpeed(), true);
 	bomb->SetNetworkIDManager(mGame->getNetworkIDManager());
 	bomb->SetOwnerId(id);
