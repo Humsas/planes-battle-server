@@ -157,6 +157,11 @@ AbstractEntity *ChunkManager::searchForColision(AbstractEntity *e)
 	return NULL;
 }
 
+bool ChunkManager::checkGroundColision(AbstractEntity *e)
+{
+	return getMapHeightAtPoint(*e->getPosition()) > e->getPosition()->z - e->getScale();
+}
+
 void ChunkManager::safeRemove(AbstractEntity *e)
 {
 	if(e != NULL)
