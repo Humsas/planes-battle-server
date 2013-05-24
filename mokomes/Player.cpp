@@ -51,6 +51,7 @@ void Player::Update()
 				if(((AircraftB17*)obj)->TakeDamage(mBombList[i]->GetDamage()))
 				{
 					//Sunaikintas lektuvas
+					((AircraftB17*)obj)->reset();
 				}
 				break;
 			case GAME_ENTITY_PROJECTILE_BOMB:
