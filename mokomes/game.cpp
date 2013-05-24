@@ -84,6 +84,7 @@ void Game::Update()
 
 				// abu lektuvai sunaikinami
 				((AircraftB17*)obj)->reset();
+				mPlayers[1]->GetPlane()->reset();
 				break;
 			}
 		}
