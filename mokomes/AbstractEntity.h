@@ -161,9 +161,17 @@ public:
 		if(e != NULL)
 		{
 			Vector *tmpPos = e->getPosition();
-			float distance =	(tmpPos->x - position.x * tmpPos->x - position.x)+
-				(tmpPos->y - position.y * tmpPos->y - position.y)+
-				(tmpPos->z - position.z * tmpPos->z - position.z);
+			/*float scaleDistance = scale + e->getScale();
+			if(abs(tmpPos->x - position.x) >= scaleDistance &&
+				abs(tmpPos->y - position.y) >= scaleDistance &&
+				abs(tmpPos->z - position.z) >= scaleDistance)
+			{
+				return true;
+			}*/
+
+			double distance =	((tmpPos->x - position.x) * (tmpPos->x - position.x))+
+				((tmpPos->y - position.y) * (tmpPos->y - position.y))+
+				((tmpPos->z - position.z) * (tmpPos->z - position.z));
 
 			return  distance <= (scale + e->getScale()) * (scale + e->getScale()); 
 		}
