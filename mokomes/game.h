@@ -133,7 +133,7 @@ public:
 	//ColisionManager*	getColisionManager();
 	Networking*			getNetwork();
 	NetworkIDManager*	getNetworkIDManager();
-
+	Timer*				getTimer();
 
 
 	void loadSounds();

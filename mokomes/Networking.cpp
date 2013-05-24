@@ -339,6 +339,20 @@ bool Networking::ArePlayersReady()
 	return true;
 }
 
+//Sends bool message to player about winner(true - winner)
+void Networking::SendWinMessage(RakNetGUID winner, RakNetGUID loser)
+{
+	BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_PLAYER_WON);
+	bsOut.Write((bool)true);
+	mServer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, winner, false);
+
+	BitStream bsOut2;
+	bsOut2.Write((RakNet::MessageID)ID_GAME_MESSAGE_PLAYER_WON);
+	bsOut2.Write((bool)false);
+	mServer->Send(&bsOut2, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, loser, false);
+}
+
 //Send message to all clients about object deletion
 void Networking::DeleteObjectSend(NetworkID id, int type)
 {
