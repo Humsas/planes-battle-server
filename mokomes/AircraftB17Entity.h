@@ -190,7 +190,7 @@ public:
 	~AircraftB17();
 
 
-	void reset();
+	void reset(bool fullReset = false);
 
 	void startEngine(bool starter);
 	void stopEngine();
