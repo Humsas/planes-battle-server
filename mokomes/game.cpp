@@ -73,7 +73,7 @@ void Game::Update()
 	for (int i = 0; i < mPlayers.size(); i++)
 		mPlayers[i]->Update();
 
-	if(mPlayers.size() > 0)
+	if(mPlayers.size() == 2)
 	{
 		AbstractEntity * obj = getScene()->getChunkManager()->searchForColision(mPlayers[0]->GetPlane());
 		if(obj != NULL)
