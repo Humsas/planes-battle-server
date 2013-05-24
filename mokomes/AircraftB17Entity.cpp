@@ -92,58 +92,99 @@ AircraftB17::~AircraftB17()
 	delete FDMExec;
 }
 
-void AircraftB17::reset()
+void AircraftB17::reset(bool fullReset)
 {
-	//FDMExec->ResetToInitialConditions();
-
-	//FDMExec->GetIC()->SetTerrainElevationFtIC(initPos.z/0.3048);
-
-
-	//FDMExec->GetIC()->SetPhiDegIC(-initRotation.z);
-	//FDMExec->GetIC()->SetThetaDegIC(initRotation.y);
-	//FDMExec->GetIC()->SetPsiDegIC(-(initRotation.x+90));
-
-	///*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
+	if(fullReset)
+	{
+		delete FDMExec;
 
 
-	///*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
-	//FDMExec->GetAtmosphere()->SetExDensity(1);
-	//FDMExec->GetAtmosphere()->SetExPressure(200);*/
-	///*FDMExec->GetPropagate()->SetSeaLevelRadius(0);
-	//FDMExec->GetAtmosphere()->SetWindNED(1,0,0);
-	//FDMExec->GetAtmosphere()->SetWindspeed(10);*/
+		FDMExec = new JSBSim::FGFDMExec();
+		FDMExec->SetDebugLevel(0);
+		FDMExec->SetOutputFileName("");
+		FDMExec->SetAircraftPath("aircraft");
+		FDMExec->SetEnginePath("engine");
+		FDMExec->SetSystemsPath("systems");
 
-	////FDMExec->GetIC()->Load("reset00");
-	////FDMExec->RunIC();
+		//FDMExec->LoadModel("B17");
 
-	FDMExec->DoTrim(JSBSim::tGround);
+		//FDMExec->GetPropulsion()->InitRunning(-1);
 
-	////startEngine();
+		FDMExec->LoadScript("scripts\\testScript");
+		FDMExec->GetPropulsion()->InitRunning(-1);
+		FDMExec->GetIC()->SetTerrainElevationFtIC(initPos.z/0.3048);
+		/*FDMExec->GetIC()->SetUBodyFpsIC(0.0);
+		FDMExec->GetIC()->SetVBodyFpsIC(0.0);
+		FDMExec->GetIC()->SetWBodyFpsIC(0.0);
 
-	////FDMExec->GetPropagate()->GetLocation().
+		FDMExec->GetIC()->SetLatitudeDegIC(0);
+		FDMExec->GetIC()->SetLongitudeDegIC(0);*/
 
-	//// initial settings
-	throttle	= 0.0;
-	ailerons	= 0.0;
-	elevator	= 0.0;
-	ruder		= 0.0;
-	flaps		= 0.0;
-	propAdvance = 0.0;
-	starter		= 0;
-	magnetos	= 0;
-	mixture		= 1.0;
-	speed		= 0.0;
-	brakes		= 0.0;
-	gearDown	= 1;
-	stallWarn	= 0.0;
+		FDMExec->GetIC()->SetPhiDegIC(-initRotation.z);
+		FDMExec->GetIC()->SetThetaDegIC(initRotation.y);
+		FDMExec->GetIC()->SetPsiDegIC(-(initRotation.x+90));
 
-	//this->position.x = initPos.x;
-	//this->position.y = initPos.y;
-	//this->position.z = initPos.z;
+		/*FDMExec->GetIC()->SetAltitudeAGLFtIC(18000);*/
+		
 
-	//copyToJSBSim();
-	FDMExec->RunIC();
-	//copyFromJSBSim();
+		/*FDMExec->GetAtmosphere()->SetExTemperature(9.0/5.0*(1+273.15) );
+		FDMExec->GetAtmosphere()->SetExDensity(1);
+		FDMExec->GetAtmosphere()->SetExPressure(200);*/
+		/*FDMExec->GetPropagate()->SetSeaLevelRadius(0);
+		FDMExec->GetAtmosphere()->SetWindNED(1,0,0);
+		FDMExec->GetAtmosphere()->SetWindspeed(10);*/
+
+		//FDMExec->GetIC()->Load("reset00");
+		//FDMExec->RunIC();
+
+		FDMExec->DoTrim(JSBSim::tGround);
+
+		//startEngine();
+
+		//FDMExec->GetPropagate()->GetLocation().
+
+		// initial settings
+		throttle	= 0.0;
+		ailerons	= 0.0;
+		elevator	= 0.0;
+		ruder		= 0.0;
+		flaps		= 0.0;
+		propAdvance = 0.0;
+		starter		= 0;
+		magnetos	= 0;
+		mixture		= 1.0;
+		speed		= 0.0;
+		brakes		= 0.0;
+		gearDown	= 1;
+		stallWarn	= 0.0;
+
+		this->position.x = initPos.x;
+		this->position.y = initPos.y;
+		this->position.z = initPos.z;
+
+		copyToJSBSim();
+		FDMExec->RunIC();
+		copyFromJSBSim();
+
+	}
+	else
+	{
+		FDMExec->ResetToInitialConditions();
+
+		throttle	= 0.0;
+		ailerons	= 0.0;
+		elevator	= 0.0;
+		ruder		= 0.0;
+		flaps		= 0.0;
+		propAdvance = 0.0;
+		starter		= 0;
+		magnetos	= 0;
+		mixture		= 1.0;
+		speed		= 0.0;
+		brakes		= 0.0;
+		gearDown	= 1;
+		stallWarn	= 0.0;
+	}
 }
 
 void AircraftB17::startEngine(bool starter)
@@ -159,6 +200,7 @@ void AircraftB17::stopEngine()
 
 void AircraftB17::Update(float dt)
 {
+	bool reset = false;
 	if(!isClientStub)
 	{
 		mProjectileBombCooldown.UpdateCooldowns(dt);
@@ -171,9 +213,9 @@ void AircraftB17::Update(float dt)
 
 
 		FDMExec->Run();
-			/*{
-			reset();
-			}*/
+		/*{
+		reset();
+		}*/
 
 
 		FGJSBBase::Message* msg;
@@ -182,7 +224,9 @@ void AircraftB17::Update(float dt)
 			switch (msg->type) {
 			case FGJSBBase::Message::eText:
 				if (msg->text == "Crash Detected: Simulation FREEZE.")
-					reset();		
+				{
+					reset = true;
+				}
 				break;
 			}
 		}
@@ -243,6 +287,12 @@ void AircraftB17::Update(float dt)
 	}
 	rotateYPR(&rotarionYawPitchRoll);
 	combine();
+
+	if(reset)
+	{
+		this->reset(true);
+	}
+	
 }
 
 
