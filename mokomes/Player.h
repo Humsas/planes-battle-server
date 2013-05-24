@@ -7,8 +7,6 @@
 #include "Building.h"
 #include "Game.h"
 
-#define BUILDING_HEALTH 100
-
 using namespace RakNet;
 
 class Game;
