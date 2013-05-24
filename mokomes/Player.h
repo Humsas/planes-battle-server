@@ -18,6 +18,7 @@ private:
 	Game*					mGame;
 	RakNetGUID				mPlayerId;
 	vector<ProjectileBomb*> mBombList;
+	vector<Building*>		mBuildingsList;
 
 
 	void AddBuilding(Building* b);
@@ -37,6 +38,7 @@ public:
 	void					SetPlane(AircraftB17* plane)	{mPlane = plane;}
 	RakNetGUID				GetOwnerId()					{return mPlayerId;}
 	void					BuildBase(int count);
+	bool					RemoveBuildingFromList(Building* b);
 };
 
 

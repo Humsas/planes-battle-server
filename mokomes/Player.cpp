@@ -83,6 +83,23 @@ void Player::Update()
 
 				if(((Building*)obj)->TakeDamage(mBombList[i]->GetDamage()))
 				{
+					for(int i = 0; i < mGame->mPlayers.size(); i++)
+					{
+						if(mGame->mPlayers[i]->GetOwnerId() != mPlayerId)
+						{
+							// Jei true, tai sitas zaidejas(viso objekto savininkas) laimejo
+							if(mGame->mPlayers[i]->RemoveBuildingFromList((Building*)obj))
+							{
+								gServerConsole.addLine("Game ended. Please, restart, the game.", GAME_CONSOLE_WARNING);
+
+								mGame->getNetwork()->SendWinMessage(mPlayerId, mGame->mPlayers[i]->GetOwnerId());
+
+								//stop game here
+								mGame->getTimer()->pause();
+							}
+						}
+					}
+
 					//Sunaikintas pastatas
 					mGame->getScene()->getChunkManager()->safeRemove(obj);
 					mGame->getNetwork()->DeleteObjectSend(((Building*)obj)->GetNetworkID(), obj->getType());
@@ -123,6 +140,18 @@ bool Player::isReadyToPlay()
 	return mPlane->isReadyToPlay();
 }
 
+//Returns true if no buildings are left in the list
+bool Player::RemoveBuildingFromList(Building* b)
+{
+	for(int i = 0; i < mBuildingsList.size(); i++)
+		if(mBuildingsList[i] == b)
+		{
+			mBuildingsList.erase(mBuildingsList.begin()+i);
+			break;
+		}
+
+	return mBuildingsList.size() == 0;
+}
 
 void Player::BuildBase(int count)
 {
@@ -234,5 +263,6 @@ void Player::AddBuilding(Building* b)
 	b->SetOwnerId(mPlayerId);
 	b->CreateSerialize(mGame->getNetwork()->GetServer());
 
+	mBuildingsList.push_back(b);
 	mGame->getScene()->getChunkManager()->addEntity(b);
 }

@@ -53,6 +53,8 @@ public:
 	void SendConnectionDataToPlayer(RakNetGUID id);
 	bool ArePlayersReady();
 	void DeleteObjectSend(NetworkID id, int type);
+	void SendWinMessage(RakNetGUID winner, RakNetGUID loser);
+
 	//void SendCreatedObjectsIDs(vector<NetworkID> ids);
 };
 

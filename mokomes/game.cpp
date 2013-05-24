@@ -341,11 +341,11 @@ NetworkIDManager* Game::getNetworkIDManager()
 	return mNetworkIdManager;
 }
 
-//vector<RakNet::RakNetGUID> Game::getPlayersId()
-//{
-//	return mPlayersList;
-//}
 
+Timer* Game::getTimer()
+{
+	return timer;
+}
 
 void Game::playerConnected(RakNet::RakNetGUID playerID)
 {
