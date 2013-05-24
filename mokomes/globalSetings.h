@@ -6,8 +6,8 @@
 
 #ifndef _FS
 #define FULL_SCREEN (0)
-#define SCREEN_WIDTH (1536)
-#define SCREEN_HEIGHT (864)
+#define SCREEN_WIDTH (800)
+#define SCREEN_HEIGHT (600)
 #else
 #define FULL_SCREEN (1)
 #define SCREEN_WIDTH (GetSystemMetrics(SM_CXSCREEN))

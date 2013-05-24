@@ -65,6 +65,7 @@ void Game::Update()
 	// update all the game physics
 	timer->Update();
 
+
 	scena->Update(timer->getDeltaT());
 
 	sound->update();
