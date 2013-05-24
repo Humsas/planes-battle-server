@@ -1,5 +1,8 @@
 #include "Player.h"
 
+#include "console.h"
+extern Console gServerConsole;
+
 
 Player::Player(Game* game, RakNetGUID playerID) 
 { 
@@ -49,6 +52,7 @@ void Player::Update()
 						continue;
 					bombsToRemove.push_back(i);
 
+					gServerConsole.addLine("Kolizija");
 					if(((AircraftB17*)obj)->TakeDamage(mBombList[i]->GetDamage()))
 					{
 						//Sunaikintas lektuvas

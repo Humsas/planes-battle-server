@@ -13,6 +13,9 @@
 #include "FGState.h"
 #include "models\propulsion\FGPiston.h"
 
+#include "console.h"
+extern Console gServerConsole;
+
 using namespace RakNet;
 using namespace JSBSim;
 
@@ -241,6 +244,7 @@ public:
 	bool TakeDamage(int dmg)
 	{
 		mHealth -= dmg;
+		gServerConsole.addLine("HP: "+mHealth);
 		if(mHealth <= 0)
 			return true;
 
