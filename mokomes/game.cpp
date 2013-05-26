@@ -397,6 +397,9 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 			case GAME_ENTITY_BUILDING:
 				stream->Write((NetworkID)((Building*)es)->GetNetworkID());
 				break;
+			case GAME_ENTITY_TREE1:
+				stream->Write((NetworkID)((Tree1*)es)->GetNetworkID());
+				break;
 			default:
 				break;
 			}
@@ -668,6 +671,8 @@ void Game::TestGameInit()
 		if(distance(p1, p) > 5000 && distance(p2, p) > 5000)
 		{
 			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), false);
+			treeEntity->SetNetworkIDManager(mNetworkIdManager);
+			treeEntity->CreateSerialize(mNetwork->GetServer());
 			scena->getChunkManager()->addEntity(treeEntity);
 			treeCount--;
 		}
