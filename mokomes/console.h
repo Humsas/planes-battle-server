@@ -67,25 +67,25 @@ public:
 		mBodyColor[0].y = 5;
 		mBodyColor[0].z = 0;
 		mBodyColor[0].rhw = 1.0f;
-		mBodyColor[0].colour = D3DCOLOR_XRGB(127, 0, 0);
+		mBodyColor[0].colour = D3DCOLOR_XRGB(230, 230, 230);
 
 		mBodyColor[1].x = SCREEN_WIDTH-5;
 		mBodyColor[1].y = 5;
 		mBodyColor[1].z = 0;
 		mBodyColor[1].rhw = 1.0f;
-		mBodyColor[1].colour = D3DCOLOR_XRGB(127, 0, 0);
+		mBodyColor[1].colour = D3DCOLOR_XRGB(230, 230, 230);
 
 		mBodyColor[2].x = 5;
 		mBodyColor[2].y = SCREEN_HEIGHT-5;
 		mBodyColor[2].z = 0;
 		mBodyColor[2].rhw = 1.0f;
-		mBodyColor[2].colour = D3DCOLOR_XRGB(127, 0, 0);
+		mBodyColor[2].colour = D3DCOLOR_XRGB(230, 230, 230);
 
 		mBodyColor[3].x = SCREEN_WIDTH-5;
 		mBodyColor[3].y = SCREEN_HEIGHT-5;
 		mBodyColor[3].z = 0;
 		mBodyColor[3].rhw = 1.0f;
-		mBodyColor[3].colour = D3DCOLOR_XRGB(127, 0, 0);
+		mBodyColor[3].colour = D3DCOLOR_XRGB(230, 230, 230);
 
 		mBorderColor[0].x = 0;
 		mBorderColor[0].y = 0;
@@ -115,25 +115,25 @@ public:
 		mInputColor[0].y = SCREEN_HEIGHT-35;
 		mInputColor[0].z = 0;
 		mInputColor[0].rhw = 1.0f;
-		mInputColor[0].colour = D3DCOLOR_XRGB(0, 150, 0);
+		mInputColor[0].colour = D3DCOLOR_XRGB(170, 170, 170);
 
 		mInputColor[1].x = SCREEN_WIDTH-10;
 		mInputColor[1].y = SCREEN_HEIGHT-35;
 		mInputColor[1].z = 0;
 		mInputColor[1].rhw = 1.0f;
-		mInputColor[1].colour = D3DCOLOR_XRGB(0, 150, 0);
+		mInputColor[1].colour = D3DCOLOR_XRGB(170, 170, 170);
 
 		mInputColor[2].x = 7;
 		mInputColor[2].y = SCREEN_HEIGHT-10;
 		mInputColor[2].z = 0;
 		mInputColor[2].rhw = 1.0f;
-		mInputColor[2].colour = D3DCOLOR_XRGB(0, 150, 0);
+		mInputColor[2].colour = D3DCOLOR_XRGB(170, 170, 170);
 
 		mInputColor[3].x = SCREEN_WIDTH-10;
 		mInputColor[3].y = SCREEN_HEIGHT-10;
 		mInputColor[3].z = 0;
 		mInputColor[3].rhw = 1.0f;
-		mInputColor[3].colour = D3DCOLOR_XRGB(0, 150, 0);
+		mInputColor[3].colour = D3DCOLOR_XRGB(170, 170, 170);
 	}
 
 	void inputMessageAppend(char c);

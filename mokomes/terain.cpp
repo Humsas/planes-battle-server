@@ -131,7 +131,7 @@ void Terrain::generateTerain()
 				this->drawMap[count++]=vIndex;
 				this->drawMap[count++]=vIndex+1;
 				this->drawMap[count++]=vIndex+vertX;
-        
+		
 
 				// second triangle
 				this->drawMap[count++]=vIndex + 1;
@@ -202,10 +202,10 @@ void Terrain::generateTerain()
 				// 3*3 avg smooth
 		
 				hMap[count] = vert[count].Y = ((
-	   					((float)(*(data+bitas+RGB_BYTE_SIZE*vertX-RGB_BYTE_SIZE)) + (float)(*(data+bitas+RGB_BYTE_SIZE*vertX)) + (float)(*(data+bitas+RGB_BYTE_SIZE*vertX+RGB_BYTE_SIZE)))+
+						((float)(*(data+bitas+RGB_BYTE_SIZE*vertX-RGB_BYTE_SIZE)) + (float)(*(data+bitas+RGB_BYTE_SIZE*vertX)) + (float)(*(data+bitas+RGB_BYTE_SIZE*vertX+RGB_BYTE_SIZE)))+
 
 
-	   					((float)(*(data+bitas-RGB_BYTE_SIZE)) + (float)(*(data+bitas)) + (float)(*(data+bitas+RGB_BYTE_SIZE)))+
+						((float)(*(data+bitas-RGB_BYTE_SIZE)) + (float)(*(data+bitas)) + (float)(*(data+bitas+RGB_BYTE_SIZE)))+
 
 
 						((float)(*(data+bitas-RGB_BYTE_SIZE*vertX-RGB_BYTE_SIZE)) + (float)(*(data+bitas-RGB_BYTE_SIZE*vertX)) + (float)(*(data+bitas-RGB_BYTE_SIZE*vertX+RGB_BYTE_SIZE)))
@@ -277,21 +277,21 @@ void Terrain::generateTerain()
 
 	// create a vertex buffer interface called v_buffer
 	d3->SetVertexDeclaration(terrainCustomVertex);
-    d3->CreateVertexBuffer(vertX * vertZ * sizeof(terVert) ,
-                               0,
-                               0,
-                               D3DPOOL_MANAGED,
-                               &v_buff,
-                               NULL);
+	d3->CreateVertexBuffer(vertX * vertZ * sizeof(terVert) ,
+							   0,
+							   0,
+							   D3DPOOL_MANAGED,
+							   &v_buff,
+							   NULL);
 
 
 
-    VOID* pVoid;    // a void pointer
+	VOID* pVoid;    // a void pointer
 
-    // lock v_buffer and load the vertices into it
-    v_buff->Lock(0, 0, (void**)&pVoid, 0);
+	// lock v_buffer and load the vertices into it
+	v_buff->Lock(0, 0, (void**)&pVoid, 0);
 	memcpy(pVoid, vert, sizeof(terVert)  * (vertX * vertZ));
-    v_buff->Unlock();
+	v_buff->Unlock();
 
 	//delete []pVoid;
 
@@ -531,10 +531,10 @@ void Terrain::Render()
 	wvp = mWorld * mView * mProj;
 
 
-             pEffect->SetMatrix("world", &mWorld);
+			 pEffect->SetMatrix("world", &mWorld);
 			 pEffect->SetMatrix("worldInverseTrans", &wi);
 
-             pEffect->SetMatrix("wvp",  &wvp);
+			 pEffect->SetMatrix("wvp",  &wvp);
 			 pEffect->SetMatrix("viewInvTrans", &ViewInverse);
 
 			 //pEffect->SetTexture("diffuseTexture",t8Tex);
@@ -622,7 +622,7 @@ void Terrain::Render()
 		pEffect->BeginPass(i); // Set the pass
 		 //render geometry e.g. DrawIndexedPrimitive
 		//d3->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-     
+	 
 		
 		d3->DrawIndexedPrimitive( D3DPT_TRIANGLELIST,0,0,vertX * vertZ,0,triCount[drawindex]);
 	
@@ -866,11 +866,11 @@ void Terrain::calculateTerrainNormals()
 {
 
 	D3DXVECTOR3 v1;
-    D3DXVECTOR3 v2;
-    D3DXVECTOR3 v3;
-    D3DXVECTOR3 vTangent;
-    D3DXVECTOR3 vBiNormal;
-    D3DXVECTOR3 vNormal;
+	D3DXVECTOR3 v2;
+	D3DXVECTOR3 v3;
+	D3DXVECTOR3 vTangent;
+	D3DXVECTOR3 vBiNormal;
+	D3DXVECTOR3 vNormal;
 
 
 	D3DXVECTOR3 A, B, N;
@@ -886,15 +886,15 @@ start = i*3;
 		
 
 		v1 = D3DXVECTOR3(vert[drawMap[start+0]].X, vert[drawMap[start+0]].Y, vert[drawMap[start+0]].Z);
-        v2 = D3DXVECTOR3(vert[drawMap[start+1]].X, vert[drawMap[start+1]].Y, vert[drawMap[start+1]].Z);
-        v3 = D3DXVECTOR3(vert[drawMap[start+2]].X, vert[drawMap[start+2]].Y, vert[drawMap[start+2]].Z);
+		v2 = D3DXVECTOR3(vert[drawMap[start+1]].X, vert[drawMap[start+1]].Y, vert[drawMap[start+1]].Z);
+		v3 = D3DXVECTOR3(vert[drawMap[start+2]].X, vert[drawMap[start+2]].Y, vert[drawMap[start+2]].Z);
 
 
 		createTangentSpaceVectors( &v1,&v2,&v3,
-                                   vert[drawMap[start+0]].fU2, vert[drawMap[start+0]].fV2,
-                                   vert[drawMap[start+1]].fU2, vert[drawMap[start+1]].fV2,
-                                   vert[drawMap[start+2]].fU2, vert[drawMap[start+2]].fV2,
-                                   &vTangent, &vBiNormal, &vNormal );
+								   vert[drawMap[start+0]].fU2, vert[drawMap[start+0]].fV2,
+								   vert[drawMap[start+1]].fU2, vert[drawMap[start+1]].fV2,
+								   vert[drawMap[start+2]].fU2, vert[drawMap[start+2]].fV2,
+								   &vTangent, &vBiNormal, &vNormal );
 		
 		//vNormal.y *= -1;
 
@@ -994,14 +994,14 @@ start = i*3;
 
 
 void Terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
-                                D3DXVECTOR3 *v2,
-                                D3DXVECTOR3 *v3,
-                                float v1u, float v1v,
-                                float v2u, float v2v,
-                                float v3u, float v3v,
-                                D3DXVECTOR3 *vTangent,
-                                D3DXVECTOR3 *vBiNormal,
-                                D3DXVECTOR3 *vNormal )
+								D3DXVECTOR3 *v2,
+								D3DXVECTOR3 *v3,
+								float v1u, float v1v,
+								float v2u, float v2v,
+								float v3u, float v3v,
+								D3DXVECTOR3 *vTangent,
+								D3DXVECTOR3 *vBiNormal,
+								D3DXVECTOR3 *vNormal )
 {
 	//A.x = (vert[drawMap[start+1]].X - vert[drawMap[start+2]].X);
 		//A.y = (vert[drawMap[start+1]].Y - vert[drawMap[start+2]].Y);
@@ -1012,96 +1012,96 @@ void Terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 		//B.z = (vert[drawMap[start]].Z - vert[drawMap[start+2]].Z);
 
 
-    // Create edge vectors from vertex 1 to vectors 2 and 3.
-    D3DXVECTOR3 vDirVec_v2_to_v1 = *v1 - *v3;
-    D3DXVECTOR3 vDirVec_v3_to_v1 = *v2 - *v3;
+	// Create edge vectors from vertex 1 to vectors 2 and 3.
+	D3DXVECTOR3 vDirVec_v2_to_v1 = *v1 - *v3;
+	D3DXVECTOR3 vDirVec_v3_to_v1 = *v2 - *v3;
 
-    // Create edge vectors from the texture coordinates of vertex 1 to vector 2.
-    float vDirVec_v2u_to_v1u = v1u - v3u;
-    float vDirVec_v2v_to_v1v = v1v - v3v;
+	// Create edge vectors from the texture coordinates of vertex 1 to vector 2.
+	float vDirVec_v2u_to_v1u = v1u - v3u;
+	float vDirVec_v2v_to_v1v = v1v - v3v;
 
-    // Create edge vectors from the texture coordinates of vertex 1 to vector 3.
-    float vDirVec_v3u_to_v1u = v2u - v3u;
-    float vDirVec_v3v_to_v1v = v2v - v3v;
+	// Create edge vectors from the texture coordinates of vertex 1 to vector 3.
+	float vDirVec_v3u_to_v1u = v2u - v3u;
+	float vDirVec_v3v_to_v1v = v2v - v3v;
 
-    float fDenominator = vDirVec_v2u_to_v1u * vDirVec_v3v_to_v1v - 
-                         vDirVec_v3u_to_v1u * vDirVec_v2v_to_v1v;
+	float fDenominator = vDirVec_v2u_to_v1u * vDirVec_v3v_to_v1v - 
+						 vDirVec_v3u_to_v1u * vDirVec_v2v_to_v1v;
 
-    if( fDenominator < 0.0001f && fDenominator > -0.0001f  && false)
-    {
-        // We're too close to zero and we're at risk of a divide-by-zero! 
-        // Set the tangent matrix to the identity matrix and do nothing.
-        *vTangent  = D3DXVECTOR3( 1.0f, 0.0f, 0.0f );
-        *vBiNormal = D3DXVECTOR3( 0.0f, 1.0f, 0.0f );
-        *vNormal   = D3DXVECTOR3( 0.0f, 0.0f, 1.0f );
-    }
-    else
-    {
-        // Calculate and cache the reciprocal value
-        float fScale1 = 1.0f / fDenominator;
+	if( fDenominator < 0.0001f && fDenominator > -0.0001f  && false)
+	{
+		// We're too close to zero and we're at risk of a divide-by-zero! 
+		// Set the tangent matrix to the identity matrix and do nothing.
+		*vTangent  = D3DXVECTOR3( 1.0f, 0.0f, 0.0f );
+		*vBiNormal = D3DXVECTOR3( 0.0f, 1.0f, 0.0f );
+		*vNormal   = D3DXVECTOR3( 0.0f, 0.0f, 1.0f );
+	}
+	else
+	{
+		// Calculate and cache the reciprocal value
+		float fScale1 = 1.0f / fDenominator;
 
-        D3DXVECTOR3 T;
-        D3DXVECTOR3 B;
-        D3DXVECTOR3 N;
+		D3DXVECTOR3 T;
+		D3DXVECTOR3 B;
+		D3DXVECTOR3 N;
 
-        T = D3DXVECTOR3((vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.x - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.x) * fScale1,
-                        (vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.y - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.y) * fScale1,
-                        (vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.z - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.z) * fScale1);
+		T = D3DXVECTOR3((vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.x - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.x) * fScale1,
+						(vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.y - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.y) * fScale1,
+						(vDirVec_v3v_to_v1v * vDirVec_v2_to_v1.z - vDirVec_v2v_to_v1v * vDirVec_v3_to_v1.z) * fScale1);
 
-        B = D3DXVECTOR3((-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.x + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.x) * fScale1,
-                        (-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.y + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.y) * fScale1,
-                        (-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.z + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.z) * fScale1);
+		B = D3DXVECTOR3((-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.x + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.x) * fScale1,
+						(-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.y + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.y) * fScale1,
+						(-vDirVec_v3u_to_v1u * vDirVec_v2_to_v1.z + vDirVec_v2u_to_v1u * vDirVec_v3_to_v1.z) * fScale1);
 
-        // The normal N is calculated as the cross product between T and B
-        D3DXVec3Cross( &N, &T, &B );
+		// The normal N is calculated as the cross product between T and B
+		D3DXVec3Cross( &N, &T, &B );
 
-        // Calculate and cache the reciprocal value
-        float fScale2 = 1.0f / ((T.x * B.y * N.z - T.z * B.y * N.x) + 
-                                (B.x * N.y * T.z - B.z * N.y * T.x) + 
-                                (N.x * T.y * B.z - N.z * T.y * B.x));
+		// Calculate and cache the reciprocal value
+		float fScale2 = 1.0f / ((T.x * B.y * N.z - T.z * B.y * N.x) + 
+								(B.x * N.y * T.z - B.z * N.y * T.x) + 
+								(N.x * T.y * B.z - N.z * T.y * B.x));
 
-        //
-        // Use the temporary T (Tangent), (B) Binormal, and N (Normal) vectors 
-        // to calculate the inverse of the tangent matrix that they represent.
-        // The inverse of the tangent matrix is what we want since we need that
-        // to transform the light's vector into tangent-space.
-        //
+		//
+		// Use the temporary T (Tangent), (B) Binormal, and N (Normal) vectors 
+		// to calculate the inverse of the tangent matrix that they represent.
+		// The inverse of the tangent matrix is what we want since we need that
+		// to transform the light's vector into tangent-space.
+		//
 
-        D3DXVECTOR3 vTemp;
+		D3DXVECTOR3 vTemp;
 
-        (*vTangent).x =   D3DXVec3Cross( &vTemp, &B, &N )->x * fScale2;
-        (*vTangent).y = -(D3DXVec3Cross( &vTemp, &N, &T )->x * fScale2);
-        (*vTangent).z =   D3DXVec3Cross( &vTemp, &T, &B )->x * fScale2;
-        D3DXVec3Normalize( &(*vTangent), &(T) );
+		(*vTangent).x =   D3DXVec3Cross( &vTemp, &B, &N )->x * fScale2;
+		(*vTangent).y = -(D3DXVec3Cross( &vTemp, &N, &T )->x * fScale2);
+		(*vTangent).z =   D3DXVec3Cross( &vTemp, &T, &B )->x * fScale2;
+		D3DXVec3Normalize( &(*vTangent), &(T) );
 
-        (*vBiNormal).x = -(D3DXVec3Cross( &vTemp, &B, &N )->y * fScale2);
-        (*vBiNormal).y =   D3DXVec3Cross( &vTemp, &N, &T )->y * fScale2;
-        (*vBiNormal).z = -(D3DXVec3Cross( &vTemp, &T, &B )->y * fScale2);
-        D3DXVec3Normalize( &(*vBiNormal), &(B) );
+		(*vBiNormal).x = -(D3DXVec3Cross( &vTemp, &B, &N )->y * fScale2);
+		(*vBiNormal).y =   D3DXVec3Cross( &vTemp, &N, &T )->y * fScale2;
+		(*vBiNormal).z = -(D3DXVec3Cross( &vTemp, &T, &B )->y * fScale2);
+		D3DXVec3Normalize( &(*vBiNormal), &(B) );
 
-        (*vNormal).x =   D3DXVec3Cross( &vTemp, &B, &N )->z * fScale2;
-        (*vNormal).y = -(D3DXVec3Cross( &vTemp, &N, &T )->z * fScale2);
-        (*vNormal).z =   D3DXVec3Cross( &vTemp, &T, &B )->z * fScale2;
-        D3DXVec3Normalize( &(*vNormal), &(N) );
+		(*vNormal).x =   D3DXVec3Cross( &vTemp, &B, &N )->z * fScale2;
+		(*vNormal).y = -(D3DXVec3Cross( &vTemp, &N, &T )->z * fScale2);
+		(*vNormal).z =   D3DXVec3Cross( &vTemp, &T, &B )->z * fScale2;
+		D3DXVec3Normalize( &(*vNormal), &(N) );
 
-        //
-        // NOTE: Since the texture-space of Direct3D and OpenGL are laid-out 
-        //       differently, a single normal map can't look right in both 
-        //       unless you make some adjustments somewhere.
-        //
-        //       You can adjust or fix this problem in three ways:
-        //
-        //       1. Create two normal maps: one for OpenGL and one for Direct3D.
-        //       2. Flip the normal map image over as you load it into a texture 
-        //          object.
-        //       3. Flip the binormal over when computing the tangent-space
-        //          matrix.
-        //
-        // Since the normal map used by this sample was created for Direct3D,
-        // no adjustment is necessary.
-        //
-        //*vBiNormal = *vBiNormal * -1.0f;
-    }
+		//
+		// NOTE: Since the texture-space of Direct3D and OpenGL are laid-out 
+		//       differently, a single normal map can't look right in both 
+		//       unless you make some adjustments somewhere.
+		//
+		//       You can adjust or fix this problem in three ways:
+		//
+		//       1. Create two normal maps: one for OpenGL and one for Direct3D.
+		//       2. Flip the normal map image over as you load it into a texture 
+		//          object.
+		//       3. Flip the binormal over when computing the tangent-space
+		//          matrix.
+		//
+		// Since the normal map used by this sample was created for Direct3D,
+		// no adjustment is necessary.
+		//
+		//*vBiNormal = *vBiNormal * -1.0f;
+	}
 }
 
 
@@ -1857,7 +1857,7 @@ void Terrain::createTangentSpaceVectors( D3DXVECTOR3 *v1,
 		for (DWORD x=0; x<width; x++)
 		{
 		   int index=(x+(y*(r.Pitch)/4));
-        
+		
 		   atvaizdas[index]=paveikslas[cnt];
 
 		   //// Blue
@@ -2005,12 +2005,12 @@ void Terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
 			(leftAngle >= a2 || a2 >= rightAngle) ||
 			(leftAngle >= a3 || a3 >= rightAngle) ||
 			(leftAngle >= a4 || a4 >= rightAngle)))
-                    
-                    
+					
+					
 				)
 		{
 		// piesia kvadrata
-            
+			
 		//g2d.setPaint(colors[level]);
 		//g2d.drawRect(x, y, w, h);
 
@@ -2128,85 +2128,85 @@ void Terrain::tree(int level, int x, int y, int w, int h, double tx, double ty, 
  bool Terrain::colision(int x, int y, int w, int h, double tx, double ty, int level, double &dist)
  {
 	 if(
-             ((dist = distance(x,y, w, h, tx, ty)) <= radius[level]) 
-                ||
-                (
-                tx >= x && tx <= x+w &&
-                ty >= y && ty <= y+h 
-                )  
-          )
-        {
-            return true;
-        }
-        
-        return false;
+			 ((dist = distance(x,y, w, h, tx, ty)) <= radius[level]) 
+				||
+				(
+				tx >= x && tx <= x+w &&
+				ty >= y && ty <= y+h 
+				)  
+		  )
+		{
+			return true;
+		}
+		
+		return false;
  }
 
 
  bool Terrain::fullColision(int x, int y, int w, int h, double tx, double ty, int level)
-    {
-        if(
-                distance2(x,y, tx, ty) <= radius[level] &&
-                distance2(x+w,y, tx, ty) <= radius[level] &&
-                distance2(x,y+h, tx, ty) <= radius[level] &&
-                distance2(x+w,y+h, tx, ty) <= radius[level]
-                )
-        {
-            return true;
-        }
+	{
+		if(
+				distance2(x,y, tx, ty) <= radius[level] &&
+				distance2(x+w,y, tx, ty) <= radius[level] &&
+				distance2(x,y+h, tx, ty) <= radius[level] &&
+				distance2(x+w,y+h, tx, ty) <= radius[level]
+				)
+		{
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 
  double Terrain::distance(int x, int y, int w, int h, double tx, double ty)
-    {
-        double distanceToCenter = sqrt(
-                ((x+(w/2.0)-tx)*(x+(w/2.0)-tx))+((y+(h/2.0)-ty)*(y+(h/2.0)-ty)));
-        
-        double colisionRadius = sqrt(
-                ((w/2.0)*(w/2.0))+((h/2.0)*(h/2.0)));
-        
-        return distanceToCenter-colisionRadius;
-    } 
+	{
+		double distanceToCenter = sqrt(
+				((x+(w/2.0)-tx)*(x+(w/2.0)-tx))+((y+(h/2.0)-ty)*(y+(h/2.0)-ty)));
+		
+		double colisionRadius = sqrt(
+				((w/2.0)*(w/2.0))+((h/2.0)*(h/2.0)));
+		
+		return distanceToCenter-colisionRadius;
+	} 
 
  double Terrain::distance2(int x, int y, double tx, double ty)
-    {
-        return sqrt(((x-tx)*(x-tx))+((y-ty)*(y-ty)));
-    }
+	{
+		return sqrt(((x-tx)*(x-tx))+((y-ty)*(y-ty)));
+	}
 
 
  double Terrain::angle(double px, double py, double x, double y)
-    {
-        x = x - px;
-        y = y - py;
-        
-       
+	{
+		x = x - px;
+		y = y - py;
+		
+	   
 		double lenght = sqrt((double)(x*x+y*y));             
-        double sinOf = y/lenght;       
-        double angle = asin(sinOf)* (180/3.14);       
-        
-        if(x < 0)
-        {
-            if(y < 0)
-            {
-                angle = 180 + abs(angle);
-            }
-            else
-            {
-                angle = 180-angle;
-            }
-        }
-        else
-        {
-            if(y < 0)
-            {
-                angle = 360 + angle;
-            }
-        }
+		double sinOf = y/lenght;       
+		double angle = asin(sinOf)* (180/3.14);       
+		
+		if(x < 0)
+		{
+			if(y < 0)
+			{
+				angle = 180 + abs(angle);
+			}
+			else
+			{
+				angle = 180-angle;
+			}
+		}
+		else
+		{
+			if(y < 0)
+			{
+				angle = 360 + angle;
+			}
+		}
 
-        return angle;
-    }
+		return angle;
+	}
 
  int Terrain::xyToint(int x, int y)
  {

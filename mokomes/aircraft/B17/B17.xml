@@ -1095,18 +1095,6 @@
 
   </aerodynamics>
 
-  <output name="JSBoutB17.csv" type="CSV" rate="120">
-    <rates> ON </rates>
-    <velocities> ON </velocities>
-    <forces> ON </forces>
-    <moments> ON </moments>
-    <position> ON </position>
-    <propulsion> ON </propulsion>
-    <aerosurfaces> ON </aerosurfaces>
-    <fcs> OFF </fcs>
-    <massprops> ON </massprops>
-    <ground_reactions> ON </ground_reactions>
-    <property> aero/angle/right_wing_tip_alpha </property>
-  </output>
+
   
 </fdm_config>

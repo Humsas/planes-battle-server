@@ -1,25 +1,23 @@
 #ifndef TREE1_H_
 #define TREE1_H_
 
-
-//#include "WinsockWrapper.h"
+#include "WinsockWrapper.h"
 #include "AbstractEntity.h"
 #include "NetworkObject.h"
+#include "NetworkIDObject.h"
 
 
 using namespace RakNet;
 
 class Tree1 : public AbstractEntity, public NetworkIDObject,  public NetworkObject
 {
-
 public:
 	Tree1()
 	{
 		mType = GAME_ENTITY_TREE1;
 		mCreated = false;
-		mMeshID = "t1";
 	}
-	Tree1(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "t1", position, rotation, rand() % 100 + 1, ENTITY_STATIC), NetworkObject(canUpdate)
+	Tree1(Mesh *m, std::string meshId, Vector &position, Vector &rotation, int scale, bool canUpdate) : AbstractEntity(m, meshId, position, rotation, scale, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_TREE1; 
 		mCreated = false;
@@ -30,12 +28,8 @@ public:
 	}
 
 
-
 	void Update(float dt)
 	{
-			// do nothing :D
-			// nes nejuda sitas daiktas
-
 	}
 
 	/*void Render()
@@ -68,10 +62,7 @@ public:
 		stream->Write(mType);
 		stream->Write((NetworkID)this->GetNetworkID());
 
-		stream->Write(position);
-		//stream.Write(rotarionYawPitchRoll);
-		//stream.Write(scale);
-		//stream.Write(entityType);
+
 
 		if(!IsBitStreamDifferent(stream))
 		{
@@ -92,10 +83,7 @@ public:
 		stream->Read(mType);
 		stream->IgnoreBytes(sizeof(NetworkID));
 
-		stream->Read(position);
-		//stream->Read(rotarionYawPitchRoll);
-		//stream->Read(scale);
-		//stream->Read(entityType);
+
 	}
 
 	void CreateSerialize(RakPeerInterface* peer)
@@ -109,7 +97,9 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		//stream.Write(mMeshID);
+		RakString tmp = mMeshID.c_str();
+		stream.Write((RakString)tmp);
+
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
@@ -125,7 +115,9 @@ public:
 		stream.Write((Vector)rotarionYawPitchRoll);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		//stream.Write(mMeshID);
+		RakString tmp = mMeshID.c_str();
+		stream.Write((RakString)tmp);
+
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
 	}
@@ -149,7 +141,10 @@ public:
 		stream->Read(rotarionYawPitchRoll);
 		stream->Read(scale);
 		stream->Read(entityType);
-		//stream->Read(mMeshID);
+		RakString tmpStr;
+		stream->Read(tmpStr);
+		mMeshID = tmpStr.C_StringUnsafe();
+
 
 		pMesh = pMeshManager->getPointer(mMeshID);
 
@@ -157,6 +152,7 @@ public:
 		rotateYPR(&rotarionYawPitchRoll);
 		combine();
 	}
+
 };
 
 #endif

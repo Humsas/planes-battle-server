@@ -659,18 +659,20 @@ double Game::distance(Vector &v1, Vector &v2)
 void Game::TestGameInit()
 {
 	// spawn some mediena
-	Vector p1(25600, 25600, 0);
-	Vector p2(51200, 51200, 0);
+	Vector p1(29883.3, 26343.8, 1175.33);
+	Vector p2(51318.7, 45347.4, 1175.33-44);
+	string medziai[7] = {"t1", "t1", "t3", "t4", "t5", "t6", "t7"};
 
-	int treeCount = 1000;
+	int treeCount = 10000;
 
 	while(treeCount > 0)
 	{
-		Vector p((rand() % 25600) + 25600, (rand() % 25600) + 25600, 0);
+		Vector p((rand() % 25598) + 25601, (rand() % 25598) + 25601, 0);
 
 		if(distance(p1, p) > 5000 && distance(p2, p) > 5000)
 		{
-			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), false);
+			//Tree1 *tt = new Tree1()
+			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), medziai[rand() % 7], Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), 20+ rand()%30,false);
 			treeEntity->SetNetworkIDManager(mNetworkIdManager);
 			treeEntity->CreateSerialize(mNetwork->GetServer());
 			scena->getChunkManager()->addEntity(treeEntity);
