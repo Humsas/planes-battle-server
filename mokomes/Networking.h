@@ -23,6 +23,8 @@
 #include "console.h"
 #include "game.h"
 #include "TestCubeEntity.h"
+#include "Tree1Entiry.h"
+
 
 using namespace std;
 using namespace RakNet;

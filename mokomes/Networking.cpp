@@ -117,6 +117,16 @@ void Networking::Update()
 							te->SetCreated(true);
 						break;
 					}
+
+				case GAME_ENTITY_TREE1:
+					{
+						Tree1* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Tree1*>(id);
+
+						if(te != NULL)
+							te->SetCreated(true);
+						break;
+					}
+
 				default:
 					break;
 				}
@@ -185,6 +195,13 @@ void Networking::Update()
 								te->CreateSerialize(mServer, packet->guid);
 								break;
 							}
+
+						case GAME_ENTITY_TREE1:
+							{
+								Tree1* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Tree1*>(id);
+								te->CreateSerialize(mServer, packet->guid);
+								break;
+							}
 						default:
 							break;
 					}
@@ -221,6 +238,9 @@ void Networking::Update()
 			break;
 		case GAME_ENTITY_BUILDING:
 			((Building*)es)->NetworkUpdate(mServer);
+			break;
+		case GAME_ENTITY_TREE1:
+			((Tree1*)es)->NetworkUpdate(mServer);
 			break;
 		default:
 			break;
@@ -401,6 +421,17 @@ void Networking::DeleteObjectReceived(NetworkID id, int type)
 	case GAME_ENTITY_BUILDING:
 		{
 			Building* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Building*>(id);
+
+			if(te != NULL)
+			{
+
+			}
+			break;
+		}
+
+	case GAME_ENTITY_TREE1:
+		{
+			Tree1* te = mGame->getNetworkIDManager()->GET_OBJECT_FROM_ID<Tree1*>(id);
 
 			if(te != NULL)
 			{

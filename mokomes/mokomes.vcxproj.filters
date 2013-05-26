@@ -821,5 +821,8 @@
     <ClInclude Include="FPSLimiter.h">
       <Filter>Header Files\UsefulStuff</Filter>
     </ClInclude>
+    <ClInclude Include="Tree1Entiry.h">
+      <Filter>Header Files\GameEntities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
