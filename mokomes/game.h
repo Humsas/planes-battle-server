@@ -120,7 +120,7 @@ private:
 
 	float lastWarningTime;
 
-
+	double distance(Vector &v1, Vector &v2);
 	
 
 public:

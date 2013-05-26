@@ -17,7 +17,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	//kolizijos	= new ColisionManager(scena->getTerrain());
 
 	timer		= new Timer();
-	
+
 	//lektuvas = NULL;
 	//lektuvas	= new AircraftB17(scena->getMeshManager(), Vector(20000, 7500, scena->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(20000, 4000, 7500))), Vector(0, 0, 0), true, scena->getChunkManager());
 
@@ -50,9 +50,9 @@ Game::~Game()
 	for(int i = mPlayers.size()-1; i > 0; i--)
 		if(mPlayers[i] != NULL)	
 			delete mPlayers[i];
-							//delete enemyBaseList;
-							//delete bombList;
-							//delete cannonsList;
+	//delete enemyBaseList;
+	//delete bombList;
+	//delete cannonsList;
 }
 
 void Game::Render()
@@ -459,206 +459,231 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 			break;
 		}
 
-	USHORT keyCode;
-	bool isUp;
-	stream->Read(keyCode);
+		USHORT keyCode;
+		bool isUp;
+		stream->Read(keyCode);
 
-	switch (keyCode)
-	{
-	case VK_SHIFT:
-		break;
-	case 'Z':
-		stream->Read(isUp);
-		(isUp)? plane->startEngine(false) : plane->startEngine(true);
-		
-		break;
-	case 'X':
-		stream->Read(isUp);
-		(isUp)? "" : plane->stopEngine();
-
-		break;
-	case 'W':
-		stream->Read(isUp);
-		(isUp)? plane->setElevator(0) : plane->setElevator(1.0);
-
-		break;
-	case 'S':
-		stream->Read(isUp);
-		(isUp)? plane->setElevator(0) : plane->setElevator(-1.0);
-
-		break;
-	case 'A':
-		stream->Read(isUp);
-		(isUp)? plane->setElerons(0) : plane->setElerons(1.0);
-
-		break;
-	case 'D':
-		stream->Read(isUp);
-		(isUp)? plane->setElerons(0) : plane->setElerons(-1.0);
-
-		break;
-	case 'Q':
-		stream->Read(isUp);
-		(isUp)? plane->setRuder(0) : plane->setRuder(-1.0);
-
-		break;
-	case 'E':
-		stream->Read(isUp);
-		(isUp)? plane->setRuder(0) : plane->setRuder(1.0);
-
-		break;
-	case 'B':
-		stream->Read(isUp);
-		(isUp)? plane->setBrakes(false) : plane->setBrakes(true);
-
-		break;
-	case 'F':
-		stream->Read(isUp);
-		(isUp)? plane->setFlaps(0.0) : plane->setFlaps(1.0);
-
-		break;
-	case 'G':
-		stream->Read(isUp);
-		(isUp)? "" : plane->gearUpDown();
-
-		break;
-	case VK_UP:
-		stream->Read(isUp);
-		(isUp)? "" : plane->increaseThrottle();
-
-		break;
-	case VK_DOWN:
-		stream->Read(isUp);
-		(isUp)? "" : plane->decreaseThrottle();
-
-		break;
-	case GAME_KEY_QUIT_GAME:
-		gServerConsole.addLine("Klienas quitina");
-		PostQuitMessage(1);
-		break;
-	case MM_JOY1MOVE:
+		switch (keyCode)
 		{
-			float elerons, elevator;
-			stream->Read(elerons);
-			stream->Read(elevator);
-
-			plane->setElerons(elerons);
-			plane->setElevator(elevator);
-
+		case VK_SHIFT:
 			break;
-		}
-	case MM_JOY1ZMOVE:
-		{
-			float throttle;
-			stream->Read(throttle);
-			plane->setThrottle(throttle);
-
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON1:
-		{
-			stream->Read(isUp);
-			if(!isUp)
-				plane->decreaseThrottle();
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON2:
-		{
-			stream->Read(isUp);
-			if(!isUp)
-				plane->increaseMixture();
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON3:
-		{
-			stream->Read(isUp);
-			if(!isUp)
-				plane->decreaseMixture();
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON4:
-		{
-			stream->Read(isUp);
-			if(!isUp)
-				plane->increaseThrottle();
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON5:
-		{
-			stream->Read(isUp);
-			(isUp)? plane->setRuder(0.0) : plane->setRuder(-1.0);
-
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON6:
-		break;
-	case GAME_KEY_JOY_BUTTON7:
-		{
-			stream->Read(isUp);
-			(isUp)? plane->setRuder(0.0) : plane->setRuder(1.0);
-
-			break;
-		}
-	case GAME_KEY_JOY_BUTTON8:
-		break;
-	case GAME_KEY_JOY_BUTTON9:
-		{
+		case 'Z':
 			stream->Read(isUp);
 			(isUp)? plane->startEngine(false) : plane->startEngine(true);
 
 			break;
-		}
-	case GAME_KEY_JOY_BUTTON10:
-		{
+		case 'X':
 			stream->Read(isUp);
-			if(!isUp)
-				plane->stopEngine();
-			break;
-		}
-	case GAME_KEY_MOUSE_MOVE:
-		{
-			LONG x, y;
-			stream->Read(x);
-			stream->Read(y);
-			//getScene()->getCamera()->updateAngle(x, y);
+			(isUp)? "" : plane->stopEngine();
 
 			break;
+		case 'W':
+			stream->Read(isUp);
+			(isUp)? plane->setElevator(0) : plane->setElevator(1.0);
+
+			break;
+		case 'S':
+			stream->Read(isUp);
+			(isUp)? plane->setElevator(0) : plane->setElevator(-1.0);
+
+			break;
+		case 'A':
+			stream->Read(isUp);
+			(isUp)? plane->setElerons(0) : plane->setElerons(1.0);
+
+			break;
+		case 'D':
+			stream->Read(isUp);
+			(isUp)? plane->setElerons(0) : plane->setElerons(-1.0);
+
+			break;
+		case 'Q':
+			stream->Read(isUp);
+			(isUp)? plane->setRuder(0) : plane->setRuder(-1.0);
+
+			break;
+		case 'E':
+			stream->Read(isUp);
+			(isUp)? plane->setRuder(0) : plane->setRuder(1.0);
+
+			break;
+		case 'B':
+			stream->Read(isUp);
+			(isUp)? plane->setBrakes(false) : plane->setBrakes(true);
+
+			break;
+		case 'F':
+			stream->Read(isUp);
+			(isUp)? plane->setFlaps(0.0) : plane->setFlaps(1.0);
+
+			break;
+		case 'G':
+			stream->Read(isUp);
+			(isUp)? "" : plane->gearUpDown();
+
+			break;
+		case VK_UP:
+			stream->Read(isUp);
+			(isUp)? "" : plane->increaseThrottle();
+
+			break;
+		case VK_DOWN:
+			stream->Read(isUp);
+			(isUp)? "" : plane->decreaseThrottle();
+
+			break;
+		case GAME_KEY_QUIT_GAME:
+			gServerConsole.addLine("Klienas quitina");
+			PostQuitMessage(1);
+			break;
+		case MM_JOY1MOVE:
+			{
+				float elerons, elevator;
+				stream->Read(elerons);
+				stream->Read(elevator);
+
+				plane->setElerons(elerons);
+				plane->setElevator(elevator);
+
+				break;
+			}
+		case MM_JOY1ZMOVE:
+			{
+				float throttle;
+				stream->Read(throttle);
+				plane->setThrottle(throttle);
+
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON1:
+			{
+				stream->Read(isUp);
+				if(!isUp)
+					plane->decreaseThrottle();
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON2:
+			{
+				stream->Read(isUp);
+				if(!isUp)
+					plane->increaseMixture();
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON3:
+			{
+				stream->Read(isUp);
+				if(!isUp)
+					plane->decreaseMixture();
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON4:
+			{
+				stream->Read(isUp);
+				if(!isUp)
+					plane->increaseThrottle();
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON5:
+			{
+				stream->Read(isUp);
+				(isUp)? plane->setRuder(0.0) : plane->setRuder(-1.0);
+
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON6:
+			break;
+		case GAME_KEY_JOY_BUTTON7:
+			{
+				stream->Read(isUp);
+				(isUp)? plane->setRuder(0.0) : plane->setRuder(1.0);
+
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON8:
+			break;
+		case GAME_KEY_JOY_BUTTON9:
+			{
+				stream->Read(isUp);
+				(isUp)? plane->startEngine(false) : plane->startEngine(true);
+
+				break;
+			}
+		case GAME_KEY_JOY_BUTTON10:
+			{
+				stream->Read(isUp);
+				if(!isUp)
+					plane->stopEngine();
+				break;
+			}
+		case GAME_KEY_MOUSE_MOVE:
+			{
+				LONG x, y;
+				stream->Read(x);
+				stream->Read(y);
+				//getScene()->getCamera()->updateAngle(x, y);
+
+				break;
+			}
+		case GAME_KEY_MOUSE_WHEEL:
+			break;
+		case GAME_KEY_MOUSE_LEFT_BUTTON_DOWN:
+			//fire(plane, playerID, true);
+			plane->setLeftButtonDown(true);
+			break;
+		case GAME_KEY_MOUSE_LEFT_BUTTON_UP:
+			plane->setLeftButtonDown(false);
+			//fire(false);
+			break;
+		case GAME_KEY_MOUSE_RIGHT_BUTTON_DOWN:
+			//drop(true);
+			break;
+		case GAME_KEY_MOUSE_RIGHT_BUTTON_UP:
+			//drop(false);
+			break;
+		default:
+			gServerConsole.addLine("Atkeliavo Neatpazintas mygtuko signalas.");
+			break;
 		}
-	case GAME_KEY_MOUSE_WHEEL:
-		break;
-	case GAME_KEY_MOUSE_LEFT_BUTTON_DOWN:
-		//fire(plane, playerID, true);
-		plane->setLeftButtonDown(true);
-		break;
-	case GAME_KEY_MOUSE_LEFT_BUTTON_UP:
-		plane->setLeftButtonDown(false);
-		//fire(false);
-		break;
-	case GAME_KEY_MOUSE_RIGHT_BUTTON_DOWN:
-		//drop(true);
-		break;
-	case GAME_KEY_MOUSE_RIGHT_BUTTON_UP:
-		//drop(false);
-		break;
-	default:
-		gServerConsole.addLine("Atkeliavo Neatpazintas mygtuko signalas.");
-		break;
-	}
 }
 
+double Game::distance(Vector &v1, Vector &v2)
+{
+	return sqrt(((v1.x - v2.x) * (v1.x - v2.x))+
+		((v1.y - v2.y) * (v1.y - v2.y))+
+		((v1.z - v2.z) * (v1.z - v2.z)));
+}
 
 void Game::TestGameInit()
 {
+	// spawn some mediena
+	Vector p1(25600, 25600, 0);
+	Vector p2(51200, 51200, 0);
+
+	int treeCount = 1000;
+
+	while(treeCount > 0)
+	{
+		Vector p((rand() % 25600) + 25600, (rand() % 25600) + 25600, 0);
+
+		if(distance(p1, p) > 5000 && distance(p2, p) > 5000)
+		{
+			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), false);
+			scena->getChunkManager()->addEntity(treeEntity);
+			treeCount--;
+		}
+	}
+
+
 	// add some tree
 
-	int iS = 1;
+	/*int iS = 1;
 	int iR = 1;
-	
+
 	string medziai[7] = {"t1", "t1", "t3", "t4", "t5", "t6", "t7"};
 
 	objektas *oo = NULL;
 
-	objectPosition *op = NULL;
+	objectPosition *op = NULL;*/
 
 	//for(int i = 0; i < 100; i++)
 	//{
@@ -770,7 +795,7 @@ void Game::TestGameInit()
 	//	}
 	//
 	//}
-	
+
 
 	//oo = scena->addObject("sfera"/*, i*500, Ter.getH(D3DXVECTOR3(i*500,1,j*500))+0 ,j*500, iSecret*/);
 
