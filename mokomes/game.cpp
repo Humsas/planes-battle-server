@@ -536,7 +536,7 @@ void Game::ProcessKeyMessages(BitStream* stream, RakNetGUID playerID)
 
 			break;
 		case GAME_KEY_QUIT_GAME:
-			gServerConsole.addLine("Klienas quitina");
+			gServerConsole.addLine("Zaidejas atsijunge.");
 			PostQuitMessage(1);
 			break;
 		case MM_JOY1MOVE:
