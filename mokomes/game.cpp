@@ -672,7 +672,7 @@ void Game::TestGameInit()
 		if(distance(p1, p) > 5000 && distance(p2, p) > 5000)
 		{
 			//Tree1 *tt = new Tree1()
-			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), medziai[rand() % 7], Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), 20+ rand()%30,false);
+			Tree1 *treeEntity = new Tree1(scena->getMeshManager(), medziai[rand() % 7], Vector(p.x, p.y, scena->getChunkManager()->getMapHeightAtPoint(Vector(p.x, p.y, 0))), Vector(rand()%360, 0, 0), 40+ rand()%60,false);
 			treeEntity->SetNetworkIDManager(mNetworkIdManager);
 			treeEntity->CreateSerialize(mNetwork->GetServer());
 			scena->getChunkManager()->addEntity(treeEntity);
