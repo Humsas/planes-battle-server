@@ -115,25 +115,25 @@ public:
 		mInputColor[0].y = SCREEN_HEIGHT-35;
 		mInputColor[0].z = 0;
 		mInputColor[0].rhw = 1.0f;
-		mInputColor[0].colour = D3DCOLOR_XRGB(170, 170, 170);
+		mInputColor[0].colour = D3DCOLOR_XRGB(0, 0, 0);
 
 		mInputColor[1].x = SCREEN_WIDTH-10;
 		mInputColor[1].y = SCREEN_HEIGHT-35;
 		mInputColor[1].z = 0;
 		mInputColor[1].rhw = 1.0f;
-		mInputColor[1].colour = D3DCOLOR_XRGB(170, 170, 170);
+		mInputColor[1].colour = D3DCOLOR_XRGB(0, 0, 0);
 
 		mInputColor[2].x = 7;
 		mInputColor[2].y = SCREEN_HEIGHT-10;
 		mInputColor[2].z = 0;
 		mInputColor[2].rhw = 1.0f;
-		mInputColor[2].colour = D3DCOLOR_XRGB(170, 170, 170);
+		mInputColor[2].colour = D3DCOLOR_XRGB(0, 0, 0);
 
 		mInputColor[3].x = SCREEN_WIDTH-10;
 		mInputColor[3].y = SCREEN_HEIGHT-10;
 		mInputColor[3].z = 0;
 		mInputColor[3].rhw = 1.0f;
-		mInputColor[3].colour = D3DCOLOR_XRGB(170, 170, 170);
+		mInputColor[3].colour = D3DCOLOR_XRGB(0, 0, 0);
 	}
 
 	void inputMessageAppend(char c);
