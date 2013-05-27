@@ -133,7 +133,8 @@ public:
 		stream.Write((Vector)speed);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		stream.Write(mMeshID);
+		RakString str = mMeshID.c_str();
+		stream.Write((RakString)str);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
@@ -150,7 +151,8 @@ public:
 		stream.Write((Vector)speed);
 		stream.Write((float)scale);
 		stream.Write(entityType);
-		stream.Write(mMeshID);
+		RakString str = mMeshID.c_str();
+		stream.Write((RakString)str);
 
 		peer->Send(&stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_NEW_DATA, idToSendTo, false);
 	}
@@ -175,7 +177,9 @@ public:
 		stream->Read(speed);
 		stream->Read(scale);
 		stream->Read(entityType);
-		stream->Read(mMeshID);
+		RakString str;
+		stream->Read(str);
+		mMeshID = str.C_StringUnsafe();
 
 		pMesh = pMeshManager->getPointer(mMeshID);
 
