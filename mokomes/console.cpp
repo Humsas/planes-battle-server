@@ -108,9 +108,9 @@ void Console::render(LPDIRECT3DDEVICE9 &d3)
 	#pragma omp critical(konsole)
 	{
 		d3->SetRenderState(D3DRS_LIGHTING, FALSE);
-		d3->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-		d3->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-		d3->SetRenderState(D3DRS_SRCBLENDALPHA, D3DRS_DESTBLENDALPHA);
+		//d3->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+		//d3->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+		//d3->SetRenderState(D3DRS_SRCBLENDALPHA, D3DRS_DESTBLENDALPHA);
 
 		IDirect3DVertexBuffer9 *vertexBuffer;
 		d3->CreateVertexBuffer(4*sizeof(TLVERTEX), NULL, D3DFVF_TLVERTEX, D3DPOOL_DEFAULT, &vertexBuffer, NULL);
@@ -148,7 +148,7 @@ void Console::render(LPDIRECT3DDEVICE9 &d3)
 			false,
 			DEFAULT_CHARSET,
 			OUT_TT_PRECIS,
-			CLIP_DEFAULT_PRECIS,
+			100,
 			DEFAULT_PITCH,
 			L"Calibri"};
 
@@ -228,11 +228,11 @@ void Console::render(LPDIRECT3DDEVICE9 &d3)
 				break;
 			}
 
-			FontPosition.top += 15;
+			FontPosition.top += 16;
 		}
 
 		//Zaidejo ivedamas tekstas
-		FontPosition.top = SCREEN_HEIGHT - 35;
+		FontPosition.top = SCREEN_HEIGHT - 32;
 		ss.str(L"");
 		ss.clear();
 		ss << mInputMessage.c_str();
