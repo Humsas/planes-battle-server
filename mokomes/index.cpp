@@ -89,7 +89,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	RegisterClassEx(&wc);
 
-	hWnd = CreateWindowEx(NULL, L"GameClass", L"Plains Battle",
+	hWnd = CreateWindowEx(NULL, L"GameClass", L"Planes Battle",
 		WS_MINIMIZEBOX, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLong(hWnd, GWL_STYLE, WS_POPUP | WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX); 
