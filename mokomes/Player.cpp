@@ -26,6 +26,22 @@ void Player::Update()
 	if(mPlane->isReadyToShootProjectileBomb())
 		fire(mPlane, mPlane->GetOwnerId());
 
+	/*for(int i = 0; i < mTurretsList.size(); i++)
+	{
+		if(mTurretsList[i]->getShotTimer() >= 2)
+		{
+			ProjectileBomb *bomb = new ProjectileBomb(mGame->getScene()->getMeshManager(), *mTurretsList[i]->getPosition(), mTurretsList[i]->getShotDirrection(), 300, true);
+			bomb->SetNetworkIDManager(mGame->getNetworkIDManager());
+			bomb->SetOwnerId(mPlayerId);
+			bomb->CreateSerialize(mGame->getNetwork()->GetServer());
+
+			mGame->getScene()->getChunkManager()->addEntity(bomb);
+			mBombList.push_back(bomb);
+
+			mTurretsList[i]->resetShotTimer();
+		}
+	}*/
+
 	for (int i = 0; i < mBombList.size(); i++)
 	{
 		//Kolizija su zeme
@@ -114,6 +130,8 @@ void Player::Update()
 		}
 	}
 
+	
+
 	if(bombsToRemove.size() > 0)
 	{
 		for (int i = bombsToRemove.size()-1; i >= 0; i--)
@@ -158,15 +176,15 @@ void Player::BuildBase(int count)
 	if(count == 1)
 	{
 		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(30227.9, 25874, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30227.9, 1315, 25874))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30227.9, 1315, 25874))+20), Vector(0,0,0), true);
 		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(30827.9, 25896, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30827.9, 1315, 25896))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30827.9, 1315, 25896))+20), Vector(0,0,0), true);
 		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(29167.6, 26346.1, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(29167.6, 1315, 26346.1))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(29167.6, 1315, 26346.1))+20), Vector(0,0,0), true);
 		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(30258.9, 26531.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30258.9, 1315, 26531.4))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30258.9, 1315, 26531.4))+20), Vector(0,0,0), true);
 		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(30790.9, 26535.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30790.9, 1315, 26535.4))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30790.9, 1315, 26535.4))+20), Vector(0,0,0), true);
 
 		AddTurret(t1);
 		AddTurret(t2);
@@ -225,15 +243,15 @@ void Player::BuildBase(int count)
 	else
 	{
 		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(50974.1, 45817.2, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50974.1, 1315, 45817.2))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50974.1, 1315, 45817.2))+20), Vector(0,0,0), true);
 		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(50374.1, 45795.2, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50374.1, 1315, 45795.2))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50374.1, 1315, 45795.2))+20), Vector(0,0,0), true);
 		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(52034.4, 45345.1, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(52034.4, 1315, 45345.1))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(52034.4, 1315, 45345.1))+20), Vector(0,0,0), true);
 		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(50943.1, 45159.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50943.1, 1315, 45159.8))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50943.1, 1315, 45159.8))+20), Vector(0,0,0), true);
 		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(50411.1, 45155.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50411.1, 1315, 45155.8))), Vector(0,0,0), true);
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50411.1, 1315, 45155.8))+20), Vector(0,0,0), true);
 
 		AddTurret(t1);
 		AddTurret(t2);
