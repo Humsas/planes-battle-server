@@ -413,6 +413,12 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 		mNetwork->GetServer()->Send(stream, HIGH_PRIORITY, RELIABLE_ORDERED, GAME_CHANNEL_UPDATE, playerID, false);
 		delete pEnt;
 		delete stream;
+
+		if(mPlayers.size() == 2)
+		{
+			mPlayers[0]->SetTurretsTarget(mPlayers[1]->GetPlane());
+			mPlayers[1]->SetTurretsTarget(mPlayers[0]->GetPlane());
+		}
 	}
 }
 

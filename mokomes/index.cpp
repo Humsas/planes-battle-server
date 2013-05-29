@@ -244,8 +244,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 #pragma omp section
 			while(suktis)
 			{
-				//if(game->getNetwork()->ArePlayersReady())
-				game->Update();
+				if(game->getNetwork()->ArePlayersReady())
+				{
+					game->Update();
+				}
 				FPSLimitForUpdate.doSleep();
 			}
 
