@@ -27,7 +27,7 @@ public:
 		scaleBarrel = 70;
 		rotarionYawPitchRollBarrel = Vector(0, 0, 0);		
 	}
-	Turret(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "cannon", position, rotation, 100, ENTITY_STATIC), NetworkObject(canUpdate)
+	Turret(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "cannon", position, rotation, 100, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_TURRET; 
 		mCreated = false;

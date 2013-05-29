@@ -400,6 +400,9 @@ void Game::playerConnected(RakNet::RakNetGUID playerID)
 			case GAME_ENTITY_TREE1:
 				stream->Write((NetworkID)((Tree1*)es)->GetNetworkID());
 				break;
+			case GAME_ENTITY_TURRET:
+				stream->Write((NetworkID)((Turret*)es)->GetNetworkID());
+				break;
 			default:
 				break;
 			}
