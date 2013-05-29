@@ -31,7 +31,7 @@
 using namespace std;
 using namespace RakNet;
 
-#define MAX_CLIENTS 100
+#define MAX_CLIENTS 2
 #define SERVER_PORT 53648
 
 class Game;
