@@ -15,7 +15,7 @@ Networking::Networking(Console* console, Game* game)
 	mServer->Startup(MAX_CLIENTS, &sd, 1);
 
 	mServer->SetMaximumIncomingConnections(MAX_CLIENTS);
-	mServer->SetTimeoutTime(300000, UNASSIGNED_SYSTEM_ADDRESS);
+	mServer->SetTimeoutTime(30000, UNASSIGNED_SYSTEM_ADDRESS);
 
 	OpenUPNP();
 }
