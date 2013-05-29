@@ -18,6 +18,7 @@
 #include "TestCubeEntity.h"
 
 #include "bomb.h"
+#include "Turret.h"
 #include "Player.h"
 #include "timer.h"
 

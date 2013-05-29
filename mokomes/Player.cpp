@@ -155,18 +155,25 @@ bool Player::RemoveBuildingFromList(Building* b)
 
 void Player::BuildBase(int count)
 {
-	Turret *tt = new Turret(mGame->getScene()->getMeshManager(), Vector(30000, 30000, 2000), Vector(0,0,0), true);
-
-	tt->SetNetworkIDManager(mGame->getNetworkIDManager());
-	tt->SetOwnerId(mPlayerId);
-	tt->CreateSerialize(mGame->getNetwork()->GetServer());
-
-	tt->setTarget(mPlane);
-
-	mGame->getScene()->getChunkManager()->addEntity(tt);
-
 	if(count == 1)
 	{
+		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(30227.9, 25874, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30227.9, 1315, 25874))), Vector(0,0,0), true);
+		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(30827.9, 25896, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30827.9, 1315, 25896))), Vector(0,0,0), true);
+		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(29167.6, 26346.1, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(29167.6, 1315, 26346.1))), Vector(0,0,0), true);
+		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(30258.9, 26531.4, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30258.9, 1315, 26531.4))), Vector(0,0,0), true);
+		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(30790.9, 26535.4, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30790.9, 1315, 26535.4))), Vector(0,0,0), true);
+
+		AddTurret(t1);
+		AddTurret(t2);
+		AddTurret(t3);
+		AddTurret(t4);
+		AddTurret(t5);
+
 		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(29883.3, 26343.8, 1175.33), Vector(-86, 0, 0), 358, MAX_HEALTH_BUILDING, true);
 		Building* building1 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(30435.3, 26237.8, 
 			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(30435.3, 1315, 26237.8))), Vector(-32, 0, 0), 67, MAX_HEALTH_BUILDING, true);
@@ -217,6 +224,23 @@ void Player::BuildBase(int count)
 	}
 	else
 	{
+		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(50974.1, 45817.2, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50974.1, 1315, 45817.2))), Vector(0,0,0), true);
+		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(50374.1, 45795.2, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50374.1, 1315, 45795.2))), Vector(0,0,0), true);
+		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(52034.4, 45345.1, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(52034.4, 1315, 45345.1))), Vector(0,0,0), true);
+		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(50943.1, 45159.8, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50943.1, 1315, 45159.8))), Vector(0,0,0), true);
+		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(50411.1, 45155.8, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50411.1, 1315, 45155.8))), Vector(0,0,0), true);
+
+		AddTurret(t1);
+		AddTurret(t2);
+		AddTurret(t3);
+		AddTurret(t4);
+		AddTurret(t5);	
+
 		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(51318.7, 45347.4, 1175.33-44), Vector(-86-178, 0, 0), 358, MAX_HEALTH_BUILDING, true);
 		Building* building1 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(50766.7, 45453.4, 
 			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50766.7, 1315, 45453.4))), Vector(-32-178, 0, 0), 67, MAX_HEALTH_BUILDING, true);
@@ -275,4 +299,22 @@ void Player::AddBuilding(Building* b)
 
 	mBuildingsList.push_back(b);
 	mGame->getScene()->getChunkManager()->addEntity(b);
+}
+
+
+void Player::AddTurret(Turret* tt)
+{
+	tt->SetNetworkIDManager(mGame->getNetworkIDManager());
+	tt->SetOwnerId(mPlayerId);
+	tt->CreateSerialize(mGame->getNetwork()->GetServer());
+
+	mTurretsList.push_back(tt);
+	mGame->getScene()->getChunkManager()->addEntity(tt);
+}
+
+
+void Player::SetTurretsTarget(AircraftB17* p)
+{
+	for (int i = 0; i < mTurretsList.size(); i++)
+		mTurretsList[i]->setTarget(p);
 }
