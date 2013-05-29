@@ -155,6 +155,16 @@ bool Player::RemoveBuildingFromList(Building* b)
 
 void Player::BuildBase(int count)
 {
+	Turret *tt = new Turret(mGame->getScene()->getMeshManager(), Vector(30000, 30000, 2000), Vector(0,0,0), true);
+
+	tt->SetNetworkIDManager(mGame->getNetworkIDManager());
+	tt->SetOwnerId(mPlayerId);
+	tt->CreateSerialize(mGame->getNetwork()->GetServer());
+
+	tt->setTarget(mPlane);
+
+	mGame->getScene()->getChunkManager()->addEntity(tt);
+
 	if(count == 1)
 	{
 		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(29883.3, 26343.8, 1175.33), Vector(-86, 0, 0), 358, MAX_HEALTH_BUILDING, true);

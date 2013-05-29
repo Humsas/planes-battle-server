@@ -414,9 +414,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ServerConsole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -812,20 +809,23 @@
     <ClInclude Include="CooldownRegulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InvisibleObjectsChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Building.h">
       <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="FPSLimiter.h">
+      <Filter>Header Files\UsefulStuff</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tree1Entity.h">
+      <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
-    <ClInclude Include="ServerConsole.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Turret.h">
+      <Filter>Header Files\GameEntities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
