@@ -19,9 +19,11 @@ private:
 	RakNetGUID				mPlayerId;
 	vector<ProjectileBomb*> mBombList;
 	vector<Building*>		mBuildingsList;
+	vector<Turret*>			mTurretsList;
 
 
 	void AddBuilding(Building* b);
+	void AddTurret(Turret* b);
 
 
 public:
@@ -39,6 +41,7 @@ public:
 	RakNetGUID				GetOwnerId()					{return mPlayerId;}
 	void					BuildBase(int count);
 	bool					RemoveBuildingFromList(Building* b);
+	void					SetTurretsTarget(AircraftB17* p);
 };
 
 
