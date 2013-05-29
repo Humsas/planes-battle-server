@@ -25,11 +25,11 @@ public:
 		mCreated = false;
 		mMeshID = "cannon";
 		target = NULL;
-		scaleBarrel = 70;
+		scaleBarrel = 35;
 		rotarionYawPitchRollBarrel = Vector(0, 0, 0);
 		timeFromLastShot = 0;
 	}
-	Turret(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "cannon", position, rotation, 100, ENTITY_DYNAMIC), NetworkObject(canUpdate)
+	Turret(Mesh *m, Vector &position, Vector &rotation, bool canUpdate) : AbstractEntity(m, "cannon", position, rotation, 50, ENTITY_DYNAMIC), NetworkObject(canUpdate)
 	{
 		mType = GAME_ENTITY_TURRET; 
 		mCreated = false;
@@ -37,7 +37,7 @@ public:
 		target = NULL;
 		pMeshBarrel = m->getPointer("cannonBarrel");
 		rotarionYawPitchRollBarrel = Vector(rotation);
-		scaleBarrel = 70;
+		scaleBarrel = 35;
 		timeFromLastShot = 0;
 	}
 
@@ -68,6 +68,11 @@ public:
 		return timeFromLastShot;
 	}
 
+	Vector &getShotDirrection()
+	{
+		return rotarionYawPitchRollBarrel;
+	}
+
 	void Update(float dt)
 	{
 		// trackinti targeta ir sukiotis
@@ -95,104 +100,108 @@ public:
 				//	// saunam i paskaiciuota taska 
 				//
 				Vector targetVector = (*target->getPosition() - position);
-				//float distance = targetVector.Magnitude(); // atstumas iki taikinio
-				//float travelTime = distance / projectileSpeed;	// laikas, kuri keliaus sovinys
-				//
-				//
-				//
-				/*Vector velocity = Vector(lektuvas->Airplane.vVelocity.y,
-				-lektuvas->Airplane.vVelocity.x,
-				lektuvas->Airplane.vVelocity.z);*/
-				//
-				//	Vector imaginaryTarget = targetVector + (velocity*0.3048)*travelTime;
-				//
-				//	// prakritimas begant laikui
-				//	Vector tmpV = imaginaryTarget;
-				//
-				//	tmpV.Normalize();
-				//	tmpV *= projectileSpeed;
-				//
-				//	float zPos = tmpV.z * travelTime - 0.5 * gravity * travelTime * travelTime;
-				//
-				//	imaginaryTarget.z = imaginaryTarget.z + (imaginaryTarget.z - zPos)/2;
-				//
-				//	travelTime = imaginaryTarget.Magnitude() / projectileSpeed;
-				//	
-				//	imaginaryTarget.Normalize();
-				//
-				//	Vector cannonBarrel = ec->op->pozicija + (imaginaryTarget * (ec->op->radius+5));
-				//
-				//	imaginaryTarget *= projectileSpeed;
-				//
-				//
-				//
-				//
-				float x = targetVector.x;
-				float y = targetVector.y;
-				// ilgis vienetinis
-				float len = sqrt(x*x + y*y);
 
-				float angle = acos(abs(x) / len) * (180/3.141592654);
+				if(targetVector.Magnitude() < 3000)
+				{
 
-				// kampo taisymas
-				if(x >= 0 && y >= 0)
-				{ // I
+
+					//float distance = targetVector.Magnitude(); // atstumas iki taikinio
+					//float travelTime = distance / projectileSpeed;	// laikas, kuri keliaus sovinys
+					//
+					//
+					//
+					/*Vector velocity = Vector(lektuvas->Airplane.vVelocity.y,
+					-lektuvas->Airplane.vVelocity.x,
+					lektuvas->Airplane.vVelocity.z);*/
+					//
+					//	Vector imaginaryTarget = targetVector + (velocity*0.3048)*travelTime;
+					//
+					//	// prakritimas begant laikui
+					//	Vector tmpV = imaginaryTarget;
+					//
+					//	tmpV.Normalize();
+					//	tmpV *= projectileSpeed;
+					//
+					//	float zPos = tmpV.z * travelTime - 0.5 * gravity * travelTime * travelTime;
+					//
+					//	imaginaryTarget.z = imaginaryTarget.z + (imaginaryTarget.z - zPos)/2;
+					//
+					//	travelTime = imaginaryTarget.Magnitude() / projectileSpeed;
+					//	
+					//	imaginaryTarget.Normalize();
+					//
+					//	Vector cannonBarrel = ec->op->pozicija + (imaginaryTarget * (ec->op->radius+5));
+					//
+					//	imaginaryTarget *= projectileSpeed;
+					//
+					//
+					//
+					//
+					float x = targetVector.x;
+					float y = targetVector.y;
+					// ilgis vienetinis
+					float len = sqrt(x*x + y*y);
+
+					float angle = acos(abs(x) / len) * (180/3.141592654);
+
+					// kampo taisymas
+					if(x >= 0 && y >= 0)
+					{ // I
+					}
+					else if(x < 0 && y >= 0)
+					{ // II
+						angle = 180 - angle;
+					}
+					else if(x < 0 && y < 0)
+					{ // III
+						angle = 180 + angle;
+					}
+					else if(x >= 0 && y < 0)
+					{ // IV
+						angle = 360 - angle;
+					}
+					//
+					//
+					//				//Vector positionVec = op->pozicija - lektuvas->op->pozicija;
+					float pitch = asin(targetVector.z/targetVector.Magnitude())* (180/3.141592654);
+					//
+					rotarionYawPitchRoll.x = -angle+90;
+					rotarionYawPitchRoll.y = 0;
+					rotarionYawPitchRoll.z = 0;
+
+					rotarionYawPitchRollBarrel.x = -angle+90;
+					rotarionYawPitchRollBarrel.y = -pitch;
+					rotarionYawPitchRollBarrel.z = 0;
+
+					/*ec->oo->rotateYPR(-angle+90,0,0);
+					ec->ooBarrel->rotateYPR(-angle+90,-pitch,0);*/
+					//
+					//
+					//
+					//
+					//	bomba->bomba = new ProjectileBomb(cannonBarrel.x,
+					//		cannonBarrel.y,
+					//		cannonBarrel.z,
+					//		imaginaryTarget.x,
+					//		imaginaryTarget.y,
+					//		imaginaryTarget.z);
+					//
+					//
+					//	/*bomba->bomba = new ProjectileBomb(lektuvas->Airplane.vPosition.y*0.3048,
+					//		-lektuvas->Airplane.vPosition.x*0.3048,
+					//		lektuvas->Airplane.vPosition.z*0.3048,
+					//		lektuvas->Airplane.vVelocity.y*0.3048 + projectileSpeed * (lektuvas->Airplane.vVelocity.y / lektuvas->Airplane.vVelocity.Magnitude()),
+					//		-lektuvas->Airplane.vVelocity.x*0.3048 - projectileSpeed * (lektuvas->Airplane.vVelocity.x / lektuvas->Airplane.vVelocity.Magnitude()),
+					//		lektuvas->Airplane.vVelocity.z*0.3048 + projectileSpeed * (lektuvas->Airplane.vVelocity.z / lektuvas->Airplane.vVelocity.Magnitude()));
+					//*/
+					//	//lektuvas->Airplane.vVelocity.x;
+					//
+					//	/*bomba->bomba->bomba.position.x = -lektuvas->Airplane.vPosition.y*0.3048;
+					//	bomba->bomba->bomba.position.y = lektuvas->Airplane.vPosition.z*0.3048;
+					//	bomba->bomba->bomba.position.z = lektuvas->Airplane.vPosition.x*0.3048;*/
+					//	////lektuvas->Airplane.vPosition.
+
 				}
-				else if(x < 0 && y >= 0)
-				{ // II
-					angle = 180 - angle;
-				}
-				else if(x < 0 && y < 0)
-				{ // III
-					angle = 180 + angle;
-				}
-				else if(x >= 0 && y < 0)
-				{ // IV
-					angle = 360 - angle;
-				}
-				//
-				//
-				//				//Vector positionVec = op->pozicija - lektuvas->op->pozicija;
-				float pitch = asin(targetVector.z/targetVector.Magnitude())* (180/3.141592654);
-				//
-				rotarionYawPitchRoll.x = -angle+90;
-				rotarionYawPitchRoll.y = 0;
-				rotarionYawPitchRoll.z = 0;
-
-				rotarionYawPitchRollBarrel.x = -angle+90;
-				rotarionYawPitchRollBarrel.y = -pitch;
-				rotarionYawPitchRollBarrel.z = 0;
-
-				/*ec->oo->rotateYPR(-angle+90,0,0);
-				ec->ooBarrel->rotateYPR(-angle+90,-pitch,0);*/
-				//
-				//
-				//
-				//
-				//	bomba->bomba = new ProjectileBomb(cannonBarrel.x,
-				//		cannonBarrel.y,
-				//		cannonBarrel.z,
-				//		imaginaryTarget.x,
-				//		imaginaryTarget.y,
-				//		imaginaryTarget.z);
-				//
-				//
-				//	/*bomba->bomba = new ProjectileBomb(lektuvas->Airplane.vPosition.y*0.3048,
-				//		-lektuvas->Airplane.vPosition.x*0.3048,
-				//		lektuvas->Airplane.vPosition.z*0.3048,
-				//		lektuvas->Airplane.vVelocity.y*0.3048 + projectileSpeed * (lektuvas->Airplane.vVelocity.y / lektuvas->Airplane.vVelocity.Magnitude()),
-				//		-lektuvas->Airplane.vVelocity.x*0.3048 - projectileSpeed * (lektuvas->Airplane.vVelocity.x / lektuvas->Airplane.vVelocity.Magnitude()),
-				//		lektuvas->Airplane.vVelocity.z*0.3048 + projectileSpeed * (lektuvas->Airplane.vVelocity.z / lektuvas->Airplane.vVelocity.Magnitude()));
-				//*/
-				//	//lektuvas->Airplane.vVelocity.x;
-				//
-				//	/*bomba->bomba->bomba.position.x = -lektuvas->Airplane.vPosition.y*0.3048;
-				//	bomba->bomba->bomba.position.y = lektuvas->Airplane.vPosition.z*0.3048;
-				//	bomba->bomba->bomba.position.z = lektuvas->Airplane.vPosition.x*0.3048;*/
-				//	////lektuvas->Airplane.vPosition.
-
-
-
 			}
 		}
 	}
