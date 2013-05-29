@@ -84,7 +84,8 @@ void Game::Update()
 			case GAME_ENTITY_AIRCRAFT_B17:
 
 				// abu lektuvai sunaikinami
-				((AircraftB17*)obj)->reset();
+				//((AircraftB17*)obj)->reset();
+				mPlayers[0]->GetPlane()->reset();
 				mPlayers[1]->GetPlane()->reset();
 				break;
 			}
