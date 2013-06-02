@@ -35,7 +35,7 @@ Game::Game(LPDIRECT3DDEVICE9 &d3)
 	//scena->getChunkManager()->addEntity(lektuvas);
 
 	TestGameInit();
-	sound->playSound("engine_loop", true);
+	//sound->playSound("engine_loop", true);
 
 	lastWarningTime = 0.0;
 }
