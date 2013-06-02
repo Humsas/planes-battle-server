@@ -288,16 +288,16 @@ void Player::BuildBase(int count)
 	}
 	else
 	{
-		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(50974.1, 45817.2, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50974.1, 1315, 45817.2))+20), Vector(0,0,0), true);
-		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(50374.1, 45795.2, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50374.1, 1315, 45795.2))+20), Vector(0,0,0), true);
-		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(52034.4, 45345.1, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(52034.4, 1315, 45345.1))+20), Vector(0,0,0), true);
-		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(50943.1, 45159.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50943.1, 1315, 45159.8))+20), Vector(0,0,0), true);
-		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(50411.1, 45155.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50411.1, 1315, 45155.8))+20), Vector(0,0,0), true);
+		Turret *t1 = new Turret(mGame->getScene()->getMeshManager(), Vector(50974.1-10000, 45817.2-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50974.1-10000, 1315, 45817.2-10000))+20), Vector(0,0,0), true);
+		Turret *t2 = new Turret(mGame->getScene()->getMeshManager(), Vector(50374.1-10000, 45795.2-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50374.1-10000, 1315, 45795.2-10000))+20), Vector(0,0,0), true);
+		Turret *t3 = new Turret(mGame->getScene()->getMeshManager(), Vector(52034.4-10000, 45345.1-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(52034.4-10000, 1315, 45345.1-10000))+20), Vector(0,0,0), true);
+		Turret *t4 = new Turret(mGame->getScene()->getMeshManager(), Vector(50943.1-10000, 45159.8-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50943.1-10000, 1315, 45159.8-10000))+20), Vector(0,0,0), true);
+		Turret *t5 = new Turret(mGame->getScene()->getMeshManager(), Vector(50411.1-10000, 45155.8-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50411.1-10000, 1315, 45155.8-10000))+20), Vector(0,0,0), true);
 
 		AddTurret(t1);
 		AddTurret(t2);
@@ -305,37 +305,38 @@ void Player::BuildBase(int count)
 		AddTurret(t4);
 		AddTurret(t5);	
 
-		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(51318.7, 45347.4, 1175.33-44), Vector(-86-178, 0, 0), 358, MAX_HEALTH_BUILDING, true);
-		Building* building1 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(50766.7, 45453.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50766.7, 1315, 45453.4))), Vector(-32-178, 0, 0), 67, MAX_HEALTH_BUILDING, true);
-		Building* building2 = new Building(mGame->getScene()->getMeshManager(), "gas_station", Vector(50527.6, 45302.9, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50527.6, 1315, 45302.9))+1), Vector(92-178, 6, 2), 74, MAX_HEALTH_BUILDING, true);
-		Building* building3 = new Building(mGame->getScene()->getMeshManager(), "lusna", Vector(50611.9, 45339.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50611.9, 1315, 45339.8))), Vector(394-178, 3, 0), 88, MAX_HEALTH_BUILDING, true);
-		Building* building4 = new Building(mGame->getScene()->getMeshManager(), "lusna2", Vector(50606.7, 45425.8, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50606.7, 1315, 45425.8))), Vector(-116-178, -2, -3), 83, MAX_HEALTH_BUILDING, true);
-		Building* building5 = new Building(mGame->getScene()->getMeshManager(), "mansion", Vector(50643.5, 45439.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50643.5, 1315, 45439.4))-2), Vector(340-178, 0, -4), 48, MAX_HEALTH_BUILDING, true);
-		Building* building6 = new Building(mGame->getScene()->getMeshManager(), "namas01", Vector(50730.4, 45497.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50730.4, 1315, 45497.4))), Vector(240-178, 0, 0), 63, MAX_HEALTH_BUILDING, true);
-		Building* building7 = new Building(mGame->getScene()->getMeshManager(), "namas1", Vector(50537.4, 45477.1, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50537.4, 1315, 45477.1))), Vector(264-178, 0, 0), 79, MAX_HEALTH_BUILDING, true);
-		Building* building8 = new Building(mGame->getScene()->getMeshManager(), "namas2", Vector(50706.2, 45551, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50706.2, 1315, 45551))), Vector(240-178, 0, 0), 60, MAX_HEALTH_BUILDING, true);
-		Building* building9 = new Building(mGame->getScene()->getMeshManager(), "namas5", Vector(50677.4, 45293.2, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50677.4, 1315, 45293.2))), Vector(-56-178, 0, 0), 73, MAX_HEALTH_BUILDING, true);
-		Building* building10 = new Building(mGame->getScene()->getMeshManager(), "namas6", Vector(50870.3, 45537.9, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50870.3, 1315, 45537.9))), Vector(336-178, 0, 0), 101, MAX_HEALTH_BUILDING, true);
-		Building* building11 = new Building(mGame->getScene()->getMeshManager(), "namas7", Vector(50930.3, 45559.6, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50930.3, 1315, 45559.6))), Vector(154-178, 0, 0), 90, MAX_HEALTH_BUILDING, true);
-		Building* building12 = new Building(mGame->getScene()->getMeshManager(), "namas8", Vector(50927.1, 45477.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50927.1, 1315, 45477.4))), Vector(-28-178, 0, 0), 96, MAX_HEALTH_BUILDING, true);
-		Building* building13 = new Building(mGame->getScene()->getMeshManager(), "namas9", Vector(50722, 45634.5, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50722, 1315, 45634.5))), Vector(-50-178, 0, 0), 86, MAX_HEALTH_BUILDING, true);
-		Building* building14 = new Building(mGame->getScene()->getMeshManager(), "store", Vector(50844.3, 45421.9, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50844.3, 1315, 45421.9))), Vector(248-178, 0, 0), 73, MAX_HEALTH_BUILDING, true);
-		Building* building15 = new Building(mGame->getScene()->getMeshManager(), "tavern", Vector(50823, 45643.4, 
-			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50823, 1315, 45643.4))), Vector(196-178, 0, 0), 96, MAX_HEALTH_BUILDING, true);
+		Building* building = new Building(mGame->getScene()->getMeshManager(), "pilis", Vector(51318.7-10000, 45347.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(51318.7-10000, 1315, 45347.4-10000))-44), Vector(-86-178, 0, 0), 358, MAX_HEALTH_BUILDING, true);
+		Building* building1 = new Building(mGame->getScene()->getMeshManager(), "fish_house", Vector(50766.7-10000, 45453.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50766.7-10000, 1315, 45453.4-10000))), Vector(-32-178, 0, 0), 67, MAX_HEALTH_BUILDING, true);
+		Building* building2 = new Building(mGame->getScene()->getMeshManager(), "gas_station", Vector(50527.6-10000, 45302.9-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50527.6-10000, 1315, 45302.9-10000))+1), Vector(92-178, 6, 2), 74, MAX_HEALTH_BUILDING, true);
+		Building* building3 = new Building(mGame->getScene()->getMeshManager(), "lusna", Vector(50611.9-10000, 45339.8-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50611.9-10000, 1315, 45339.8-10000))), Vector(394-178, 3, 0), 88, MAX_HEALTH_BUILDING, true);
+		Building* building4 = new Building(mGame->getScene()->getMeshManager(), "lusna2", Vector(50606.7-10000, 45425.8-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50606.7-10000, 1315, 45425.8-10000))), Vector(-116-178, -2, -3), 83, MAX_HEALTH_BUILDING, true);
+		Building* building5 = new Building(mGame->getScene()->getMeshManager(), "mansion", Vector(50643.5-10000, 45439.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50643.5-10000, 1315, 45439.4-10000))-2), Vector(340-178, 0, -4), 48, MAX_HEALTH_BUILDING, true);
+		Building* building6 = new Building(mGame->getScene()->getMeshManager(), "namas01", Vector(50730.4-10000, 45497.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50730.4-10000, 1315, 45497.4-10000))), Vector(240-178, 0, 0), 63, MAX_HEALTH_BUILDING, true);
+		Building* building7 = new Building(mGame->getScene()->getMeshManager(), "namas1", Vector(50537.4-10000, 45477.1-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50537.4-10000, 1315, 45477.1-10000))), Vector(264-178, 0, 0), 79, MAX_HEALTH_BUILDING, true);
+		Building* building8 = new Building(mGame->getScene()->getMeshManager(), "namas2", Vector(50706.2-10000, 45551-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50706.2-10000, 1315, 45551-10000))), Vector(240-178, 0, 0), 60, MAX_HEALTH_BUILDING, true);
+		Building* building9 = new Building(mGame->getScene()->getMeshManager(), "namas5", Vector(50677.4-10000, 45293.2-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50677.4-10000, 1315, 45293.2-10000))), Vector(-56-178, 0, 0), 73, MAX_HEALTH_BUILDING, true);
+		Building* building10 = new Building(mGame->getScene()->getMeshManager(), "namas6", Vector(50870.3-10000, 45537.9-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50870.3-10000, 1315, 45537.9-10000))), Vector(336-178, 0, 0), 101, MAX_HEALTH_BUILDING, true);
+		Building* building11 = new Building(mGame->getScene()->getMeshManager(), "namas7", Vector(50930.3-10000, 45559.6-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50930.3-10000, 1315, 45559.6-10000))), Vector(154-178, 0, 0), 90, MAX_HEALTH_BUILDING, true);
+		Building* building12 = new Building(mGame->getScene()->getMeshManager(), "namas8", Vector(50927.1-10000, 45477.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50927.1-10000, 1315, 45477.4-10000))), Vector(-28-178, 0, 0), 96, MAX_HEALTH_BUILDING, true);
+		Building* building13 = new Building(mGame->getScene()->getMeshManager(), "namas9", Vector(50722-10000, 45634.5-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50722-10000, 1315, 45634.5-10000))), Vector(-50-178, 0, 0), 86, MAX_HEALTH_BUILDING, true);
+		Building* building14 = new Building(mGame->getScene()->getMeshManager(), "store", Vector(50844.3-10000, 45421.9-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50844.3-10000, 1315, 45421.9-10000))), Vector(248-178, 0, 0), 73, MAX_HEALTH_BUILDING, true);
+		Building* building15 = new Building(mGame->getScene()->getMeshManager(), "tavern", Vector(50823-10000, 45643.4-10000, 
+			mGame->getScene()->getChunkManager()->getMapHeightAtPoint(D3DXVECTOR3(50823-10000, 1315, 45643.4-10000))), Vector(196-178, 0, 0), 96, MAX_HEALTH_BUILDING, true);
 		AddBuilding(building);
 		AddBuilding(building1);
 		AddBuilding(building2);
