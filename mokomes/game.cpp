@@ -74,6 +74,7 @@ void Game::Update()
 	for (int i = 0; i < mPlayers.size(); i++)
 		mPlayers[i]->Update();
 
+	// Lektuvo su lektuvu susidurimas
 	if(mPlayers.size() == 2)
 	{
 		AbstractEntity * obj = getScene()->getChunkManager()->searchForColision(mPlayers[0]->GetPlane());

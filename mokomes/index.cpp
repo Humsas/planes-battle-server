@@ -82,14 +82,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = hInstance;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wc.lpszClassName = L"GameClass";
+	wc.lpszClassName = L"GameClassServer";
 
 
 
 
 	RegisterClassEx(&wc);
 
-	hWnd = CreateWindowEx(NULL, L"GameClass", L"Planes Battle",
+	hWnd = CreateWindowEx(NULL, L"GameClassServer", L"Planes Battle Server",
 		WS_MINIMIZEBOX, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
 		NULL, NULL, hInstance, NULL);
 	SetWindowLong(hWnd, GWL_STYLE, WS_POPUP | WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX); 
@@ -244,10 +244,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 #pragma omp section
 			while(suktis)
 			{
-				if(game->getNetwork()->ArePlayersReady())
-				{
+				//if(game->getNetwork()->ArePlayersReady())
+				//{
 					game->Update();
-				}
+				//}
 				FPSLimitForUpdate.doSleep();
 			}
 
