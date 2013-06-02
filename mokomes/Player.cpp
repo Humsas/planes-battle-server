@@ -130,14 +130,60 @@ void Player::Update()
 		}
 	}
 
-	
-
 	if(bombsToRemove.size() > 0)
 	{
 		for (int i = bombsToRemove.size()-1; i >= 0; i--)
 		{
 			mBombList.erase(mBombList.begin()+bombsToRemove[i]);
 		}
+	}
+
+	// Kolizija su pastatu ir medziais
+	AbstractEntity * obj = mGame->getScene()->getChunkManager()->searchForColision(mPlane);
+	if(obj != NULL)
+	{
+		switch (obj->getType())
+		{
+			case GAME_ENTITY_BUILDING:
+			{
+				//if(((Building*)obj)->GetOwnerId() == mPlayerId)
+				//	break;
+
+				mPlane->reset();
+				for(int i = 0; i < mGame->mPlayers.size(); i++)
+				{
+					// Jei true, tai sitas zaidejas(viso objekto savininkas) laimejo
+					if(mGame->mPlayers[i]->RemoveBuildingFromList((Building*)obj))
+					{
+						gServerConsole.addLine("Game ended. Please, restart, the game.", GAME_CONSOLE_WARNING);
+
+						if(i == 0)
+							mGame->getNetwork()->SendWinMessage(mGame->mPlayers[1]->GetOwnerId(), mGame->mPlayers[0]->GetOwnerId());
+						else if(i == 1)
+							mGame->getNetwork()->SendWinMessage(mGame->mPlayers[0]->GetOwnerId(), mGame->mPlayers[1]->GetOwnerId());
+
+						//stop game here
+						mGame->getTimer()->pause();
+					}
+				}
+
+				//Sunaikintas pastatas
+				mGame->getScene()->getChunkManager()->safeRemove(obj);
+				mGame->getNetwork()->DeleteObjectSend(((Building*)obj)->GetNetworkID(), obj->getType());
+
+				break;
+			}
+			case GAME_ENTITY_TREE1:
+			{
+				if(((Tree1*)obj)->GetOwnerId() == mPlayerId)
+					break;
+
+				mPlane->reset();
+
+				break;
+			}
+		}
+
 	}
 }
 
